@@ -1,0 +1,10 @@
+<form [formGroup]="form" class="ui form"
+      (ngSubmit)="onSubmit(form.value)">
+    <div class="{{ each.key }} field" *ngFor="let each of template | mapToIterable">
+        <hb-form-widget [data]="each.val" [key]="each.key"></hb-form-widget>
+        <hb-form-array *ngIf="each.val?.groupType == 'array'" [formArrayName]="each.key"
+                       [data]="each.val" [key]="each.key"></hb-form-array>
+        <hb-form-object *ngIf="each.val?.groupType == 'object'"
+                        [data]="each.val" [key]="each.key"></hb-form-object>
+    </div>
+</form>

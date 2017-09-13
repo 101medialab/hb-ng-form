@@ -1,0 +1,46 @@
+{
+    "compileOnSave": false,
+    "buildOnSave": false,
+    "compilerOptions": {
+        "baseUrl": "./",
+        "target": "ES5",
+        "module": "ES2015",
+        "moduleResolution": "node",
+        "declaration": true,
+        "noImplicitAny": false,
+        "sourceMap": true,
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "outDir": "./dist",
+        "rootDir": "./",
+        "skipLibCheck": true,
+        "typeRoots": [
+            "./node_modules/@types",
+            "./typings"
+        ],
+        "lib": [
+            "dom",
+            "es2017"
+        ]
+    },
+    "include": [
+        "./"
+    ],
+    "files": [
+        "./node_modules/hb-ng2-sdk/typings/hb-ng2-sdk.d.ts",
+        "./src/HbFormModule.ts"
+    ],
+    "exclude": [
+        "**/*.ngfactory.ts",
+        "**/*.shim.ts"
+    ],
+    "angularCompilerOptions": {
+        "genDir": "./dist",
+        "skipMetadataEmit" : false,
+        "entryModule": "./src/HbFormModule#HbFormModule"
+    },
+    "awesomeTypescriptLoaderOptions": {
+        "useBabel": true,
+        "useCache": true
+    }
+}
