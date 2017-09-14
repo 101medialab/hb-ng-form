@@ -1,10 +1,23 @@
-<form [formGroup]="form" class="ui form"
-      (ngSubmit)="onSubmit(form.value)">
+<!--<h1>-->
+    <!--Basic styling </h1>-->
+
+<!--<form [formGroup]="form" class="ui form" (ngSubmit)="onSubmit(form.value)">-->
+    <!--<div class="{{ each.key }} field" *ngFor="let each of template | mapToIterable">-->
+        <!--<hb-form-widget [data]="each.val" [key]="each.key"></hb-form-widget>-->
+        <!--<hb-form-array *ngIf="each.val?.groupType == 'array'" [formArrayName]="each.key" [data]="each.val" [key]="each.key"></hb-form-array>-->
+        <!--<hb-form-object *ngIf="each.val?.groupType == 'object'" [data]="each.val" [key]="each.key"></hb-form-object>-->
+    <!--</div>-->
+<!--</form>-->
+
+<!--<hr />-->
+
+<h1>
+    Angular Material Design </h1>
+
+<form [formGroup]="form" class="ui form" (ngSubmit)="onSubmit(form.value)">
     <div class="{{ each.key }} field" *ngFor="let each of template | mapToIterable">
-        <hb-form-widget [data]="each.val" [key]="each.key"></hb-form-widget>
-        <hb-form-array *ngIf="each.val?.groupType == 'array'" [formArrayName]="each.key"
-                       [data]="each.val" [key]="each.key"></hb-form-array>
-        <hb-form-object *ngIf="each.val?.groupType == 'object'"
-                        [data]="each.val" [key]="each.key"></hb-form-object>
+        <hb-md-form-widget [data]="each.val" [key]="each.key"></hb-md-form-widget>
+        <hb-md-form-array *ngIf="each.val?.groupType == 'array'" [formArrayName]="each.key" [data]="each.val" [key]="each.key"></hb-md-form-array>
+        <hb-md-form-object *ngIf="each.val?.groupType == 'object'" [data]="each.val" [key]="each.key"></hb-md-form-object>
     </div>
 </form>

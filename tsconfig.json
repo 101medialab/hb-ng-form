@@ -24,7 +24,8 @@
         ]
     },
     "include": [
-        "./"
+        "./src",
+        "./demo"
     ],
     "files": [
         "./node_modules/hb-ng2-sdk/typings/hb-ng2-sdk.d.ts",

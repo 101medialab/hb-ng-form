@@ -1,6 +1,7 @@
 'use strict';
 let path = require('path'),
-    webpack = require('webpack');
+    webpack = require('webpack'),
+    OptimizeJsPlugin = require('optimize-js-plugin');
 
 let config = {
     entry: {
@@ -48,13 +49,13 @@ let config = {
 
 if (process.env.NODE_ENV !== 'production') {
     config.devtool = 'source-map';
-    config.plugins = config.plugins.concat([
-        new webpack.DefinePlugin({
-            'WEBPACK_ENV': '"dev"'
-        }),
-        new webpack.NamedModulesPlugin(),
-        new webpack.HotModuleReplacementPlugin()
-    ]);
+    // config.plugins = config.plugins.concat([
+    //     new webpack.DefinePlugin({
+    //         'WEBPACK_ENV': '"dev"'
+    //     }),
+    //     new webpack.NamedModulesPlugin(),
+    //     new webpack.HotModuleReplacementPlugin()
+    // ]);
 } else {
     config.devtool = false;
     config.plugins = config.plugins.concat([

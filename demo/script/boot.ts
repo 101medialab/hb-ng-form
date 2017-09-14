@@ -1,3 +1,5 @@
+import 'hammerjs';
+
 import { Component, NgModule, OnInit } from "@angular/core";
 import { RouterModule } from "@angular/router";
 import { BrowserModule } from '@angular/platform-browser';
@@ -32,6 +34,7 @@ class DemoBootComponent implements OnInit {
 
         this.form = new FormGroup(expected.ngFormControl);
         this.template = expected.templateConfig;
+
         console.log(this);
     }
 }
@@ -42,6 +45,7 @@ class DemoBootComponent implements OnInit {
         CommonModule,
         ReactiveFormsModule,
         HbFormModule,
+
         // RouterModule.forRoot([{
         //     path: 'demo/basic',
         //     component: MainComponent

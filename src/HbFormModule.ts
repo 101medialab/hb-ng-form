@@ -1,12 +1,28 @@
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import {
+    MdAutocompleteModule,
+    MdButtonModule,
+    MdButtonToggleModule,
+    MdCardModule,
+    MdCheckboxModule,
+    MdDatepickerModule,
+    MdExpansionModule,
+    MdInputModule,
+    MdNativeDateModule,
+    MdRadioModule,
+    MdSelectModule
+} from "@angular/material";
 import { CommonModule } from "hb-ng2-sdk";
 
 import {
     HbFormArray,
     HbMdFormArray,
     HbFormObject,
-    HbFormWidget
+    HbMdFormObject,
+    HbFormWidget,
+    HbMdFormWidget
 } from './index';
 
 
@@ -14,7 +30,9 @@ let directivesAndPipes = [
         HbFormArray,
         HbMdFormArray,
         HbFormObject,
-        HbFormWidget
+        HbMdFormObject,
+        HbFormWidget,
+        HbMdFormWidget
     ]
 ;
 
@@ -23,6 +41,21 @@ let directivesAndPipes = [
         CommonModule,
         FormsModule,
         ReactiveFormsModule,
+
+        // Material Design
+        BrowserAnimationsModule,
+
+        MdAutocompleteModule,
+        MdButtonModule,
+        MdButtonToggleModule,
+        MdCardModule,
+        MdCheckboxModule,
+        MdDatepickerModule,
+        MdExpansionModule,
+        MdInputModule,
+        MdNativeDateModule,
+        MdRadioModule,
+        MdSelectModule
     ],
     declarations: directivesAndPipes,
     exports: [

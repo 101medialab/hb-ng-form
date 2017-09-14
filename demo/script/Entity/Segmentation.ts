@@ -32,17 +32,10 @@ let a = {
 };
 
 import {
-    FormConfig, MultiOptions, SetupConfig,
-    FlexibleObjectArray
+    FormConfig, MultiOptions, SetupConfig, FlexibleObjectArray
 } from '../../../src/index';
 
 export class LeafNodeCondition {
-    @SetupConfig()
-    @FormConfig({
-        label: ''
-    })
-    columnName: string = '';
-
     @SetupConfig()
     @MultiOptions({
         options: [{
@@ -58,6 +51,12 @@ export class LeafNodeCondition {
         label: ''
     })
     columnType: 'CATEGORY' | 'TAG' = 'CATEGORY';
+
+    @SetupConfig()
+    @FormConfig({
+        label: 'Name'
+    })
+    columnName: string = '';
 
     @SetupConfig()
     @MultiOptions({
@@ -77,7 +76,7 @@ export class LeafNodeCondition {
 
     @SetupConfig()
     @FormConfig({
-        'label': ''
+        'label': 'Score'
     })
     value: number = 0;
 }
@@ -124,6 +123,10 @@ export class GroupNode {
 }
 
 export default class Segmentation {
+    @SetupConfig()
+    @FormConfig({
+        label: 'Segmentation Name'
+    })
     name: string = '';
 
     @SetupConfig()
@@ -135,15 +138,19 @@ export default class Segmentation {
     @SetupConfig()
     @FlexibleObjectArray({
         objectDefinitions: [{
-            label: 'Condition',
+            label: 'When',
             structure: LeafNode
         }, {
             label: 'Group',
             structure: GroupNode
         }],
-        label: 'When'
+        label: 'Criteria'
     })
     profile: Array<LeafNode | GroupNode> = [];
 
+    @SetupConfig()
+    @FormConfig({
+        label: 'Only subscribed (if any)'
+    })
     subscriptions: string = '';
 }

@@ -1,5 +1,5 @@
 import {Component} from "@angular/core";
-import {HbFormWidget} from './HbFormWidget';
+import { HbFormArray } from "./HbFormArray";
 
 @Component({
     selector: 'hb-md-form-array',
@@ -20,17 +20,17 @@ import {HbFormWidget} from './HbFormWidget';
 
             <div [attr.id]="data.id + '-' + i" class="panel panel-default hb-form-array-cell"
                  *ngFor="let cell of (data.arrayType != 'enum' ? data.children : data.optionsTemplate); let i=index">
-                <hb-form-widget *ngIf="data.arrayType == 'enum' && cell.groupType == undefined"
-                                [data]="cell" [key]="i" [parent]="data"></hb-form-widget>
+                <hb-md-form-widget *ngIf="data.arrayType == 'enum' && cell.groupType == undefined"
+                                [data]="cell" [key]="i" [parent]="data"></hb-md-form-widget>
                 
                 <div *ngIf="data.arrayType != 'enum'">
                     <div *ngFor="let each of cell | mapToIterable;" class="panel panel-default">
-                        <hb-form-widget *ngIf="each.val.groupType == undefined"
-                                        [data]="each.val" [key]="i" [parent]="data"></hb-form-widget>
-                        <hb-form-array *ngIf="each.val?.groupType == 'array'"
-                                       [data]="each.val" [key]="each.key" [parent]="data"></hb-form-array>
-                        <hb-form-object *ngIf="each.val?.groupType == 'object'"
-                                        [data]="each.val" [key]="each.key" [parent]="data"></hb-form-object>
+                        <hb-md-form-widget *ngIf="each.val.groupType == undefined"
+                                        [data]="each.val" [key]="i" [parent]="data"></hb-md-form-widget>
+                        <hb-md-form-array *ngIf="each.val?.groupType == 'array'"
+                                       [data]="each.val" [key]="each.key" [parent]="data"></hb-md-form-array>
+                        <hb-md-form-object *ngIf="each.val?.groupType == 'object'"
+                                        [data]="each.val" [key]="each.key" [parent]="data"></hb-md-form-object>
                     </div>
                 </div>
                 
@@ -49,4 +49,4 @@ import {HbFormWidget} from './HbFormWidget';
     `,
     inputs: ['key', 'data', 'parent']
 })
-export class HbMdFormArray extends HbFormWidget {}
+export class HbMdFormArray extends HbFormArray {}
