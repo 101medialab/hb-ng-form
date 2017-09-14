@@ -2,7 +2,7 @@
 let path = require('path'),
     webpack = require('webpack');
 
-module.exports = {
+let config = {
     entry: {
         'main': './src/HbFormModule.ts',
         'demo': './demo/script/boot.ts'
@@ -43,6 +43,41 @@ module.exports = {
         },
         extensions: ['.ts', '.js']
     },
-    stats: 'errors-only',
-    devtool: 'source-map'
+    stats: 'errors-only'
 };
+
+if (process.env.NODE_ENV !== 'production') {
+    config.devtool = 'source-map';
+    config.plugins = config.plugins.concat([
+        new webpack.DefinePlugin({
+            'WEBPACK_ENV': '"dev"'
+        }),
+        new webpack.NamedModulesPlugin(),
+        new webpack.HotModuleReplacementPlugin()
+    ]);
+} else {
+    config.devtool = false;
+    config.plugins = config.plugins.concat([
+        new webpack.optimize.UglifyJsPlugin({
+            compress: {
+                screw_ie8: true,
+                warnings: false,
+            },
+            comments: false,
+            sourceMap: false,
+        }),
+        new OptimizeJsPlugin({
+            sourceMap: false,
+        }),
+        new webpack.DefinePlugin({
+            WEBPACK_ENV: '"production"',
+        }),
+        new webpack.optimize.UglifyJsPlugin({
+            compress: {
+                drop_debugger: false
+            }
+        })
+    ]);
+}
+
+module.exports = config;

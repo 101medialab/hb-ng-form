@@ -8,9 +8,10 @@ import {
 import {
     NonPrimitiveTypeMeta,
     ObjectAttributeTypeExtractor as Extractor
-} from 'hb-ng2-sdk/reusable/ObjectAttributeTypeExtractor';
+} from 'hb-ng2-sdk';
 
 export * from './NgFormFactoryAnnotations';
+
 export class Ng2FormFactory {
     static generateFormGroupByObject(
         formBuilder: FormBuilder,

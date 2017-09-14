@@ -12,8 +12,8 @@
     "cleanup": "rimraf ./**/*.ngfactory.ts ./**/*.ngstyle.ts ./**/*.ngsummary.json dist",
     "explorer": "source-map-explorer ./dist/main.bundle.js ./dist/main.bundle.js.map",
     "ngc": "ngc -p tsconfig.json",
-    "build": "npm run cleanup && npm run ngc && NODE_ENV=production node_modules/.bin/webpack --config webpack.config.js -p && gulp",
-    "dev": "npm run cleanup && NODE_ENV=dev node_modules/.bin/webpack --config webpack.config.js -p --watch",
+    "build": "npm run cleanup && npm run ngc && NODE_ENV=production node_modules/.bin/webpack --config webpack.config.js && gulp",
+    "dev": "npm run cleanup && NODE_ENV=dev node_modules/.bin/webpack --config webpack.config.js --watch",
     "test": "jest",
     "test:watch": "jest --watch"
   },
@@ -51,8 +51,14 @@
     "url": "git://github.com/101medialab/hb-ng-form.git"
   },
   "jest": {
+    "globals": {
+      "ts-jest": {
+        "useBabelrc": true,
+        "tsConfigFile": "src/tsconfig.spec.json"
+      }
+    },
     "preset": "jest-preset-angular",
-    "setupTestFrameworkScriptFile": "<rootDir>/node_modules/jest-preset-angular/setupJest.js",
+    "setupTestFrameworkScriptFile": "<rootDir>/setupJest.js",
     "transformIgnorePatterns": [
       "<rootDir>/node_modules/(?!hb-ng2-sdk)"
     ],

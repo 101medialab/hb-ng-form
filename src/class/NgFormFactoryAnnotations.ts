@@ -7,7 +7,7 @@ import { FormConfigSymbol } from './decorators/FormConfig';
 import { MultiOptionsSymbol } from './decorators/MultiOptions';
 import { HTMLSettingSymbol } from "./decorators/HTMLSetting";
 import { FlexibleObjectArraySymbol } from "./decorators/FlexibleObjectArray";
-import { OnOATResolved } from "hb-ng2-sdk/reusable/ObjectAttributeTypeExtractor";
+import { OnOATResolved } from "hb-ng2-sdk";
 
 export function SetupConfig() {
     return OnOATResolved((target, key, resolved) => {

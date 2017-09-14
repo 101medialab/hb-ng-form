@@ -23,12 +23,6 @@ class DemoBootComponent implements OnInit {
     public template;
 
     ngOnInit() {
-        console.log(
-            Extractor.generateMapping(
-                new Segmentation()
-            )
-        );
-
         let expected = Factory.generateFormGroupByOATMapping(
             new FormBuilder(),
             Extractor.generateMapping(

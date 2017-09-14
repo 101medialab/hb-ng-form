@@ -1,4 +1,3 @@
-
 import { IBaseFormConfig } from "./FormConfig";
 
 export interface IFlexibleObjectArrayFormConfig extends IBaseFormConfig {
@@ -11,8 +10,6 @@ export interface IFlexibleObjectArrayFormConfig extends IBaseFormConfig {
 export const FlexibleObjectArraySymbol = Symbol('IFlexibleObjectArrayFormConfig');
 
 export function FlexibleObjectArray(options: IFlexibleObjectArrayFormConfig) {
-    console.log(123);
-
     return Reflect.metadata(
         FlexibleObjectArraySymbol,
         Object.assign(
