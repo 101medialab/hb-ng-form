@@ -24,7 +24,9 @@ import {
     HbFormWidget,
     HbMdFormWidget
 } from './index';
-
+import { IBaseFormConfig } from "./class/decorators/FormConfig";
+import { IMultipleOptionsFormConfig } from "./class/decorators/MultiOptions";
+import { IArrayOptionsFormConfig } from "./class/decorators/ArrayOptions";
 
 let directivesAndPipes = [
         HbFormArray,
@@ -63,4 +65,11 @@ let directivesAndPipes = [
     ]
 })
 export class HbFormModule {
+}
+
+// Actually template object is way more complicated. Types in here have not address all attributes but configurable only
+export type TemplateObjectType = IBaseFormConfig | IMultipleOptionsFormConfig | IArrayOptionsFormConfig | ICustomComponent;
+
+export interface ICustomComponent {
+    templateObject: TemplateObjectType
 }

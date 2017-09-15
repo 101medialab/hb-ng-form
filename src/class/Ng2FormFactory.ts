@@ -27,6 +27,8 @@ export class Ng2FormFactory {
         );
     }
 
+    static diContainer = new Map();
+
     static generateLabel(key) {
         return key.replace(/([A-Z]+)/g, " $1").replace(/_/g, ' ').capitalize();
     }
@@ -162,6 +164,12 @@ export class Ng2FormFactory {
 
             schemaTemp.templateConfig.setValue = Ng2FormFactory.setValueToTemplate.bind(schemaTemp.templateConfig);
 
+            if ('formFactory' in current && typeof current.formFactory.onCreate === 'function') {
+                current.formFactory.onCreate(
+                    schemaTemp.templateConfig, Ng2FormFactory.diContainer
+                );
+            }
+
             return {
                 ngFormControl:
                     schemaTemp.ngFormControl instanceof FormControl || current.type === 'object' ?
@@ -211,6 +219,12 @@ export class Ng2FormFactory {
                 const control = <FormArray>ngFormArrayControl;
                 control.push(childConfig.ngFormControl);
                 result.children.push(childConfig.templateConfig);
+
+                if ('formFactory' in current && typeof current.formFactory.onPush === 'function') {
+                    current.formFactory.onCreate(
+                        childConfig.templateConfig, Ng2FormFactory.diContainer
+                    );
+                }
             },
             remove = (i: number) => {
                 const control = <FormArray>ngFormArrayControl;
@@ -300,7 +314,8 @@ export class Ng2FormFactory {
             'hide',
             'renderType',
             'optionsTemplate',
-            'arrayType'
+            'arrayType',
+            'autocomplete'
         ].forEach(function (each) {
             if (attrMapping.formFactory && each in attrMapping.formFactory) {
                 templateObj[each] = attrMapping.formFactory[each];

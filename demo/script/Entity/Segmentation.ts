@@ -1,39 +1,17 @@
-let a = {
-    "name": "test1",
-    "description": "description1",
-    "flags": [
-        "drops-flags--1243",
-        "drops-flags--432"
-    ],
-    "profile": {
-        "children": [{
-            "condition": {
-                "columnName": "b5ad96db-4c99-4257-9278-0fcc048abd24",
-                "columnType": "CATEGORY",
-                "operator": "GREATER_THAN",
-                "value": 100.0
-            },
-            "type": "LEAF"
-        }, {
-            "condition": {
-                "columnName": "af7ad6d1-7a1f-4352-a5a0-f42c11e92669",
-                "columnType": "CATEGORY",
-                "operator": "GREATER_THAN",
-                "value": -1
-            },
-            "type": "LEAF"
-        }],
-        "type": "AND"
-    },
-    "subscriptions": [
-        "fcca3134-b046-4737-b813-d29d6da33533",
-        "34689234-a5a0-4352-7a1f-0fcc048abd24"
-    ]
-};
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 
 import {
-    FormConfig, MultiOptions, SetupConfig, FlexibleObjectArray
+    FormConfig,
+    MultiOptions,
+    SetupConfig,
+    FlexibleObjectArray,
+    ObjectOptions,
+    AutocompleteOptions
 } from '../../../src/index';
+import { Observable } from 'rxjs';
+import { Observer } from "rxjs/Observer";
+import { FormControl } from "@angular/forms";
+import { MySelectizeComponent } from "../MySelectizeComponent";
 
 export class LeafNodeCondition {
     @SetupConfig()
@@ -55,6 +33,10 @@ export class LeafNodeCondition {
     @SetupConfig()
     @FormConfig({
         label: 'Name'
+    })
+    @AutocompleteOptions({
+        renderType: 'custom',
+        useComponent: MySelectizeComponent
     })
     columnName: string = '';
 
@@ -82,6 +64,53 @@ export class LeafNodeCondition {
 }
 
 export class LeafNode {
+    @SetupConfig()
+    @ObjectOptions({
+        onCreate: (childrenTemplate, diContainer: Map<string, any>) => {
+            childrenTemplate.columnName.selectOptionsObservables = Observable.create((observer: Observer<any>) => {
+                let url = '';
+
+                const typeControl: FormControl = childrenTemplate.columnType.control;
+                typeControl.valueChanges.subscribe((value) => {
+                    switch (value) {
+                        case 'CATEGORY':
+                            url = '/v1/categories';
+
+                            break;
+
+                        case 'TAG':
+                            url = '/v1/tags';
+
+                            break;
+                    }
+
+                    const httpClient = <HttpClient>diContainer.get('httpClient');
+
+                    httpClient
+                        .get(
+                        )
+                        .subscribe((value: any) => {
+                            let result = [];
+
+                            value.data.forEach((each) => {
+                                result.push({
+                                    label: each.name,
+                                    value: each.id
+                                });
+                            });
+
+                            observer.next(result);
+                        });
+                });
+
+                setTimeout(() => {
+                    typeControl.setValue(
+                        typeControl.value
+                    );
+                }, 100);
+            });
+        }
+    })
     condition: LeafNodeCondition = new LeafNodeCondition();
 
     @SetupConfig()

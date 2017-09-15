@@ -1,4 +1,5 @@
 import 'hammerjs';
+import 'jquery';
 
 import { Component, NgModule, OnInit } from "@angular/core";
 import { RouterModule } from "@angular/router";
@@ -15,6 +16,9 @@ import { HbFormModule } from "../../src/HbFormModule";
 import { CommonModule, ObjectAttributeTypeExtractor as Extractor } from "hb-ng2-sdk";
 import Segmentation from "./Entity/Segmentation";
 import { Ng2FormFactory as Factory } from "../../src/class/Ng2FormFactory";
+import { HttpClient, HttpClientModule } from "@angular/common/http";
+import { MySelectizeComponent } from "./MySelectizeComponent";
+import { HbSelectizeDirective } from "./SelectizeDirective";
 
 @Component({
     selector: 'hb-form-demo',
@@ -23,6 +27,12 @@ import { Ng2FormFactory as Factory } from "../../src/class/Ng2FormFactory";
 class DemoBootComponent implements OnInit {
     public form;
     public template;
+
+    constructor(
+        private httpClient: HttpClient
+    ) {
+        Factory.diContainer.set('httpClient', httpClient);
+    }
 
     ngOnInit() {
         let expected = Factory.generateFormGroupByOATMapping(
@@ -35,7 +45,7 @@ class DemoBootComponent implements OnInit {
         this.form = new FormGroup(expected.ngFormControl);
         this.template = expected.templateConfig;
 
-        console.log(this);
+        console.log(this.form);
     }
 }
 
@@ -45,6 +55,7 @@ class DemoBootComponent implements OnInit {
         CommonModule,
         ReactiveFormsModule,
         HbFormModule,
+        HttpClientModule,
 
         // RouterModule.forRoot([{
         //     path: 'demo/basic',
@@ -63,8 +74,18 @@ class DemoBootComponent implements OnInit {
         //     redirectTo: ''
         // }]),
     ],
-    declarations: [DemoBootComponent],
-    bootstrap: [DemoBootComponent]
+    entryComponents: [
+        MySelectizeComponent
+    ],
+    declarations: [
+        DemoBootComponent,
+        MySelectizeComponent,
+        HbSelectizeDirective
+    ],
+    bootstrap: [DemoBootComponent],
+    exports: [
+        HbSelectizeDirective
+    ]
 })
 class HbFormDemoModule {
 }
