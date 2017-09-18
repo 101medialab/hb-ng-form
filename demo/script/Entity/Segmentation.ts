@@ -32,10 +32,7 @@ export class LeafNodeCondition {
 
     @SetupConfig()
     @FormConfig({
-        label: 'Name'
-    })
-    @AutocompleteOptions({
-        renderType: 'custom',
+        label: 'Name',
         useComponent: MySelectizeComponent
     })
     columnName: string = '';
@@ -123,6 +120,7 @@ export class LeafNode {
 export class GroupNode {
     @SetupConfig()
     @FlexibleObjectArray({
+        label: 'Conditions',
         objectDefinitions: [{
             label: 'Condition',
             structure: LeafNode
@@ -130,7 +128,7 @@ export class GroupNode {
             label: 'Group',
             structure: GroupNode
         }],
-        label: 'Conditions'
+        expandOptions: true
     })
     children: Array<LeafNode | GroupNode> = [];
 

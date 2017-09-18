@@ -307,6 +307,7 @@ export class Ng2FormFactory {
         [
             'label',
             'type',
+            'useComponent',
             'maxChoices',
             'expandOptions',
             'options',

@@ -1,4 +1,4 @@
-import {Component} from "@angular/core";
+import { Component, ComponentFactoryResolver, ViewChild, ViewContainerRef } from "@angular/core";
 import {BaseClass} from 'hb-ng2-sdk';
 
 @Component({
@@ -13,7 +13,9 @@ import {BaseClass} from 'hb-ng2-sdk';
                 )
             "
             [ngClass]="{ 'error': !data.control.valid }" class="expand-to-child hb-form-widget">
-            <div *ngIf="data.expandOptions == undefined">
+            <ng-template #customBlock></ng-template>
+
+            <div *ngIf="!data.useComponent && data.expandOptions == undefined">
                 <label for="{{ key ? key : data.label.slugify() }}-input">{{ data.renderType !== 'checkbox' || data.label !== undefined ? data.label : data.option.name }}</label>
         
                 <div class="input-control-container">
@@ -41,7 +43,7 @@ import {BaseClass} from 'hb-ng2-sdk';
                 </div>
             </div>
         
-            <div *ngIf="data.renderType && data.expandOptions != undefined" class="options-group">
+            <div *ngIf="!data.useComponent && data.renderType && data.expandOptions != undefined" class="options-group">
                 <div *ngIf="data.renderType != 'select'">
                     <div *ngFor="let option of data.options">
                         <label for="{{ key ? key : data.label.slugify() }}-input">{{ option.name }}</label>
@@ -70,6 +72,26 @@ export class HbFormWidget extends BaseClass {
     public key;
     public data;
     public parent;
+
+    @ViewChild("customBlock", { read: ViewContainerRef }) customBlock;
+
+    constructor(
+        private resolver: ComponentFactoryResolver
+    ) {
+        super();
+    }
+
+    ngAfterViewInit() {
+        if (this.data.useComponent) {
+            const factory = this.resolver.resolveComponentFactory(
+                this.data.useComponent
+            );
+            const ref = this.customBlock.createComponent(factory);
+            ref.instance.templateObject = this.data;
+
+            ref.changeDetectorRef.detectChanges();
+        }
+    }
 
     toBoolean(val) {
         return val === 'true'

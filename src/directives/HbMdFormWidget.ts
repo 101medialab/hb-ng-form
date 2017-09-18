@@ -1,4 +1,4 @@
-import { Component, ComponentFactoryResolver, ViewChild, ViewContainerRef } from "@angular/core";
+import { Component } from "@angular/core";
 import { HbFormWidget } from "./HbFormWidget";
 
 @Component({
@@ -13,7 +13,9 @@ import { HbFormWidget } from "./HbFormWidget";
                 )
             "
             [ngClass]="{ 'error': !data.control.valid }" class="expand-to-child hb-form-widget">
-            <div *ngIf="data.expandOptions == undefined">
+            <ng-template #customBlock></ng-template>
+            
+            <div *ngIf="!data.useComponent && data.expandOptions == undefined">
                 <div class="input-control-container">
                     <ng-container *ngIf="['select', 'radio', 'checkbox', 'textarea'].indexOf(data.renderType) === -1">
                         <md-form-field *ngIf="
@@ -74,8 +76,6 @@ import { HbFormWidget } from "./HbFormWidget";
                                     </strong>
                                 </md-hint>
                             </md-form-field>
-
-                            <ng-template #autocompleteCustomizeBlock></ng-template>
                         </ng-template>
                     </ng-container>
 
@@ -97,7 +97,7 @@ import { HbFormWidget } from "./HbFormWidget";
                 </div>
             </div>
         
-            <div *ngIf="data.renderType && data.expandOptions != undefined" class="options-group">
+            <div *ngIf="!data.useComponent && data.renderType && data.expandOptions != undefined" class="options-group">
                 <div *ngIf="['radio', 'checkbox'].indexOf(data.renderType) > -1; else select">
                     <md-radio-group
                         *ngIf="data.renderType == 'radio'; else checkbox"
@@ -145,27 +145,4 @@ import { HbFormWidget } from "./HbFormWidget";
     inputs: ['data', 'key', 'parent']
 })
 export class HbMdFormWidget extends HbFormWidget {
-    @ViewChild("autocompleteCustomizeBlock", { read: ViewContainerRef }) autocompleteCustomizeBlock;
-
-    constructor(
-        private resolver: ComponentFactoryResolver
-    ) {
-        super();
-    }
-
-    ngAfterViewInit() {
-        if ('autocomplete' in this.data) {
-            if (this.data.autocomplete.renderType === 'custom') {
-                if (this.data.autocomplete.useComponent) {
-                    const factory = this.resolver.resolveComponentFactory(
-                        this.data.autocomplete.useComponent
-                    );
-                    const ref = this.autocompleteCustomizeBlock.createComponent(factory);
-                    ref.instance.templateObject = this.data;
-
-                    ref.changeDetectorRef.detectChanges();
-                }
-            }
-        }
-    }
 }

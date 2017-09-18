@@ -1,9 +1,9 @@
 import { Observable } from "rxjs/Observable";
 
 export interface IAutocompleteOptions {
-    renderType: 'custom' | 'default';
     onInit?: (childrenTemplate: any, diContainer: Map<string, any>) => void;
-    useComponent?: any; /** You must implement ICustomComponent */
+
+    // No being used yet
     options?: Observable<
         Array<{
             label:string,
@@ -19,7 +19,6 @@ export function AutocompleteOptions(options: IAutocompleteOptions) {
         AutocompleteSymbol, {
             autocomplete: Object.assign(
                 <IAutocompleteOptions>{
-                    renderType: 'default'
                 }, options
             )
         }

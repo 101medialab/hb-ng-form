@@ -10,7 +10,7 @@ import { Observer } from "rxjs/Observer";
     `
 })
 export class MySelectizeComponent implements ICustomComponent {
-    /** Remember to templateObject as public attribute */
+    /** Remember to mark templateObject as public attribute */
     @Input()
     public templateObject: any = null;
     $selectize = null;

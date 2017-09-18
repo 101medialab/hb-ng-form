@@ -19,9 +19,7 @@
 npm-debug.log
 
 # ignore build and dist for now
-/dist/node_modules
-/dist/demo
-/dist/src
+/dist
 /temp
 /demo/dist
 /demo/temp
@@ -30,7 +28,6 @@ npm-debug.log
 #System Files
 .DS_Store
 Thumbs.db
-
 
 /demo/e2e/*.js
 /demo/e2e/*.map

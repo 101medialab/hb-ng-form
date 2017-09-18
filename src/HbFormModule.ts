@@ -71,5 +71,6 @@ export class HbFormModule {
 export type TemplateObjectType = IBaseFormConfig | IMultipleOptionsFormConfig | IArrayOptionsFormConfig | ICustomComponent;
 
 export interface ICustomComponent {
-    templateObject: TemplateObjectType
+    // TemplateObjectType
+    templateObject: any;
 }

@@ -1,3 +1,5 @@
+import { ICustomComponent } from "../../HbFormModule";
+
 export type RenderTypeCompatible = 'text' | 'email' | 'number' | 'hidden' | 'radio' | 'checkbox' | 'textarea' | 'select';
 
 export interface IBaseFormConfig {
@@ -8,6 +10,7 @@ export interface IBaseFormConfig {
     useValidators?: Array<string>;
     renderType?: RenderTypeCompatible;
     hide?: boolean;
+    useComponent?: any; // ICustomComponent
 }
 
 export const FormConfigSymbol = Symbol('FormConfig');
