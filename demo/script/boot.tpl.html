@@ -15,9 +15,5 @@
     Angular Material Design </h1>
 
 <form [formGroup]="form" class="ui form" (ngSubmit)="onSubmit(form.value)">
-    <div class="{{ each.key }} field" *ngFor="let each of template | mapToIterable">
-        <hb-md-form-widget [data]="each.val" [key]="each.key"></hb-md-form-widget>
-        <hb-md-form-array *ngIf="each.val?.groupType == 'array'" [formArrayName]="each.key" [data]="each.val" [key]="each.key"></hb-md-form-array>
-        <hb-md-form-object *ngIf="each.val?.groupType == 'object'" [data]="each.val" [key]="each.key"></hb-md-form-object>
-    </div>
+    <hb-md-form-object [data]="template" [key]="''"></hb-md-form-object>
 </form>

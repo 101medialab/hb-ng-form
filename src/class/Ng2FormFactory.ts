@@ -8,9 +8,9 @@ import {
 import {
     NonPrimitiveTypeMeta,
     ObjectAttributeTypeExtractor as Extractor
-} from 'hb-ng2-sdk';
+} from 'hb-ng-sdk';
 
-export * from './NgFormFactoryAnnotations';
+export * from './NgFormFactoryDecorators';
 
 export class Ng2FormFactory {
     static generateFormGroupByObject(
@@ -43,8 +43,8 @@ export class Ng2FormFactory {
             ngFormControl: {},
             templateConfig: {},
         };
-        let attrMapping = attributeMappingObject instanceof NonPrimitiveTypeMeta ?
-                attributeMappingObject.mapping : attributeMappingObject;
+        const isNonPrimitiveType = ['array', 'object'].indexOf(attributeMappingObject._type) > -1;
+        let attrMapping = isNonPrimitiveType ? attributeMappingObject._mapping : attributeMappingObject;
 
         for (let key in attrMapping) {
             // TODO: Skip attributes should be configurable
@@ -72,14 +72,16 @@ export class Ng2FormFactory {
             // Primitive type and date
             else if (current._type !== 'any') {
                 if (current !== 'undefined' && typeof current._type != 'undefined') {
-                    let validator = current.validator ? current.validator : [],
+                    let validators = current.formFactory && current.formFactory.validators ? current.formFactory.validators : [],
                         valueNotEmpty = current._value !== undefined;
 
-                    if (valueNotEmpty) validator.push(Validators.required);
+                    validators = typeof validators === 'function' ? validators(Ng2FormFactory.diContainer) : validators;
+
+                    if (valueNotEmpty) validators.push(Validators.required);
 
                     currentTemplateConfig = {
                         type: current._type,
-                        control: new FormControl(valueNotEmpty ? current._value : '', validator)
+                        control: new FormControl(valueNotEmpty ? current._value : '', validators)
                     };
                 } else {
                     resolved = resolveTypeUndefined ? resolveTypeUndefined(current, key) : null; // Resolve as null first
@@ -116,14 +118,29 @@ export class Ng2FormFactory {
 
         result.templateConfig.setValue = Ng2FormFactory.setValueToTemplate.bind(result.templateConfig);
 
+        if (isNonPrimitiveType) {
+            result.templateConfig = {
+                groupType: attributeMappingObject.type,
+                children: result.templateConfig
+            };
+
+            Ng2FormFactory.setTemplatePreset(attributeMappingObject, result.templateConfig);
+        }
+
         return result;
     }
 
-    private static prepareAndCreateChildTemplateConfig(currentInput: any, key: string, formBuilder: FormBuilder, isRaw:boolean = false) {
+    private static prepareAndCreateChildTemplateConfig(
+        currentInput: any,
+        key: string,
+        formBuilder: FormBuilder,
+        isRaw:boolean = false
+    ) {
         return () => {
             let current = null;
 
             if (isRaw) {
+                // Mock an array type with targeted Prototype
                 current = new NonPrimitiveTypeMeta(
                     'array',
                     Extractor.generateMapping(
@@ -136,7 +153,17 @@ export class Ng2FormFactory {
 
             let schemaTemp = null;
 
-            if ('type' in current._mapping && typeof current._mapping.type === 'string') {
+            if (
+                'type' in current._mapping &&
+                [
+                    'any',
+                    'string',
+                    'boolean',
+                    'number',
+                    'date',
+                    ''
+                ].indexOf(current._mapping.type) > -1
+            ) {
                 // For primitive type array
                 let control = new FormControl(
                     'value' in current._mapping ? current._mapping.value : '',
@@ -220,8 +247,10 @@ export class Ng2FormFactory {
                 control.push(childConfig.ngFormControl);
                 result.children.push(childConfig.templateConfig);
 
+                childConfig.templateConfig.flexibleObjectTypeName = result.childrenConfigName[result.useConfig];
+
                 if ('formFactory' in current && typeof current.formFactory.onPush === 'function') {
-                    current.formFactory.onCreate(
+                    current.formFactory.onPush(
                         childConfig.templateConfig, Ng2FormFactory.diContainer
                     );
                 }
@@ -235,7 +264,7 @@ export class Ng2FormFactory {
         result.add = add;
         result.remove = remove;
 
-        Ng2FormFactory.setTemplatePreset(current, result);
+        // Ng2FormFactory.setTemplatePreset(current, result);
 
         return result;
     }
@@ -311,10 +340,10 @@ export class Ng2FormFactory {
             'maxChoices',
             'expandOptions',
             'options',
-            'option',
+            'hints',
             'hide',
+            'html',
             'renderType',
-            'optionsTemplate',
             'arrayType',
             'autocomplete'
         ].forEach(function (each) {
@@ -322,5 +351,7 @@ export class Ng2FormFactory {
                 templateObj[each] = attrMapping.formFactory[each];
             }
         });
+
+        templateObj.diContainer = Ng2FormFactory.diContainer;
     }
 }

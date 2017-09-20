@@ -1,5 +1,12 @@
-import { Component, ComponentFactoryResolver, ViewChild, ViewContainerRef } from "@angular/core";
-import {BaseClass} from 'hb-ng2-sdk';
+import {
+    Component,
+    OnInit,
+    ComponentFactoryResolver,
+    ViewChild,
+    ViewContainerRef
+} from "@angular/core";
+import { Observable } from "rxjs/Observable";
+import {BaseClass} from 'hb-ng-sdk';
 
 @Component({
     selector: 'hb-form-widget',
@@ -68,7 +75,8 @@ import {BaseClass} from 'hb-ng2-sdk';
     `,
     inputs: ['data', 'key', 'parent']
 })
-export class HbFormWidget extends BaseClass {
+export class HbFormWidget extends BaseClass  implements OnInit {
+    public resolvedOptions;
     public key;
     public data;
     public parent;
@@ -93,12 +101,35 @@ export class HbFormWidget extends BaseClass {
         }
     }
 
+    ngOnInit() {
+        let data = this.data;
+
+        let result = null;
+        let resolved = null;
+        const options = data.options;
+
+        if (typeof options === 'function') {
+            resolved = options(data.diContainer);
+        } else if (!(result instanceof Observable)) {
+            resolved = options;
+        }
+
+        if (!(result instanceof Observable)) {
+            result = Observable.create((o)=> {
+                o.next(resolved);
+            });
+        }
+
+        this.resolvedOptions = result;
+    }
+
     toBoolean(val) {
         return val === 'true'
     }
 
     updateParentValue($event, option) {
-        let isChecked = $event.target.checked;
+        const target = $event.target ? $event.target : $event.source;
+        let isChecked = target.checked;
 
         switch (this.data.renderType) {
             case 'checkbox':
@@ -121,7 +152,7 @@ export class HbFormWidget extends BaseClass {
                 break;
 
             case 'radio':
-                if (isChecked) this.data.control.patchValue($event.target.value);
+                if (isChecked) this.data.control.patchValue(target.value);
 
                 break;
         }

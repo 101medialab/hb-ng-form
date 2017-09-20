@@ -14,7 +14,7 @@ import {
     MdRadioModule,
     MdSelectModule
 } from "@angular/material";
-import { CommonModule } from "hb-ng2-sdk";
+import { CommonModule } from "hb-ng-sdk";
 
 import {
     HbFormArray,
@@ -25,7 +25,7 @@ import {
     HbMdFormWidget
 } from './index';
 import { IBaseFormConfig } from "./class/decorators/FormConfig";
-import { IMultipleOptionsFormConfig } from "./class/decorators/MultiOptions";
+import { IChoiceOptionsFormConfig } from "./class/decorators/ChoiceOptions";
 import { IArrayOptionsFormConfig } from "./class/decorators/ArrayOptions";
 
 let directivesAndPipes = [
@@ -68,9 +68,13 @@ export class HbFormModule {
 }
 
 // Actually template object is way more complicated. Types in here have not address all attributes but configurable only
-export type TemplateObjectType = IBaseFormConfig | IMultipleOptionsFormConfig | IArrayOptionsFormConfig | ICustomComponent;
+export type TemplateObjectType = IBaseFormConfig | IChoiceOptionsFormConfig | IArrayOptionsFormConfig;
 
 export interface ICustomComponent {
     // TemplateObjectType
     templateObject: any;
+}
+
+export interface ICustomComponentConstructor {
+    new (...deps: any[]): ICustomComponent;
 }

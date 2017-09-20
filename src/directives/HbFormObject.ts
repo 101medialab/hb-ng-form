@@ -12,18 +12,22 @@ import {HbFormWidget} from './HbFormWidget';
         
             <div class="form-object-content">
                 <div *ngFor="let each of data.children | mapToIterable" class="{{ each.key }}">
-                    <hb-form-widget class="expand-to-child"
-                        *ngIf="each.val.groupType == undefined && each.key != 'setValue'"
-                        [data]="each.val" [key]="each.key" [parent]="data"
-                    ></hb-form-widget>
-                    <hb-form-array  class="expand-to-child"
-                        *ngIf="each.val?.groupType == 'array'"
-                        [data]="each.val" [key]="each.key" [formArrayName]="each.key" [parent]="data"
-                    ></hb-form-array>
-                    <hb-form-object class="expand-to-child"
-                        *ngIf="each.val?.groupType == 'object' && each.key != 'setValue'"
-                        [data]="each.val" [key]="each.key" [parent]="data"
-                    ></hb-form-object>
+                    {{ each.key }}
+                    
+                    <ng-container *ngIf="!each.hide && each.key != 'setValue'">
+                        <hb-form-widget class="expand-to-child"
+                            *ngIf="each.val.groupType == undefined"
+                            [data]="each.val" [key]="each.key" [parent]="data"
+                        ></hb-form-widget>
+                        <hb-form-array  class="expand-to-child"
+                            *ngIf="each.val?.groupType == 'array'"
+                            [data]="each.val" [key]="each.key" [formArrayName]="each.key" [parent]="data"
+                        ></hb-form-array>
+                        <hb-form-object class="expand-to-child"
+                            *ngIf="each.val?.groupType == 'object'"
+                            [data]="each.val" [key]="each.key" [parent]="data"
+                        ></hb-form-object>
+                    </ng-container>
                 </div>
         
                 <span class="hints" *ngIf="data?.hints">

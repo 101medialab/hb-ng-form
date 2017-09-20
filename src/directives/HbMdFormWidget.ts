@@ -1,103 +1,108 @@
-import { Component } from "@angular/core";
 import { HbFormWidget } from "./HbFormWidget";
+import { Component } from "@angular/core";
 
 @Component({
     selector: 'hb-md-form-widget',
     template: `
         <div *ngIf="
                 data.control != undefined && 
-                data.groupType == undefined && 
+                (
+                    data.groupType == undefined || 
+                    parent.arrayType == 'enum'
+                ) && 
                 key != 'setValue' && (
                     data.hide == undefined ||  
                     !data.hide
                 )
-            "
-            [ngClass]="{ 'error': !data.control.valid }" class="expand-to-child hb-form-widget">
+            " [ngClass]="{ 'error': !data.control.valid }" class="expand-to-child hb-form-widget hb-form-widget_{{ key }}">
             <ng-template #customBlock></ng-template>
-            
-            <div *ngIf="!data.useComponent && data.expandOptions == undefined">
-                <div class="input-control-container">
-                    <ng-container *ngIf="['select', 'radio', 'checkbox', 'textarea'].indexOf(data.renderType) === -1">
-                        <md-form-field *ngIf="
-                            data.selectOptionsObservables == undefined; else autocompleteBlock
-                        ">
-                            <input mdInput
-                                   [attr.id]="key ? key : data.label.slugify() + '-input'"
-                                   [type]="data.renderType ? data.renderType : 'text'"
-                                   [attr.checked]="
-                                       parent?.arrayType === 'enum' && 
-                                       parent.control.value.indexOf(data.option.value) > -1 ? 
-                                           true : null
-                                   "
-                                   (change)="
-                                       parent?.arrayType === 'enum' ?
-                                           updateParentValue($event, data.option) :
-                                           data.control.patchValue(
-                                               data.renderType === 'checkbox' ? $event.target.checked : $event.target.value
-                                           );
-                                   "
-                                   placeholder="
-                                       {{ data.renderType !== 'checkbox' || data.label !== undefined ? data.label : data.option.name }}
-                                   "
-                                   [formControl]="data.control" />
 
-                            <md-hint align="start" *ngIf="data?.hints">
-                                <strong>
-                                    {{ data.hints }}
-                                </strong>
-                            </md-hint>
-                        </md-form-field>
+            <ng-container *ngIf="(
+                !data.useComponent && 
+                data.expandOptions == undefined
+            ) || (
+                parent?.arrayType === 'enum'
+            )">
+                <ng-container *ngIf="['select', 'radio', 'checkbox', 'textarea'].indexOf(data.renderType) === -1">
+                    <md-form-field *ngIf="
+                        (
+                            parent?.arrayType === 'enum' || 
+                            data.selectOptionsObservables == undefined
+                        ); else autocompleteBlock
+                    " class="hb-form-widget-input-field">
+                        <input mdInput
+                               [attr.id]="key ? key : data.label.slugify() + '-input'"
+                               [type]="data.renderType ? data.renderType : 'text'"
+                               [attr.checked]="
+                                   parent?.arrayType === 'enum' && 
+                                   parent.control.value.indexOf(data.option.value) > -1 ?
+                                       true : null
+                               "
+                               (change)="
+                                   parent?.arrayType === 'enum' ?
+                                       updateParentValue($event, data.option) :
+                                       data.control.patchValue(
+                                           data.renderType === 'checkbox' ? $event.target.checked : $event.target.value
+                                       );
+                               "
+                               placeholder="
+                                   {{ data.renderType !== 'checkbox' || data.label !== undefined ? data.label : data.option.name }}
+                               "
+                               [formControl]="data.control" />
 
-                        <ng-template #autocompleteBlock [ngIf]="data.autocomplete != undefined">
-                            <md-form-field *ngIf="data.autocomplete.renderType != 'custom'; else autocompleteCustomizeBlock">
-                                <input mdInput
-                                       [attr.id]="key ? key : data.label.slugify() + '-input'"
-                                       [type]="data.renderType ? data.renderType : 'text'"
-                                       (change)="
-                                           data.control.patchValue(
-                                               $event.target.value
-                                           );
-                                       "
-                                       placeholder="
-                                           {{ data.label !== undefined ? data.label : data.option.name }}
-                                       "
-                                       [formControl]="data.control"
-                                       [mdAutocomplete]="auto" />
-
-                                <md-autocomplete #auto="mdAutocomplete">
-                                    <md-option *ngFor="let option of data.selectOptionsObservables | async" [value]="option.value">
-                                        <span>{{ option.label }}</span>
-                                    </md-option>
-                                </md-autocomplete>
-
-                                <md-hint align="start" *ngIf="data?.hints">
-                                    <strong>
-                                        {{ data.hints }}
-                                    </strong>
-                                </md-hint>
-                            </md-form-field>
-                        </ng-template>
-                    </ng-container>
-
-                    <md-form-field *ngIf="data.renderType === 'textarea'">
-                        <textarea mdInput rows="5" [formControl]="data.control"
-                                  placeholder="
-                                      {{ data.label ? data.label : data.option.name }}
-                                  "
-                                  [attr.id]="key ? key : data.label.slugify() + '-input'">
-                        </textarea>
-
-                        <md-hint align="start"
-                                 *ngIf="data?.hints">
+                        <md-hint align="start" *ngIf="data?.hints">
                             <strong>
-                                {{ data.hints }}
+                                {{ typeof(data.hints) == 'function' ? data.hints(data.diContainer) : data.hints }}
                             </strong>
                         </md-hint>
                     </md-form-field>
-                </div>
-            </div>
-        
-            <div *ngIf="!data.useComponent && data.renderType && data.expandOptions != undefined" class="options-group">
+
+                    <ng-template #autocompleteBlock [ngIf]="data.autocomplete != undefined">
+                        <md-form-field *ngIf="data.autocomplete.renderType != 'custom'; else autocompleteCustomizeBlock">
+                            <input mdInput
+                                   [attr.id]="key ? key : data.label.slugify() + '-input'"
+                                   [type]="data.renderType ? data.renderType : 'text'"
+                                   (change)="
+                                       data.control.patchValue(
+                                           $event.target.value
+                                       );
+                                   "
+                                   placeholder="
+                                       {{ data.label !== undefined ? data.label : data.option.name }}
+                                   "
+                                   [formControl]="data.control"
+                                   [mdAutocomplete]="auto" />
+
+                            <md-autocomplete #auto="mdAutocomplete">
+                                <md-option *ngFor="let option of data.selectOptionsObservables | async" [value]="option.value">
+                                    <span>{{ option.label }}</span>
+                                </md-option>
+                            </md-autocomplete>
+
+                            <md-hint align="start" *ngIf="data?.hints">
+                                <strong>
+                                    {{ typeof(data.hints) == 'function' ? data.hints(data.diContainer) : data.hints }}
+                                </strong>
+                            </md-hint>
+                        </md-form-field>
+                    </ng-template>
+                </ng-container>
+
+                <md-form-field *ngIf="data.renderType === 'textarea'">
+                    <textarea mdInput rows="5" [formControl]="data.control" placeholder="
+                                  {{ data.label ? data.label : data.option.name }}
+                              " [attr.id]="key ? key : data.label.slugify() + '-input'">
+                    </textarea>
+
+                    <md-hint align="start" *ngIf="data?.hints">
+                        <strong>
+                            {{ typeof(data.hints) == 'function' ? data.hints(data.diContainer) : data.hints }}
+                        </strong>
+                    </md-hint>
+                </md-form-field>    
+            </ng-container>
+
+            <ng-container *ngIf="!data.useComponent && ['radio', 'checkbox', 'select'].indexOf(data.renderType) > -1">
                 <div *ngIf="['radio', 'checkbox'].indexOf(data.renderType) > -1; else select">
                     <md-radio-group
                         *ngIf="data.renderType == 'radio'; else checkbox"
@@ -116,7 +121,6 @@ import { HbFormWidget } from "./HbFormWidget";
 
                     <ng-template #checkbox>
                         <md-checkbox
-                            class="example-radio-button"
                             *ngFor="let option of data.options"
                             [value]="option.value"
                             [attr.checked]="data.control.value === option.value || option.id === data.control.value ? true : null"
@@ -129,17 +133,17 @@ import { HbFormWidget } from "./HbFormWidget";
                 </div>
                 
                 <ng-template #select>
+                    <label *ngIf="data.label != ''">{{ data.label }}</label>
                     <md-select
                         *ngIf="data.renderType == 'select'"
-                        [attr.multiple]="data.expandOptions ? true : null"
                         [formControl]="data.control"
                     >
-                        <md-option *ngFor="let option of data.options" [value]="option.value">
+                        <md-option *ngFor="let option of resolvedOptions | async" [value]="option.value">
                             {{ option.name ? option.name : option.value }}
                         </md-option>
                     </md-select>
                 </ng-template>
-            </div>
+            </ng-container>
         </div>
     `,
     inputs: ['data', 'key', 'parent']

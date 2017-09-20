@@ -2,30 +2,27 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
 
 import {
     FormConfig,
-    MultiOptions,
+    ChoiceOptions,
     SetupConfig,
     FlexibleObjectArray,
-    ObjectOptions,
-    AutocompleteOptions
+    ObjectOptions
 } from '../../../src/index';
 import { Observable } from 'rxjs';
 import { Observer } from "rxjs/Observer";
 import { FormControl } from "@angular/forms";
 import { MySelectizeComponent } from "../MySelectizeComponent";
+import { ArrayOptions } from "../../../src/class/decorators/ArrayOptions";
 
 export class LeafNodeCondition {
     @SetupConfig()
-    @MultiOptions({
-        options: [{
+    @ChoiceOptions({
+        options: () => [{
             name: 'Category',
             value: 'CATEGORY'
         }, {
             name: 'Tag',
             value: 'TAG'
         }],
-        renderType: 'select',
-        optionsTemplate: '',
-        maxChoices: 1,
         label: ''
     })
     columnType: 'CATEGORY' | 'TAG' = 'CATEGORY';
@@ -38,17 +35,14 @@ export class LeafNodeCondition {
     columnName: string = '';
 
     @SetupConfig()
-    @MultiOptions({
-        options: [{
-            name: 'Greater than',
+    @ChoiceOptions({
+        options: () => [{
+            name: '≥',
             value: 'GREATER_THAN'
         }, {
-            name: 'Less than',
+            name: '≤',
             value: 'LESS_THAN'
         }],
-        renderType: 'select',
-        optionsTemplate: '',
-        maxChoices: 1,
         label: ''
     })
     operator: 'GREATER_THAN' | 'LESS_THAN' = 'GREATER_THAN';
@@ -62,6 +56,9 @@ export class LeafNodeCondition {
 
 export class LeafNode {
     @SetupConfig()
+    @FormConfig({
+        hideHeader: true
+    })
     @ObjectOptions({
         onCreate: (childrenTemplate, diContainer: Map<string, any>) => {
             childrenTemplate.columnName.selectOptionsObservables = Observable.create((observer: Observer<any>) => {
@@ -85,6 +82,7 @@ export class LeafNode {
 
                     httpClient
                         .get(
+                            ''
                         )
                         .subscribe((value: any) => {
                             let result = [];
@@ -117,10 +115,30 @@ export class LeafNode {
     type: string = 'LEAF';
 }
 
+@SetupConfig()
+@FormConfig({
+    label: '',
+    html: {
+        classAttr: 'mat-card'
+    }
+})
 export class GroupNode {
     @SetupConfig()
+    @ChoiceOptions({
+        options: () => [{
+            name: 'And',
+            value: 'AND'
+        }, {
+            name: 'Or',
+            value: 'OR'
+        }],
+        label: 'Condition group: '
+    })
+    type: 'AND' | 'OR' = 'AND';
+
+    @SetupConfig()
     @FlexibleObjectArray({
-        label: 'Conditions',
+        label: '',
         objectDefinitions: [{
             label: 'Condition',
             structure: LeafNode
@@ -130,29 +148,25 @@ export class GroupNode {
         }],
         expandOptions: true
     })
-    children: Array<LeafNode | GroupNode> = [];
-
-    @SetupConfig()
-    @MultiOptions({
-        options: [{
-            name: 'And',
-            value: 'AND'
-        }, {
-            name: 'Or',
-            value: 'OR'
-        }],
-        renderType: 'select',
-        optionsTemplate: '',
-        maxChoices: 1,
-        label: ''
+    @ArrayOptions({
+        onPush: (childrenTemplate) => {
+            if (childrenTemplate.flexibleObjectTypeName === 'Group') {
+                childrenTemplate.children.children.add();
+            }
+        }
     })
-    type: 'AND' | 'OR' = 'AND';
+    @FormConfig({
+        html: {
+            classAttr: 'mat-elevation-z'
+        }
+    })
+    children: Array<LeafNode | GroupNode> = [];
 }
 
 export default class Segmentation {
     @SetupConfig()
     @FormConfig({
-        label: 'Segmentation Name'
+        label: 'Segmentation Name',
     })
     name: string = '';
 
@@ -162,18 +176,7 @@ export default class Segmentation {
     })
     description: string = '';
 
-    @SetupConfig()
-    @FlexibleObjectArray({
-        objectDefinitions: [{
-            label: 'When',
-            structure: LeafNode
-        }, {
-            label: 'Group',
-            structure: GroupNode
-        }],
-        label: 'Criteria'
-    })
-    profile: Array<LeafNode | GroupNode> = [];
+    profile: GroupNode = new GroupNode();
 
     @SetupConfig()
     @FormConfig({

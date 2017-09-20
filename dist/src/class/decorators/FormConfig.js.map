@@ -1,0 +1,1 @@
+{"version":3,"sources":["../../../../src/class/decorators/FormConfig.ts"],"names":[],"mappings":"AAqBA,MAAM,CAAC,IAAM,gBAAgB,GAAG,MAAM,CAAC,YAAY,CAAC,CAAC;AAErD,MAAM,qBAAqB,OAAwB;IAC/C,MAAM,CAAC,OAAO,CAAC,QAAQ,CAAC,gBAAgB,EACpC,MAAM,CAAC,MAAM,CAAC;QACV,WAAW,EAAE,KAAK;KACrB,EAAE,OAAO,CAAC,CACd,CAAC;AACN,CAAC","file":"FormConfig.js","sourceRoot":""}

@@ -1,9 +1,11 @@
 'use strict';
-let path = require('path'),
-    webpack = require('webpack'),
-    OptimizeJsPlugin = require('optimize-js-plugin');
+const path = require('path');
+const webpack = require('webpack');
+const OptimizeJsPlugin = require('optimize-js-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const LiveReloadPlugin = require('webpack-livereload-plugin');
 
-let config = {
+let configs = [{
     entry: {
         'main': './src/HbFormModule.ts',
         'demo': './demo/script/boot.ts'
@@ -20,6 +22,9 @@ let config = {
         }, {
             test: /\.html$/,
             use: 'html-loader?minimize=false'
+        }, {
+            test: /\.scss$/,
+            loader: 'style-loader!css-loader!sass-loader' 
         }]
     },
     plugins: [
@@ -46,10 +51,39 @@ let config = {
         extensions: ['.ts', '.js']
     },
     stats: 'errors-only'
-};
+}, {
+    name: 'styles',
+    entry: {
+        'main': './src/styles/main.scss',
+        'demo': './demo/styles/main.scss',
+    },
+    output: {
+        path: path.join(process.cwd(), 'dist/styles'),
+        filename: '[name].js',
+    },
+    module: {
+        rules: [
+            {
+                test: /\.scss$/,
+                use: ExtractTextPlugin.extract({
+                    fallback: 'style-loader',
+                    use: 'css-loader?minimize=true!sass-loader',
+                }),
+            },
+            { test: /\.css$/, loader: 'style-loader!css-loader?minimize=true' }
+        ],
+    },
+    plugins: [
+        new ExtractTextPlugin({
+            filename: '[name].css',
+        }),
+        new LiveReloadPlugin()
+    ],
+}];
 
 if (process.env.NODE_ENV !== 'production') {
-    config.devtool = 'source-map';
+    configs[0].devtool = false;
+    // 'source-map';
     // config.plugins = config.plugins.concat([
     //     new webpack.DefinePlugin({
     //         'WEBPACK_ENV': '"dev"'
@@ -58,8 +92,8 @@ if (process.env.NODE_ENV !== 'production') {
     //     new webpack.HotModuleReplacementPlugin()
     // ]);
 } else {
-    config.devtool = false;
-    config.plugins = config.plugins.concat([
+    configs[0].devtool = false;
+    configs[0].plugins = configs[0].plugins.concat([
         new webpack.optimize.UglifyJsPlugin({
             compress: {
                 screw_ie8: true,
@@ -82,4 +116,4 @@ if (process.env.NODE_ENV !== 'production') {
     ]);
 }
 
-module.exports = config;
+module.exports = configs;
