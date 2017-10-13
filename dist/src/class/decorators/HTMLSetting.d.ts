@@ -6,5 +6,5 @@ export interface IHTMLSetting {
 export declare const HTMLSettingSymbol: symbol;
 export declare function HTMLSetting(options: IHTMLSetting): {
     (target: Function): void;
-    (target: Object, propertyKey: string | symbol): void;
+    (target: Object, targetKey: string | symbol): void;
 };

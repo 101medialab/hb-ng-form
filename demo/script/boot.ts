@@ -70,7 +70,8 @@ class DemoBootComponent implements OnInit {
         let expected = Factory.generateFormGroupByOATMapping(
             new FormBuilder(),
             Extractor.generateMapping(
-                new Notification()
+                new Segmentation()
+                // new Notification()
             )
         );
 

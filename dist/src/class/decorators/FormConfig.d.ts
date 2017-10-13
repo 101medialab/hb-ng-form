@@ -23,5 +23,5 @@ export interface IBaseFormConfig {
 export declare const FormConfigSymbol: symbol;
 export declare function FormConfig(options: IBaseFormConfig): {
     (target: Function): void;
-    (target: Object, propertyKey: string | symbol): void;
+    (target: Object, targetKey: string | symbol): void;
 };

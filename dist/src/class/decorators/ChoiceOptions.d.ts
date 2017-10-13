@@ -16,5 +16,5 @@ export interface IChoiceOptionsFormConfig extends IBaseFormConfig {
 export declare const ChoiceOptionsSymbol: symbol;
 export declare function ChoiceOptions(options: IChoiceOptionsFormConfig): {
     (target: Function): void;
-    (target: Object, propertyKey: string | symbol): void;
+    (target: Object, targetKey: string | symbol): void;
 };

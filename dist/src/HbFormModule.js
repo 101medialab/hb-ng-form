@@ -1,16 +1,16 @@
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
-import { MdAutocompleteModule, MdButtonModule, MdButtonToggleModule, MdCardModule, MdCheckboxModule, MdDatepickerModule, MdExpansionModule, MdInputModule, MdNativeDateModule, MdRadioModule, MdSelectModule } from "@angular/material";
+import { MatAutocompleteModule, MatButtonModule, MatButtonToggleModule, MatCardModule, MatCheckboxModule, MatDatepickerModule, MatExpansionModule, MatInputModule, MatNativeDateModule, MatRadioModule, MatSelectModule } from "@angular/material";
 import { CommonModule } from "hb-ng-sdk";
-import { HbFormArray, HbMdFormArray, HbFormObject, HbMdFormObject, HbFormWidget, HbMdFormWidget } from './index';
+import { HbFormArray, HbMatFormArray, HbFormObject, HbMatFormObject, HbFormWidget, HbMatFormWidget } from './index';
 var directivesAndPipes = [
     HbFormArray,
-    HbMdFormArray,
+    HbMatFormArray,
     HbFormObject,
-    HbMdFormObject,
+    HbMatFormObject,
     HbFormWidget,
-    HbMdFormWidget
+    HbMatFormWidget
 ];
 var HbFormModule = /** @class */ (function () {
     function HbFormModule() {
@@ -23,17 +23,17 @@ var HbFormModule = /** @class */ (function () {
                         ReactiveFormsModule,
                         // Material Design
                         BrowserAnimationsModule,
-                        MdAutocompleteModule,
-                        MdButtonModule,
-                        MdButtonToggleModule,
-                        MdCardModule,
-                        MdCheckboxModule,
-                        MdDatepickerModule,
-                        MdExpansionModule,
-                        MdInputModule,
-                        MdNativeDateModule,
-                        MdRadioModule,
-                        MdSelectModule
+                        MatAutocompleteModule,
+                        MatButtonModule,
+                        MatButtonToggleModule,
+                        MatCardModule,
+                        MatCheckboxModule,
+                        MatDatepickerModule,
+                        MatExpansionModule,
+                        MatInputModule,
+                        MatNativeDateModule,
+                        MatRadioModule,
+                        MatSelectModule
                     ],
                     declarations: directivesAndPipes,
                     exports: directivesAndPipes.slice()

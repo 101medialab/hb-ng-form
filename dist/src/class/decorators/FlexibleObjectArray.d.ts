@@ -9,5 +9,5 @@ export interface IFlexibleObjectArrayFormConfig extends IBaseFormConfig {
 export declare const FlexibleObjectArraySymbol: symbol;
 export declare function FlexibleObjectArray(options: IFlexibleObjectArrayFormConfig): {
     (target: Function): void;
-    (target: Object, propertyKey: string | symbol): void;
+    (target: Object, targetKey: string | symbol): void;
 };

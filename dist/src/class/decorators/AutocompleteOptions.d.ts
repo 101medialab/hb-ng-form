@@ -9,5 +9,5 @@ export interface IAutocompleteOptions {
 export declare const AutocompleteSymbol: symbol;
 export declare function AutocompleteOptions(options: IAutocompleteOptions): {
     (target: Function): void;
-    (target: Object, propertyKey: string | symbol): void;
+    (target: Object, targetKey: string | symbol): void;
 };

@@ -2,7 +2,7 @@ import { HbFormWidget } from "./HbFormWidget";
 import { Component } from "@angular/core";
 
 @Component({
-    selector: 'hb-md-form-widget',
+    selector: 'hb-mat-form-widget',
     template: `
         <div *ngIf="
                 data.control != undefined && 
@@ -24,13 +24,13 @@ import { Component } from "@angular/core";
                 parent?.arrayType === 'enum'
             )">
                 <ng-container *ngIf="['select', 'radio', 'checkbox', 'textarea'].indexOf(data.renderType) === -1">
-                    <md-form-field *ngIf="
+                    <mat-form-field *ngIf="
                         (
                             parent?.arrayType === 'enum' || 
                             data.selectOptionsObservables == undefined
                         ); else autocompleteBlock
                     " class="hb-form-widget-input-field">
-                        <input mdInput
+                        <input matInput
                                [attr.id]="key ? key : data.label.slugify() + '-input'"
                                [type]="data.renderType ? data.renderType : 'text'"
                                [attr.checked]="
@@ -50,16 +50,16 @@ import { Component } from "@angular/core";
                                "
                                [formControl]="data.control" />
 
-                        <md-hint align="start" *ngIf="data?.hints">
+                        <mat-hint align="start" *ngIf="data?.hints">
                             <strong>
                                 {{ typeof(data.hints) == 'function' ? data.hints(data.diContainer) : data.hints }}
                             </strong>
-                        </md-hint>
-                    </md-form-field>
+                        </mat-hint>
+                    </mat-form-field>
 
                     <ng-template #autocompleteBlock [ngIf]="data.autocomplete != undefined">
-                        <md-form-field *ngIf="data.autocomplete.renderType != 'custom'; else autocompleteCustomizeBlock">
-                            <input mdInput
+                        <mat-form-field *ngIf="data.autocomplete.renderType != 'custom'; else autocompleteCustomizeBlock">
+                            <input matInput
                                    [attr.id]="key ? key : data.label.slugify() + '-input'"
                                    [type]="data.renderType ? data.renderType : 'text'"
                                    (change)="
@@ -71,43 +71,43 @@ import { Component } from "@angular/core";
                                        {{ data.label !== undefined ? data.label : data.option.name }}
                                    "
                                    [formControl]="data.control"
-                                   [mdAutocomplete]="auto" />
+                                   [matAutocomplete]="auto" />
 
-                            <md-autocomplete #auto="mdAutocomplete">
-                                <md-option *ngFor="let option of data.selectOptionsObservables | async" [value]="option.value">
+                            <mat-autocomplete #auto="matAutocomplete">
+                                <mat-option *ngFor="let option of data.selectOptionsObservables | async" [value]="option.value">
                                     <span>{{ option.label }}</span>
-                                </md-option>
-                            </md-autocomplete>
+                                </mat-option>
+                            </mat-autocomplete>
 
-                            <md-hint align="start" *ngIf="data?.hints">
+                            <mat-hint align="start" *ngIf="data?.hints">
                                 <strong>
                                     {{ typeof(data.hints) == 'function' ? data.hints(data.diContainer) : data.hints }}
                                 </strong>
-                            </md-hint>
-                        </md-form-field>
+                            </mat-hint>
+                        </mat-form-field>
                     </ng-template>
                 </ng-container>
 
-                <md-form-field *ngIf="data.renderType === 'textarea'">
-                    <textarea mdInput rows="5" [formControl]="data.control" placeholder="
+                <mat-form-field *ngIf="data.renderType === 'textarea'">
+                    <textarea matInput rows="5" [formControl]="data.control" placeholder="
                                   {{ data.label ? data.label : data.option.name }}
                               " [attr.id]="key ? key : data.label.slugify() + '-input'">
                     </textarea>
 
-                    <md-hint align="start" *ngIf="data?.hints">
+                    <mat-hint align="start" *ngIf="data?.hints">
                         <strong>
                             {{ typeof(data.hints) == 'function' ? data.hints(data.diContainer) : data.hints }}
                         </strong>
-                    </md-hint>
-                </md-form-field>    
+                    </mat-hint>
+                </mat-form-field>    
             </ng-container>
 
             <ng-container *ngIf="!data.useComponent && ['radio', 'checkbox', 'select'].indexOf(data.renderType) > -1">
                 <div *ngIf="['radio', 'checkbox'].indexOf(data.renderType) > -1; else select">
-                    <md-radio-group
+                    <mat-radio-group
                         *ngIf="data.renderType == 'radio'; else checkbox"
                         [formControl]="data.control">
-                        <md-radio-button
+                        <mat-radio-button
                             class="example-radio-button"
                             *ngFor="let option of data.options"
                             [value]="option.value"
@@ -116,11 +116,11 @@ import { Component } from "@angular/core";
                             (change)="updateParentValue($event, option)"
                         >
                             {{ option.name }}
-                        </md-radio-button>
-                    </md-radio-group>
+                        </mat-radio-button>
+                    </mat-radio-group>
 
                     <ng-template #checkbox>
-                        <md-checkbox
+                        <mat-checkbox
                             *ngFor="let option of data.options"
                             [value]="option.value"
                             [attr.checked]="data.control.value === option.value || option.id === data.control.value ? true : null"
@@ -128,25 +128,25 @@ import { Component } from "@angular/core";
                             [formControl]="data.control"
                         >
                             {{ option.name }}
-                        </md-checkbox>
+                        </mat-checkbox>
                     </ng-template>
                 </div>
                 
                 <ng-template #select>
                     <label *ngIf="data.label != ''">{{ data.label }}</label>
-                    <md-select
+                    <mat-select
                         *ngIf="data.renderType == 'select'"
                         [formControl]="data.control"
                     >
-                        <md-option *ngFor="let option of resolvedOptions | async" [value]="option.value">
+                        <mat-option *ngFor="let option of resolvedOptions | async" [value]="option.value">
                             {{ option.name ? option.name : option.value }}
-                        </md-option>
-                    </md-select>
+                        </mat-option>
+                    </mat-select>
                 </ng-template>
             </ng-container>
         </div>
     `,
     inputs: ['data', 'key', 'parent']
 })
-export class HbMdFormWidget extends HbFormWidget {
+export class HbMatFormWidget extends HbFormWidget {
 }

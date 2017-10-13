@@ -6,5 +6,5 @@ export interface IArrayOptionsFormConfig extends IBaseFormConfig {
 export declare const ArrayOptionsSymbol: symbol;
 export declare function ArrayOptions(options: IArrayOptionsFormConfig): {
     (target: Function): void;
-    (target: Object, propertyKey: string | symbol): void;
+    (target: Object, targetKey: string | symbol): void;
 };

@@ -5,5 +5,5 @@ export interface IObjectOptionsFormConfig extends IBaseFormConfig {
 export declare const ObjectOptionsSymbol: symbol;
 export declare function ObjectOptions(options: IObjectOptionsFormConfig): {
     (target: Function): void;
-    (target: Object, propertyKey: string | symbol): void;
+    (target: Object, targetKey: string | symbol): void;
 };

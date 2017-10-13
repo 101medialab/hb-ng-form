@@ -18,5 +18,5 @@ export interface IMultipleChoicesOptionsFormConfig extends IBaseFormConfig {
 export declare const MultipleChoicesOptionsSymbol: symbol;
 export declare function MultipleChoicesOptions(options: IMultipleChoicesOptionsFormConfig): {
     (target: Function): void;
-    (target: Object, propertyKey: string | symbol): void;
+    (target: Object, targetKey: string | symbol): void;
 };
