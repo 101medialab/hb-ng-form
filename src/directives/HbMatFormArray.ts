@@ -3,7 +3,7 @@ import { HbFormArray } from "./HbFormArray";
 
 @Component({
     selector: 'hb-mat-form-array',
-    template: `        
+    template: `
         <mat-card
             class="hb-form-array hb-array-type_{{ data.arrayType }} {{ 'hb-form-array_' + key }} {{ data?.html?.classAttr }}"
             [attr.id]="data.id"
@@ -16,12 +16,17 @@ import { HbFormArray } from "./HbFormArray";
                     
                     <ng-container *ngIf="data.childrenConfigName.length > 0">
                         <ng-container *ngIf="!data.expandOptions; else expandedArrayPushOptions" >
-                            <mat-select class="hb-form-array-config-switch"
-                                       [(ngModel)]="data.useConfig" [ngModelOptions]="{standalone: true}">
-                                <mat-option *ngFor="let configName of data.childrenConfigName; let i = index" [value]="i">
-                                    {{ configName }}
-                                </mat-option>
-                            </mat-select>
+                            <mat-form-field>
+                                <mat-select 
+                                    class="hb-form-array-config-switch"
+                                    [(ngModel)]="data.useConfig"
+                                    [ngModelOptions]="{standalone: true}"
+                                >
+                                    <mat-option *ngFor="let configName of data.childrenConfigName; let i = index" [value]="i">
+                                        {{ configName }}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
 
                             <button type="button" class="btn btn-default hb-form-add-btn" *ngIf="data.arrayType != 'enum'" type="button" (click)="data.add()">Add</button>
                         </ng-container>
