@@ -133,11 +133,11 @@ import { Component } from "@angular/core";
                 </div>
                 
                 <ng-template #select>
-                    <label *ngIf="data.label != ''">{{ data.label }}</label>
                     <mat-form-field>
                         <mat-select
                             *ngIf="data.renderType == 'select'"
                             [formControl]="data.control"
+                            [placeholder]="data.label != '' ? data.label : null"
                         >
                             <mat-option *ngFor="let option of resolvedOptions | async" [value]="option.value">
                                 {{ option.name ? option.name : option.value }}
