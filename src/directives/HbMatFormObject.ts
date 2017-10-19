@@ -4,9 +4,9 @@ import { HbFormObject } from "./HbFormObject";
 @Component({
     selector: 'hb-mat-form-object',
     template: `
-        <mat-card *ngIf="data.control != undefined && key != 'setValue'" [formGroup]="data.control" [ngClass]="'hb-form-obj_' + key" class="form-object">
-            <mat-card-header *ngIf="data.label != ''">
-                <mat-card-title *ngIf="!data.hideHeader">
+        <mat-card *ngIf="data.control != undefined && key != 'setValue'" [formGroup]="data.control" [ngClass]="'hb-form-obj_' + key" class="form-object {{ data?.html?.classAttr }}">
+            <mat-card-header *ngIf="data.label != '' && !data.hideHeader">
+                <mat-card-title>
                     {{ data.label }}
                 </mat-card-title>
             </mat-card-header>

@@ -14,7 +14,7 @@ import { Component } from "@angular/core";
                     data.hide == undefined ||  
                     !data.hide
                 )
-            " [ngClass]="{ 'error': !data.control.valid }" class="expand-to-child hb-form-widget hb-form-widget_{{ key }}">
+            " [ngClass]="{ 'error': !data.control.valid }" class="expand-to-child hb-form-widget hb-form-widget_{{ key }} {{ data?.html?.classAttr }}">
             <ng-template #customBlock></ng-template>
 
             <ng-container *ngIf="(
@@ -136,8 +136,8 @@ import { Component } from "@angular/core";
                     <label *ngIf="data.label != ''">{{ data.label }}</label>
                     <mat-form-field>
                         <mat-select
-                                *ngIf="data.renderType == 'select'"
-                                [formControl]="data.control"
+                            *ngIf="data.renderType == 'select'"
+                            [formControl]="data.control"
                         >
                             <mat-option *ngFor="let option of resolvedOptions | async" [value]="option.value">
                                 {{ option.name ? option.name : option.value }}
