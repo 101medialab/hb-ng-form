@@ -28,12 +28,20 @@ import { HbFormArray } from "./HbFormArray";
                                 </mat-select>
                             </mat-form-field>
 
-                            <button type="button" class="btn btn-default hb-form-add-btn" *ngIf="data.arrayType != 'enum'" type="button" (click)="data.add()">Add</button>
+                            <button 
+                                mat-raised-button 
+                                type="button" 
+                                class="btn btn-default hb-form-add-btn" 
+                                *ngIf="data.arrayType != 'enum'" 
+                                (click)="data.add()"
+                            >
+                                Add
+                            </button>
                         </ng-container>
                         
                         <ng-template #expandedArrayPushOptions>
                             <button
-                                mat-button 
+                                mat-raised-button 
                                 type="button"
                                 *ngFor="let configName of data.childrenConfigName; let i = index"
                                 (click)="data.useConfig = i; data.add();"
@@ -46,13 +54,19 @@ import { HbFormArray } from "./HbFormArray";
             </mat-card-header>
 
             <mat-card-content>
-                <div [attr.id]="data.id + '-' + i" class="hb-form-array-cell hb-form-array-cell_{{ cell?.flexibleObjectTypeName?.toLowerCase() }} {{ cell?.html?.classAttr }}"
+                <div [attr.id]="data.id + '-' + i" 
+                     class="hb-form-array-cell hb-form-array-cell_{{ cell?.flexibleObjectTypeName?.toLowerCase() }} {{ cell?.html?.classAttr }}"
                     *ngFor="let cell of 
                         data.arrayType != 'enum' ? 
                             data.children : resolvedOptions | async
-                    ; let i=index">
-                    <hb-mat-form-widget *ngIf="data.arrayType == 'enum'"
-                                       [data]="cell" [key]="i" [parent]="data"></hb-mat-form-widget>
+                    ; let i=index"
+                >
+                    <hb-mat-form-widget 
+                        *ngIf="data.arrayType == 'enum'"
+                        [data]="cell" 
+                        [key]="i" 
+                        [parent]="data"
+                    ></hb-mat-form-widget>
     
                     <ng-container *ngIf="data.arrayType != 'enum'">
                         <div *ngFor="let each of cell.children | mapToIterable;" class="hb-form-array-cell-attr_{{ each.key }}">
