@@ -147,69 +147,69 @@ function View_HbMatFormObject_8(_l:any):i0.ɵViewDefinition {
       });
 }
 function View_HbMatFormObject_1(_l:any):i0.ɵViewDefinition {
-  return i0.ɵvid(0,[(_l()(),i0.ɵeld(0,0,(null as any),(null as any),22,'mat-card',
+  return i0.ɵvid(0,[(_l()(),i0.ɵeld(0,0,(null as any),(null as any),23,'mat-card',
       [['class','mat-card']],[[2,'ng-untouched',(null as any)],[2,'ng-touched',(null as any)],
           [2,'ng-pristine',(null as any)],[2,'ng-dirty',(null as any)],[2,'ng-valid',
               (null as any)],[2,'ng-invalid',(null as any)],[2,'ng-pending',(null as any)]],
       [[(null as any),'submit'],[(null as any),'reset']],(_v,en,$event) => {
         var ad:boolean = true;
         if (('submit' === en)) {
-          const pd_0:any = ((<any>i0.ɵnov(_v,2).onSubmit($event)) !== false);
+          const pd_0:any = ((<any>i0.ɵnov(_v,3).onSubmit($event)) !== false);
           ad = (pd_0 && ad);
         }
         if (('reset' === en)) {
-          const pd_1:any = ((<any>i0.ɵnov(_v,2).onReset()) !== false);
+          const pd_1:any = ((<any>i0.ɵnov(_v,3).onReset()) !== false);
           ad = (pd_1 && ad);
         }
         return ad;
       },i1.View_MatCard_0,i1.RenderType_MatCard)),i0.ɵdid(1,278528,(null as any),0,
       i10.NgClass,[i0.IterableDiffers,i0.KeyValueDiffers,i0.ElementRef,i0.Renderer],
-      {klass:[0,'klass'],ngClass:[1,'ngClass']},(null as any)),i0.ɵdid(2,540672,(null as any),
-      0,i7.FormGroupDirective,[[8,(null as any)],[8,(null as any)]],{form:[0,'form']},
-      (null as any)),i0.ɵprd(2048,(null as any),i7.ControlContainer,(null as any),
-      [i7.FormGroupDirective]),i0.ɵdid(4,16384,(null as any),0,i7.NgControlStatusGroup,
-      [i7.ControlContainer],(null as any),(null as any)),i0.ɵdid(5,16384,(null as any),
-      0,i2.MatPrefixRejector,([] as any[]),(null as any),(null as any)),i0.ɵdid(6,
-      49152,(null as any),0,i3.MatCard,([] as any[]),(null as any),(null as any)),
-      (_l()(),i0.ɵted(-1,0,['\n            '])),(_l()(),i0.ɵand(16777216,(null as any),
-          0,1,(null as any),View_HbMatFormObject_2)),i0.ɵdid(9,16384,(null as any),
-          0,i10.NgIf,[i0.ViewContainerRef,i0.TemplateRef],{ngIf:[0,'ngIf']},(null as any)),
-      (_l()(),i0.ɵted(-1,0,['\n            '])),(_l()(),i0.ɵeld(11,0,(null as any),
-          0,10,'mat-card-content',[['class','hb-form-object-content mat-card-content']],
+      {klass:[0,'klass'],ngClass:[1,'ngClass']},(null as any)),i0.ɵpod(2,{'error':0,
+      'hb-form-with-hints':1}),i0.ɵdid(3,540672,(null as any),0,i7.FormGroupDirective,
+      [[8,(null as any)],[8,(null as any)]],{form:[0,'form']},(null as any)),i0.ɵprd(2048,
+      (null as any),i7.ControlContainer,(null as any),[i7.FormGroupDirective]),i0.ɵdid(5,
+      16384,(null as any),0,i7.NgControlStatusGroup,[i7.ControlContainer],(null as any),
+      (null as any)),i0.ɵdid(6,16384,(null as any),0,i2.MatPrefixRejector,([] as any[]),
+      (null as any),(null as any)),i0.ɵdid(7,49152,(null as any),0,i3.MatCard,([] as any[]),
+      (null as any),(null as any)),(_l()(),i0.ɵted(-1,0,['\n            '])),(_l()(),
+      i0.ɵand(16777216,(null as any),0,1,(null as any),View_HbMatFormObject_2)),i0.ɵdid(10,
+      16384,(null as any),0,i10.NgIf,[i0.ViewContainerRef,i0.TemplateRef],{ngIf:[0,
+          'ngIf']},(null as any)),(_l()(),i0.ɵted(-1,0,['\n            '])),(_l()(),
+      i0.ɵeld(12,0,(null as any),0,10,'mat-card-content',[['class','hb-form-object-content mat-card-content']],
           (null as any),(null as any),(null as any),(null as any),(null as any))),
-      i0.ɵdid(12,16384,(null as any),0,i2.MatPrefixRejector,([] as any[]),(null as any),
-          (null as any)),i0.ɵdid(13,16384,(null as any),0,i3.MatCardContent,([] as any[]),
+      i0.ɵdid(13,16384,(null as any),0,i2.MatPrefixRejector,([] as any[]),(null as any),
+          (null as any)),i0.ɵdid(14,16384,(null as any),0,i3.MatCardContent,([] as any[]),
           (null as any),(null as any)),(_l()(),i0.ɵted(-1,(null as any),['\n                '])),
       (_l()(),i0.ɵand(16777216,(null as any),(null as any),2,(null as any),View_HbMatFormObject_3)),
-      i0.ɵdid(16,802816,(null as any),0,i10.NgForOf,[i0.ViewContainerRef,i0.TemplateRef,
-          i0.IterableDiffers],{ngForOf:[0,'ngForOf']},(null as any)),i0.ɵppd(17,1),
+      i0.ɵdid(17,802816,(null as any),0,i10.NgForOf,[i0.ViewContainerRef,i0.TemplateRef,
+          i0.IterableDiffers],{ngForOf:[0,'ngForOf']},(null as any)),i0.ɵppd(18,1),
       (_l()(),i0.ɵted(-1,(null as any),['\n                '])),(_l()(),i0.ɵand(16777216,
-          (null as any),(null as any),1,(null as any),View_HbMatFormObject_8)),i0.ɵdid(20,
+          (null as any),(null as any),1,(null as any),View_HbMatFormObject_8)),i0.ɵdid(21,
           16384,(null as any),0,i10.NgIf,[i0.ViewContainerRef,i0.TemplateRef],{ngIf:[0,
               'ngIf']},(null as any)),(_l()(),i0.ɵted(-1,(null as any),['\n            '])),
       (_l()(),i0.ɵted(-1,0,['\n        ']))],(_ck,_v) => {
     var _co:any = _v.component;
-    const currVal_7:any = i0.ɵinlineInterpolate(1,'form-object ',((_co.data == null)? (null as any): ((_co.data.html == null)? (null as any): _co.data.html.classAttr)),
-        '');
-    const currVal_8:any = ('hb-form-obj_' + _co.key);
+    const currVal_7:any = i0.ɵinlineInterpolate(2,'form-object ',((_co.data == null)? (null as any): ((_co.data.html == null)? (null as any): _co.data.html.classAttr)),
+        ' hb-form-obj_',_co.key,'');
+    const currVal_8:any = _ck(_v,2,0,!_co.data.control.valid,_co.data.hints);
     _ck(_v,1,0,currVal_7,currVal_8);
     const currVal_9:any = _co.data.control;
-    _ck(_v,2,0,currVal_9);
+    _ck(_v,3,0,currVal_9);
     const currVal_10:any = ((_co.data.label != '') && !_co.data.hideHeader);
-    _ck(_v,9,0,currVal_10);
-    const currVal_11:any = i0.ɵunv(_v,16,0,_ck(_v,17,0,i0.ɵnov((<any>_v.parent),0),
+    _ck(_v,10,0,currVal_10);
+    const currVal_11:any = i0.ɵunv(_v,17,0,_ck(_v,18,0,i0.ɵnov((<any>_v.parent),0),
         _co.data.children));
-    _ck(_v,16,0,currVal_11);
+    _ck(_v,17,0,currVal_11);
     const currVal_12:any = ((_co.data == null)? (null as any): _co.data.hints);
-    _ck(_v,20,0,currVal_12);
+    _ck(_v,21,0,currVal_12);
   },(_ck,_v) => {
-    const currVal_0:any = i0.ɵnov(_v,4).ngClassUntouched;
-    const currVal_1:any = i0.ɵnov(_v,4).ngClassTouched;
-    const currVal_2:any = i0.ɵnov(_v,4).ngClassPristine;
-    const currVal_3:any = i0.ɵnov(_v,4).ngClassDirty;
-    const currVal_4:any = i0.ɵnov(_v,4).ngClassValid;
-    const currVal_5:any = i0.ɵnov(_v,4).ngClassInvalid;
-    const currVal_6:any = i0.ɵnov(_v,4).ngClassPending;
+    const currVal_0:any = i0.ɵnov(_v,5).ngClassUntouched;
+    const currVal_1:any = i0.ɵnov(_v,5).ngClassTouched;
+    const currVal_2:any = i0.ɵnov(_v,5).ngClassPristine;
+    const currVal_3:any = i0.ɵnov(_v,5).ngClassDirty;
+    const currVal_4:any = i0.ɵnov(_v,5).ngClassValid;
+    const currVal_5:any = i0.ɵnov(_v,5).ngClassInvalid;
+    const currVal_6:any = i0.ɵnov(_v,5).ngClassPending;
     _ck(_v,0,0,currVal_0,currVal_1,currVal_2,currVal_3,currVal_4,currVal_5,currVal_6);
   });
 }
@@ -236,4 +236,4 @@ export function View_HbMatFormObject_Host_0(_l:any):i0.ɵViewDefinition {
 export const HbMatFormObjectNgFactory:i0.ComponentFactory<i9.HbMatFormObject> = i0.ɵccf('hb-mat-form-object',
     i9.HbMatFormObject,View_HbMatFormObject_Host_0,{id:'id',key:'key',data:'data',
         parent:'parent'},{},([] as any[]));
-//# sourceMappingURL=data:application/json;base64,eyJmaWxlIjoiL1VzZXJzLzEwMS1tZWRpYWxhYi10b21sby9TaXRlcy9oYi1uZy1mb3JtL3NyYy9kaXJlY3RpdmVzL0hiTWF0Rm9ybU9iamVjdC5uZ2ZhY3RvcnkudHMiLCJ2ZXJzaW9uIjozLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJuZzovLy9Vc2Vycy8xMDEtbWVkaWFsYWItdG9tbG8vU2l0ZXMvaGItbmctZm9ybS9zcmMvZGlyZWN0aXZlcy9IYk1hdEZvcm1PYmplY3QudHMiLCJuZzovLy9Vc2Vycy8xMDEtbWVkaWFsYWItdG9tbG8vU2l0ZXMvaGItbmctZm9ybS9zcmMvZGlyZWN0aXZlcy9IYk1hdEZvcm1PYmplY3QudHMuSGJNYXRGb3JtT2JqZWN0Lmh0bWwiLCJuZzovLy9Vc2Vycy8xMDEtbWVkaWFsYWItdG9tbG8vU2l0ZXMvaGItbmctZm9ybS9zcmMvZGlyZWN0aXZlcy9IYk1hdEZvcm1PYmplY3QudHMuSGJNYXRGb3JtT2JqZWN0X0hvc3QuaHRtbCJdLCJzb3VyY2VzQ29udGVudCI6WyIgIiwiXG4gICAgICAgIDxtYXQtY2FyZCAqbmdJZj1cImRhdGEuY29udHJvbCAhPSB1bmRlZmluZWQgJiYga2V5ICE9ICdzZXRWYWx1ZSdcIiBbZm9ybUdyb3VwXT1cImRhdGEuY29udHJvbFwiIFtuZ0NsYXNzXT1cIidoYi1mb3JtLW9ial8nICsga2V5XCIgY2xhc3M9XCJmb3JtLW9iamVjdCB7eyBkYXRhPy5odG1sPy5jbGFzc0F0dHIgfX1cIj5cbiAgICAgICAgICAgIDxtYXQtY2FyZC1oZWFkZXIgKm5nSWY9XCJkYXRhLmxhYmVsICE9ICcnICYmICFkYXRhLmhpZGVIZWFkZXJcIj5cbiAgICAgICAgICAgICAgICA8bWF0LWNhcmQtdGl0bGU+XG4gICAgICAgICAgICAgICAgICAgIHt7IGRhdGEubGFiZWwgfX1cbiAgICAgICAgICAgICAgICA8L21hdC1jYXJkLXRpdGxlPlxuICAgICAgICAgICAgPC9tYXQtY2FyZC1oZWFkZXI+XG4gICAgICAgICAgICA8bWF0LWNhcmQtY29udGVudCBjbGFzcz1cImhiLWZvcm0tb2JqZWN0LWNvbnRlbnRcIj5cbiAgICAgICAgICAgICAgICA8ZGl2ICpuZ0Zvcj1cImxldCBlYWNoIG9mIGRhdGEuY2hpbGRyZW4gfCBtYXBUb0l0ZXJhYmxlXCIgY2xhc3M9XCJoYi1mb3JtLW9iai1hdHRyX3t7IGVhY2gua2V5IH19XCI+XG4gICAgICAgICAgICAgICAgICAgIDxuZy1jb250YWluZXIgKm5nSWY9XCIhZWFjaC5oaWRlICYmIGVhY2gua2V5ICE9ICdzZXRWYWx1ZSdcIj5cbiAgICAgICAgICAgICAgICAgICAgICAgIDxoYi1tYXQtZm9ybS13aWRnZXRcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAqbmdJZj1cImVhY2gudmFsLmdyb3VwVHlwZSA9PSB1bmRlZmluZWQgJiYgZWFjaC5rZXkgIT0gJ3NldFZhbHVlJ1wiXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgW2RhdGFdPVwiZWFjaC52YWxcIlxuICAgICAgICAgICAgICAgICAgICAgICAgICAgIFtrZXldPVwiZWFjaC5rZXlcIlxuICAgICAgICAgICAgICAgICAgICAgICAgICAgIFtwYXJlbnRdPVwiZGF0YVwiPlxuICAgICAgICAgICAgICAgICAgICAgICAgPC9oYi1tYXQtZm9ybS13aWRnZXQ+XG4gICAgICAgICAgICAgICAgICAgICAgICA8aGItbWF0LWZvcm0tYXJyYXlcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAqbmdJZj1cImVhY2gudmFsPy5ncm91cFR5cGUgPT0gJ2FycmF5J1wiXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgW2RhdGFdPVwiZWFjaC52YWxcIlxuICAgICAgICAgICAgICAgICAgICAgICAgICAgIFtrZXldPVwiZWFjaC5rZXlcIlxuICAgICAgICAgICAgICAgICAgICAgICAgICAgIFtmb3JtQXJyYXlOYW1lXT1cImVhY2gua2V5XCJcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICBbcGFyZW50XT1cImRhdGFcIj5cbiAgICAgICAgICAgICAgICAgICAgICAgIDwvaGItbWF0LWZvcm0tYXJyYXk+XG4gICAgICAgICAgICAgICAgICAgICAgICA8aGItbWF0LWZvcm0tb2JqZWN0XG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgKm5nSWY9XCJlYWNoLnZhbD8uZ3JvdXBUeXBlID09ICdvYmplY3QnICYmIGVhY2gua2V5ICE9ICdzZXRWYWx1ZSdcIlxuICAgICAgICAgICAgICAgICAgICAgICAgICAgIFtkYXRhXT1cImVhY2gudmFsXCJcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICBba2V5XT1cImVhY2gua2V5XCJcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICBbcGFyZW50XT1cImRhdGFcIj5cbiAgICAgICAgICAgICAgICAgICAgICAgIDwvaGItbWF0LWZvcm0tb2JqZWN0PlxuICAgICAgICAgICAgICAgICAgICA8L25nLWNvbnRhaW5lcj5cbiAgICAgICAgICAgICAgICA8L2Rpdj5cbiAgICAgICAgICAgICAgICA8c3BhbiBjbGFzcz1cImhpbnRzXCIgKm5nSWY9XCJkYXRhPy5oaW50c1wiPlxuICAgICAgICAgICAgICAgICAgICB7eyB0eXBlb2YoZGF0YS5oaW50cykgPT0gJ2Z1bmN0aW9uJyA/IGRhdGEuaGludHMoZGF0YS5kaUNvbnRhaW5lcikgOiBkYXRhLmhpbnRzIH19XG4gICAgICAgICAgICAgICAgPC9zcGFuPlxuICAgICAgICAgICAgPC9tYXQtY2FyZC1jb250ZW50PlxuICAgICAgICA8L21hdC1jYXJkPlxuICAgICIsIjxoYi1tYXQtZm9ybS1vYmplY3Q+PC9oYi1tYXQtZm9ybS1vYmplY3Q+Il0sIm1hcHBpbmdzIjoiQUFBQTs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O29CQ0VZO01BQUE7aUNBQUEsVUFBQTtNQUFBLGtEQUFBO01BQUEsMkNBQThEO01BQzFEO1VBQUE7YUFBQTtVQUFBLHNCQUFBO1VBQUEsNkJBQWdCO1VBQUEsd0JBRUM7OztRQUZEO1FBQUE7Ozs7b0JBT1I7TUFBQTttQ0FBQSxVQUFBO01BQUE7TUFBQSxlQUlvQjs7O1FBRmhCO1FBQ0E7UUFDQTtRQUpKLFdBRUksVUFDQSxVQUNBLFNBSko7Ozs7b0JBTUE7TUFBQTtVQUFBO2NBQUE7TUFBQTthQUFBO1VBQUEsMEVBQUE7VUFBQSwyRUFBQTtVQUFBO1VBQUEsc0JBQUE7VUFBQSxtRUFLb0I7aUJBQUE7O0lBRGhCO0lBSkosV0FJSSxTQUpKO0lBR0k7SUFEQTtJQUdBO0lBTEosV0FHSSxVQURBLFVBR0EsVUFMSjs7SUFBQTtJQUFBO0lBQUE7SUFBQTtJQUFBO0lBQUE7SUFBQTtJQUFBLFdBQUEscUVBQUE7Ozs7b0JBT0E7TUFBQTtnQ0FBQSxVQUFBO01BQUE7TUFBQSxlQUlvQjs7O1FBRGhCO1FBREE7UUFFQTtRQUpKLFdBR0ksVUFEQSxVQUVBLFNBSko7Ozs7b0JBZEo7TUFBQTtNQUEyRCxrRUFDdkQ7VUFBQSw0RUFBQTtVQUFBO2NBQUEsd0JBS3FCO01BQ3JCO2FBQUE7VUFBQSxpQ0FNb0I7TUFDcEI7YUFBQTtVQUFBLGlDQUtxQjs7UUFqQmpCO1FBREosV0FDSSxTQURKO1FBT0k7UUFESixXQUNJLFNBREo7UUFRSTtRQURKLFdBQ0ksU0FESjs7OztvQkFmUjtNQUFBO01BQWdHLDhEQUM1RjtVQUFBLDRFQUFBO1VBQUE7Y0FBQSx3QkFvQmU7O1FBcEJEO1FBQWQsV0FBYyxTQUFkOztRQURvRDtZQUFBO1FBQXhELFdBQXdELFNBQXhEOzs7O29CQXVCQTtNQUFBO01BQXdDOzs7UUFBQTtRQUFBOzs7O29CQTlCaEQ7TUFBQTtVQUFBO2NBQUE7TUFBQTtRQUFBO1FBQUE7VUFBQTtVQUFBO1FBQUE7UUFBQTtVQUFBO1VBQUE7UUFBQTtRQUFBO01BQUEsbURBQUE7a0JBQUE7TUFBQSxnRUFBQTtNQUFBO01BQUEsc0JBQUE7TUFBQSxnQ0FBQTtNQUFBLDBEQUFBO01BQUEseUVBQUE7TUFBQTtNQUE2SywwQ0FDeks7VUFBQSxrREFBQTtVQUFBO01BSWtCLDBDQUNsQjtVQUFBO1VBQUE7YUFBQTtVQUFBLHNCQUFBO1VBQUEsNkJBQWlEO01BQzdDO2FBQUE7NEJBQUEsZ0RBQUs7TUFzQkMsMERBQ047VUFBQSw0RUFBQTtVQUFBO2NBQUEsd0JBRU87TUFDUTs7SUFqQ3NHO1FBQUE7SUFBakM7SUFBNUYsV0FBNkgsVUFBakMsU0FBNUY7SUFBaUU7SUFBakUsV0FBaUUsU0FBakU7SUFDcUI7SUFBakIsV0FBaUIsVUFBakI7SUFNUztRQUFBO0lBQUwsWUFBSyxVQUFMO0lBdUJvQjtJQUFwQixZQUFvQixVQUFwQjs7SUE5QlI7SUFBQTtJQUFBO0lBQUE7SUFBQTtJQUFBO0lBQUE7SUFBQSxXQUFBLHFFQUFBOzs7Ozt1QkFEUixrREFDUTtNQUFBLDRFQUFBO01BQUE7VUFBQSx3QkFrQ1c7OztJQWxDRDtJQUFWLFdBQVUsU0FBVjs7OztvQkNEUjtNQUFBO2dDQUFBLFVBQUE7TUFBQTtJQUFBOzs7OzsifQ==
+//# sourceMappingURL=data:application/json;base64,eyJmaWxlIjoiL1VzZXJzLzEwMS1tZWRpYWxhYi10b21sby9TaXRlcy9oYi1uZy1mb3JtL3NyYy9kaXJlY3RpdmVzL0hiTWF0Rm9ybU9iamVjdC5uZ2ZhY3RvcnkudHMiLCJ2ZXJzaW9uIjozLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJuZzovLy9Vc2Vycy8xMDEtbWVkaWFsYWItdG9tbG8vU2l0ZXMvaGItbmctZm9ybS9zcmMvZGlyZWN0aXZlcy9IYk1hdEZvcm1PYmplY3QudHMiLCJuZzovLy9Vc2Vycy8xMDEtbWVkaWFsYWItdG9tbG8vU2l0ZXMvaGItbmctZm9ybS9zcmMvZGlyZWN0aXZlcy9IYk1hdEZvcm1PYmplY3QudHMuSGJNYXRGb3JtT2JqZWN0Lmh0bWwiLCJuZzovLy9Vc2Vycy8xMDEtbWVkaWFsYWItdG9tbG8vU2l0ZXMvaGItbmctZm9ybS9zcmMvZGlyZWN0aXZlcy9IYk1hdEZvcm1PYmplY3QudHMuSGJNYXRGb3JtT2JqZWN0X0hvc3QuaHRtbCJdLCJzb3VyY2VzQ29udGVudCI6WyIgIiwiXG4gICAgICAgIDxtYXQtY2FyZCAqbmdJZj1cImRhdGEuY29udHJvbCAhPSB1bmRlZmluZWQgJiYga2V5ICE9ICdzZXRWYWx1ZSdcIiBcbiAgICAgICAgICAgICAgICAgIFtmb3JtR3JvdXBdPVwiZGF0YS5jb250cm9sXCJcbiAgICAgICAgICAgICAgICAgIFtuZ0NsYXNzXT1cInsgXG4gICAgICAgICAgICAgICAgICAgICAgJ2Vycm9yJzogIWRhdGEuY29udHJvbC52YWxpZCxcbiAgICAgICAgICAgICAgICAgICAgICAnaGItZm9ybS13aXRoLWhpbnRzJyA6IGRhdGEuaGludHNcbiAgICAgICAgICAgICAgICAgIH1cIlxuICAgICAgICAgICAgICAgICAgY2xhc3M9XCJmb3JtLW9iamVjdCB7eyBkYXRhPy5odG1sPy5jbGFzc0F0dHIgfX0gaGItZm9ybS1vYmpfe3sga2V5IH19XCI+XG4gICAgICAgICAgICA8bWF0LWNhcmQtaGVhZGVyICpuZ0lmPVwiZGF0YS5sYWJlbCAhPSAnJyAmJiAhZGF0YS5oaWRlSGVhZGVyXCI+XG4gICAgICAgICAgICAgICAgPG1hdC1jYXJkLXRpdGxlPlxuICAgICAgICAgICAgICAgICAgICB7eyBkYXRhLmxhYmVsIH19XG4gICAgICAgICAgICAgICAgPC9tYXQtY2FyZC10aXRsZT5cbiAgICAgICAgICAgIDwvbWF0LWNhcmQtaGVhZGVyPlxuICAgICAgICAgICAgPG1hdC1jYXJkLWNvbnRlbnQgY2xhc3M9XCJoYi1mb3JtLW9iamVjdC1jb250ZW50XCI+XG4gICAgICAgICAgICAgICAgPGRpdiAqbmdGb3I9XCJsZXQgZWFjaCBvZiBkYXRhLmNoaWxkcmVuIHwgbWFwVG9JdGVyYWJsZVwiIGNsYXNzPVwiaGItZm9ybS1vYmotYXR0cl97eyBlYWNoLmtleSB9fVwiPlxuICAgICAgICAgICAgICAgICAgICA8bmctY29udGFpbmVyICpuZ0lmPVwiIWVhY2guaGlkZSAmJiBlYWNoLmtleSAhPSAnc2V0VmFsdWUnXCI+XG4gICAgICAgICAgICAgICAgICAgICAgICA8aGItbWF0LWZvcm0td2lkZ2V0XG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgKm5nSWY9XCJlYWNoLnZhbC5ncm91cFR5cGUgPT0gdW5kZWZpbmVkICYmIGVhY2gua2V5ICE9ICdzZXRWYWx1ZSdcIlxuICAgICAgICAgICAgICAgICAgICAgICAgICAgIFtkYXRhXT1cImVhY2gudmFsXCJcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICBba2V5XT1cImVhY2gua2V5XCJcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICBbcGFyZW50XT1cImRhdGFcIj5cbiAgICAgICAgICAgICAgICAgICAgICAgIDwvaGItbWF0LWZvcm0td2lkZ2V0PlxuICAgICAgICAgICAgICAgICAgICAgICAgPGhiLW1hdC1mb3JtLWFycmF5XG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgKm5nSWY9XCJlYWNoLnZhbD8uZ3JvdXBUeXBlID09ICdhcnJheSdcIlxuICAgICAgICAgICAgICAgICAgICAgICAgICAgIFtkYXRhXT1cImVhY2gudmFsXCJcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICBba2V5XT1cImVhY2gua2V5XCJcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICBbZm9ybUFycmF5TmFtZV09XCJlYWNoLmtleVwiXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgW3BhcmVudF09XCJkYXRhXCI+XG4gICAgICAgICAgICAgICAgICAgICAgICA8L2hiLW1hdC1mb3JtLWFycmF5PlxuICAgICAgICAgICAgICAgICAgICAgICAgPGhiLW1hdC1mb3JtLW9iamVjdFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICpuZ0lmPVwiZWFjaC52YWw/Lmdyb3VwVHlwZSA9PSAnb2JqZWN0JyAmJiBlYWNoLmtleSAhPSAnc2V0VmFsdWUnXCJcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICBbZGF0YV09XCJlYWNoLnZhbFwiXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgW2tleV09XCJlYWNoLmtleVwiXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgW3BhcmVudF09XCJkYXRhXCI+XG4gICAgICAgICAgICAgICAgICAgICAgICA8L2hiLW1hdC1mb3JtLW9iamVjdD5cbiAgICAgICAgICAgICAgICAgICAgPC9uZy1jb250YWluZXI+XG4gICAgICAgICAgICAgICAgPC9kaXY+XG4gICAgICAgICAgICAgICAgPHNwYW4gY2xhc3M9XCJoaW50c1wiICpuZ0lmPVwiZGF0YT8uaGludHNcIj5cbiAgICAgICAgICAgICAgICAgICAge3sgdHlwZW9mKGRhdGEuaGludHMpID09ICdmdW5jdGlvbicgPyBkYXRhLmhpbnRzKGRhdGEuZGlDb250YWluZXIpIDogZGF0YS5oaW50cyB9fVxuICAgICAgICAgICAgICAgIDwvc3Bhbj5cbiAgICAgICAgICAgIDwvbWF0LWNhcmQtY29udGVudD5cbiAgICAgICAgPC9tYXQtY2FyZD5cbiAgICAiLCI8aGItbWF0LWZvcm0tb2JqZWN0PjwvaGItbWF0LWZvcm0tb2JqZWN0PiJdLCJtYXBwaW5ncyI6IkFBQUE7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztvQkNRWTtNQUFBO2lDQUFBLFVBQUE7TUFBQSxrREFBQTtNQUFBLDJDQUE4RDtNQUMxRDtVQUFBO2FBQUE7VUFBQSxzQkFBQTtVQUFBLDZCQUFnQjtVQUFBLHdCQUVDOzs7UUFGRDtRQUFBOzs7O29CQU9SO01BQUE7bUNBQUEsVUFBQTtNQUFBO01BQUEsZUFJb0I7OztRQUZoQjtRQUNBO1FBQ0E7UUFKSixXQUVJLFVBQ0EsVUFDQSxTQUpKOzs7O29CQU1BO01BQUE7VUFBQTtjQUFBO01BQUE7YUFBQTtVQUFBLDBFQUFBO1VBQUEsMkVBQUE7VUFBQTtVQUFBLHNCQUFBO1VBQUEsbUVBS29CO2lCQUFBOztJQURoQjtJQUpKLFdBSUksU0FKSjtJQUdJO0lBREE7SUFHQTtJQUxKLFdBR0ksVUFEQSxVQUdBLFVBTEo7O0lBQUE7SUFBQTtJQUFBO0lBQUE7SUFBQTtJQUFBO0lBQUE7SUFBQSxXQUFBLHFFQUFBOzs7O29CQU9BO01BQUE7Z0NBQUEsVUFBQTtNQUFBO01BQUEsZUFJb0I7OztRQURoQjtRQURBO1FBRUE7UUFKSixXQUdJLFVBREEsVUFFQSxTQUpKOzs7O29CQWRKO01BQUE7TUFBMkQsa0VBQ3ZEO1VBQUEsNEVBQUE7VUFBQTtjQUFBLHdCQUtxQjtNQUNyQjthQUFBO1VBQUEsaUNBTW9CO01BQ3BCO2FBQUE7VUFBQSxpQ0FLcUI7O1FBakJqQjtRQURKLFdBQ0ksU0FESjtRQU9JO1FBREosV0FDSSxTQURKO1FBUUk7UUFESixXQUNJLFNBREo7Ozs7b0JBZlI7TUFBQTtNQUFnRyw4REFDNUY7VUFBQSw0RUFBQTtVQUFBO2NBQUEsd0JBb0JlOztRQXBCRDtRQUFkLFdBQWMsU0FBZDs7UUFEb0Q7WUFBQTtRQUF4RCxXQUF3RCxTQUF4RDs7OztvQkF1QkE7TUFBQTtNQUF3Qzs7O1FBQUE7UUFBQTs7OztvQkFwQ2hEO01BQUE7VUFBQTtjQUFBO01BQUE7UUFBQTtRQUFBO1VBQUE7VUFBQTtRQUFBO1FBQUE7VUFBQTtVQUFBO1FBQUE7UUFBQTtNQUFBLG1EQUFBO2tCQUFBO01BQUEsZ0VBRVU7TUFBQSxnQ0FGVjtNQUFBLDhFQUFBO01BQUEsZ0ZBQUE7TUFBQTtNQUFBLHNCQUFBO01BQUEsb0NBQUE7TUFBQSw2QkFNZ0YsMENBQzVFO2FBQUEsMEVBQUE7TUFBQTtVQUFBLHdCQUlrQiwwQ0FDbEI7YUFBQTtVQUFBO2FBQUE7VUFBQSxzQkFBQTtVQUFBLDZCQUFpRDtNQUM3QzthQUFBOzRCQUFBLGdEQUFLO01Bc0JDLDBEQUNOO1VBQUEsNEVBQUE7VUFBQTtjQUFBLHdCQUVPO01BQ1E7O0lBakNiO1FBQUE7SUFKQTtJQUZWLFdBTVUsVUFKQSxTQUZWO0lBQ1U7SUFEVixXQUNVLFNBRFY7SUFPcUI7SUFBakIsWUFBaUIsVUFBakI7SUFNUztRQUFBO0lBQUwsWUFBSyxVQUFMO0lBdUJvQjtJQUFwQixZQUFvQixVQUFwQjs7SUFwQ1I7SUFBQTtJQUFBO0lBQUE7SUFBQTtJQUFBO0lBQUE7SUFBQSxXQUFBLHFFQUFBOzs7Ozt1QkFEUixrREFDUTtNQUFBLDRFQUFBO01BQUE7VUFBQSx3QkF3Q1c7OztJQXhDRDtJQUFWLFdBQVUsU0FBVjs7OztvQkNEUjtNQUFBO2dDQUFBLFVBQUE7TUFBQTtJQUFBOzs7OzsifQ==

@@ -10,11 +10,17 @@ import { Component } from "@angular/core";
                     data.groupType == undefined || 
                     parent.arrayType == 'enum'
                 ) && 
-                key != 'setValue' && (
+                key != 'setValue' && 
+                (
                     data.hide == undefined ||  
                     !data.hide
                 )
-            " [ngClass]="{ 'error': !data.control.valid }" class="expand-to-child hb-form-widget hb-form-widget_{{ key }} {{ data?.html?.classAttr }}">
+            "
+             [ngClass]="{ 
+                'error': !data.control.valid,
+                'hb-form-with-hints' : data.hints
+            }"
+             class="expand-to-child hb-form-widget hb-form-widget_{{ key }} {{ data?.html?.classAttr }}">
             <ng-template #customBlock></ng-template>
 
             <ng-container *ngIf="(
