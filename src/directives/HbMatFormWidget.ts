@@ -36,6 +36,11 @@ import { Component } from "@angular/core";
                             data.selectOptionsObservables == undefined
                         ); else autocompleteBlock
                     " class="hb-form-widget-input-field">
+                        <div class="form-field-prefix"
+                             matPrefix
+                             *ngIf="data?.matPrefix"
+                             [innerHtml]="data.matPrefix"></div>
+
                         <input matInput
                                [attr.id]="key ? key : data.label.slugify() + '-input'"
                                [type]="data.renderType ? data.renderType : 'text'"
@@ -61,6 +66,11 @@ import { Component } from "@angular/core";
                                 {{ typeof(data.hints) == 'function' ? data.hints(data.diContainer) : data.hints }}
                             </strong>
                         </mat-hint>
+                        
+                        <div class="form-field-suffix"
+                             matPrefix
+                             *ngIf="data?.matSuffix"
+                             [innerHtml]="data.matSuffix"></div>
                     </mat-form-field>
 
                     <ng-template #autocompleteBlock [ngIf]="data.autocomplete != undefined">

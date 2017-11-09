@@ -10,7 +10,7 @@ import { HbFormArray } from "./HbFormArray";
                   [formGroup]="data.control"
                   [ngClass]="{
                       'hb-form-with-hints' : data.hints
-                   }">
+                  }">
             <mat-card-header>
                 <mat-card-title *ngIf="!data.hideHeader">
                     <h2 *ngIf="data.label != ''">{{ data.label }}</h2>
