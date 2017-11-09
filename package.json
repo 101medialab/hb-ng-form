@@ -1,6 +1,6 @@
 {
   "name": "hb-ng-form",
-  "version": "0.0.0-build0008",
+  "version": "0.0.0-build000A",
   "main": "dist/src/index.js",
   "module": "dist/src/index.js",
   "typings": "dist/src/index.d.ts",

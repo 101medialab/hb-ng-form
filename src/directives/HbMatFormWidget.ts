@@ -38,8 +38,8 @@ import { Component } from "@angular/core";
                     " class="hb-form-widget-input-field">
                         <div class="form-field-prefix"
                              matPrefix
-                             *ngIf="data?.matPrefix"
-                             [innerHtml]="data.matPrefix"></div>
+                             *ngIf="data?.matExtra?.matPrefix"
+                             [innerHtml]="data.matExtra.matPrefix"></div>
 
                         <input matInput
                                [attr.id]="key ? key : data.label.slugify() + '-input'"
@@ -68,9 +68,9 @@ import { Component } from "@angular/core";
                         </mat-hint>
                         
                         <div class="form-field-suffix"
-                             matPrefix
-                             *ngIf="data?.matSuffix"
-                             [innerHtml]="data.matSuffix"></div>
+                             matSuffix
+                             *ngIf="data?.matExtra?.matSuffix"
+                             [innerHtml]="data.matExtra.matSuffix"></div>
                     </mat-form-field>
 
                     <ng-template #autocompleteBlock [ngIf]="data.autocomplete != undefined">

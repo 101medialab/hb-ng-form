@@ -1,7 +1,9 @@
 import { IBaseFormConfig } from './FormConfig';
 export interface IMatExtraOptionsFormConfig extends IBaseFormConfig {
-    matSuffix: string;
-    matPrefix: string;
+    matExtra: {
+        matPrefix?: string;
+        matSuffix?: string;
+    };
 }
 export declare const MatExtraOptionsSymbol: symbol;
 export declare function MatExtraOptions(options: IMatExtraOptionsFormConfig): {

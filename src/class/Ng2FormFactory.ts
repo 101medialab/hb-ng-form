@@ -345,7 +345,8 @@ export class Ng2FormFactory {
             'html',
             'renderType',
             'arrayType',
-            'autocomplete'
+            'autocomplete',
+            'matExtra',
         ].forEach(function (each) {
             if (attrMapping.formFactory && each in attrMapping.formFactory) {
                 templateObj[each] = attrMapping.formFactory[each];
