@@ -296,7 +296,11 @@ export class Ng2FormFactory {
                             let i = 0;
 
                             rawValue[key].forEach((each) => {
-                                targetTemplate[key].useConfig = targetTemplate[key].beforeSetValue(each);
+                                if (
+                                    'beforeSetValue' in targetTemplate[key]
+                                ) {
+                                    targetTemplate[key].useConfig = targetTemplate[key].beforeSetValue(each);
+                                }
 
                                 targetTemplate[key].add();
 

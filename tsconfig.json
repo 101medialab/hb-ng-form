@@ -40,6 +40,7 @@
     "angularCompilerOptions": {
         "genDir": "./dist",
         "skipMetadataEmit" : false,
+        "preserveWhitespaces": false,
         "entryModule": "./src/HbFormModule#HbFormModule"
     },
     "awesomeTypescriptLoaderOptions": {

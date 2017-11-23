@@ -16,6 +16,7 @@ import { Ng2FormFactory as Factory } from './Ng2FormFactory';
 import { FormConfig, SetupConfig } from './NgFormFactoryDecorators';
 import { FlexibleObjectArray } from "./decorators/FlexibleObjectArray";
 import 'hb-ng-sdk/reusable/hb-es-shim';
+import { MultipleChoicesOptions, OptionWrapper } from "./decorators/MultipleChoicesOptions";
 
 describe('ObjectAttributeTypeExtractor.generateMapping - Extract', () => {
     it('should support callback on config resolved. Example usage: Decorator', () => {
@@ -109,6 +110,84 @@ describe('Ng2FormFactory.generateFormGroupByOATMapping', () => {
     //         expected
     //     ).toEqual(null);
     // });
+
+    it('should handle enum array initial value setting', () => {
+        class EnumnArrayDemo {
+            @SetupConfig()
+            @MultipleChoicesOptions({
+                options: () => {
+                    let result: Array<OptionWrapper> = [];
+
+                    [
+                        {
+                            "id": 1,
+                            "name": "Murthwaite"
+                        }, {
+                        "id": 2,
+                        "name": "D'Alessandro"
+                    }, {
+                        "id": 3,
+                        "name": "Fibbings"
+                    }, {
+                        "id": 4,
+                        "name": "Burras"
+                    }, {
+                        "id": 5,
+                        "name": "Mathouse"
+                    }, {
+                        "id": 6,
+                        "name": "Unwins"
+                    }, {
+                        "id": 7,
+                        "name": "McArthur"
+                    }, {
+                        "id": 8,
+                        "name": "Langtree"
+                    }, {
+                        "id": 9,
+                        "name": "Discombe"
+                    }, {
+                        "id": 10,
+                        "name": "Kindleysides"
+                    }
+                    ].forEach((each) => {
+                        result.push(
+                            new OptionWrapper({
+                                name: each.name,
+                                value: each.id
+                            })
+                        );
+                    });
+
+                    return result;
+                },
+            })
+            subscriptions: Array<string> = [];
+        }
+
+        let expected = Factory.generateFormGroupByOATMapping(
+            new FormBuilder(),
+            Extractor.generateMapping(
+                new EnumnArrayDemo()
+            )
+        );
+
+        const form = new FormGroup(expected.ngFormControl);
+
+        expected.templateConfig.children.setValue({
+            subscriptions: ['2', '5']
+        });
+
+        expect(
+            expected.templateConfig.children.subscriptions.children.length
+        ).toEqual(2);
+
+        expect(
+            form.value
+        ).toMatchObject({
+            subscriptions: ['2', '5']
+        });
+    });
 
     it('should generate Angular form object and HBForm compatible template object from ObjectAttributeTypeExtractor mapping for a mixed renderType object with nested object array', () => {
         let expected = Factory.generateFormGroupByOATMapping(

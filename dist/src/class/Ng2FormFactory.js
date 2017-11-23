@@ -213,7 +213,9 @@ var Ng2FormFactory = (function () {
                             }
                             var i_2 = 0;
                             rawValue[key].forEach(function (each) {
-                                targetTemplate[key].useConfig = targetTemplate[key].beforeSetValue(each);
+                                if ('beforeSetValue' in targetTemplate[key]) {
+                                    targetTemplate[key].useConfig = targetTemplate[key].beforeSetValue(each);
+                                }
                                 targetTemplate[key].add();
                                 var fixForPrimitiveArray = {};
                                 fixForPrimitiveArray[key] = each;
