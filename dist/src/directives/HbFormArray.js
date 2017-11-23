@@ -10,7 +10,7 @@ var __extends = (this && this.__extends) || (function () {
 })();
 import { Component } from "@angular/core";
 import { HbFormWidget } from './HbFormWidget';
-var HbFormArray = /** @class */ (function (_super) {
+var HbFormArray = (function (_super) {
     __extends(HbFormArray, _super);
     function HbFormArray() {
         return _super !== null && _super.apply(this, arguments) || this;

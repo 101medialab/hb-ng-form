@@ -1,7 +1,3 @@
-/**
- *  Reminder: For all decorators' identifiers we use Symbol, so you MUST import annotations from compiled `hb-ng-sdk`
- *  Symbol is unique and you can get the same one ONLY from where it creates. Importing from src means you imported are wrong one
- */
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -11,6 +7,10 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+/**
+ *  Reminder: For all decorators' identifiers we use Symbol, so you MUST import annotations from compiled `hb-ng-sdk`
+ *  Symbol is unique and you can get the same one ONLY from where it creates. Importing from src means you imported are wrong one
+ */
 import 'jest';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { expectedMapping } from 'hb-ng-sdk/reusable/ObjectAttributeTypeExtractor.spec';
@@ -22,7 +22,7 @@ import 'hb-ng-sdk/reusable/hb-es-shim';
 describe('ObjectAttributeTypeExtractor.generateMapping - Extract', function () {
     it('should support callback on config resolved. Example usage: Decorator', function () {
         var decorator = 'DemoDecorator';
-        var DecoratorDemo = /** @class */ (function () {
+        var DecoratorDemo = (function () {
             function DecoratorDemo() {
                 this.attr = null;
                 this.inner = [new InsideObjectArrayDecoratorDemo()];
@@ -46,7 +46,7 @@ describe('ObjectAttributeTypeExtractor.generateMapping - Extract', function () {
             ], DecoratorDemo);
             return DecoratorDemo;
         }());
-        var InsideObjectArrayDecoratorDemo = /** @class */ (function () {
+        var InsideObjectArrayDecoratorDemo = (function () {
             function InsideObjectArrayDecoratorDemo() {
                 this.innerAttr = '';
             }
@@ -170,13 +170,13 @@ describe('Ng2FormFactory.generateFormGroupByOATMapping', function () {
         });
     });
     it('should generate form for Mixed type Array', function () {
-        var A = /** @class */ (function () {
+        var A = (function () {
             function A() {
                 this.name = '';
             }
             return A;
         }());
-        var B = /** @class */ (function () {
+        var B = (function () {
             function B() {
                 this.phoneNo = null;
             }
@@ -189,7 +189,7 @@ describe('Ng2FormFactory.generateFormGroupByOATMapping', function () {
             ], B.prototype, "phoneNo", void 0);
             return B;
         }());
-        var DecoratorDemo = /** @class */ (function () {
+        var DecoratorDemo = (function () {
             function DecoratorDemo() {
                 this.mixedArray = [];
             }

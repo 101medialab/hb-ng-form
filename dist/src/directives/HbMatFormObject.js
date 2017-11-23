@@ -10,7 +10,7 @@ var __extends = (this && this.__extends) || (function () {
 })();
 import { Component } from "@angular/core";
 import { HbFormObject } from "./HbFormObject";
-var HbMatFormObject = /** @class */ (function (_super) {
+var HbMatFormObject = (function (_super) {
     __extends(HbMatFormObject, _super);
     function HbMatFormObject() {
         return _super !== null && _super.apply(this, arguments) || this;

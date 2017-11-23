@@ -11,7 +11,7 @@ var __extends = (this && this.__extends) || (function () {
 import { Component, ComponentFactoryResolver, ViewChild, ViewContainerRef } from "@angular/core";
 import { Observable } from "rxjs/Observable";
 import { BaseClass } from 'hb-ng-sdk';
-var HbFormWidget = /** @class */ (function (_super) {
+var HbFormWidget = (function (_super) {
     __extends(HbFormWidget, _super);
     function HbFormWidget(resolver) {
         var _this = _super.call(this) || this;
@@ -84,7 +84,7 @@ var HbFormWidget = /** @class */ (function (_super) {
         { type: ComponentFactoryResolver, },
     ]; };
     HbFormWidget.propDecorators = {
-        'customBlock': [{ type: ViewChild, args: ["customBlock", { read: ViewContainerRef },] },],
+        "customBlock": [{ type: ViewChild, args: ["customBlock", { read: ViewContainerRef },] },],
     };
     return HbFormWidget;
 }(BaseClass));

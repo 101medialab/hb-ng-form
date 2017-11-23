@@ -1,7 +1,7 @@
 import { FormGroup, FormControl, FormArray, Validators, } from '@angular/forms';
 import { NonPrimitiveTypeMeta, ObjectAttributeTypeExtractor as Extractor } from 'hb-ng-sdk';
 export * from './NgFormFactoryDecorators';
-var Ng2FormFactory = /** @class */ (function () {
+var Ng2FormFactory = (function () {
     function Ng2FormFactory() {
     }
     Ng2FormFactory.generateFormGroupByObject = function (formBuilder, object, resolveTypeAny, options) {
@@ -13,6 +13,7 @@ var Ng2FormFactory = /** @class */ (function () {
         return key.replace(/([A-Z]+)/g, " $1").replace(/_/g, ' ').capitalize();
     };
     Ng2FormFactory.generateFormGroupByOATMapping = function (formBuilder, attributeMappingObject, // Yet all attributes inside should be typeof ExtractorResultType
+        // Yet all attributes inside should be typeof ExtractorResultType
         resolveTypeAny, resolveTypeUndefined) {
         if (resolveTypeAny === void 0) { resolveTypeAny = null; }
         if (resolveTypeUndefined === void 0) { resolveTypeUndefined = null; }
@@ -249,7 +250,10 @@ var Ng2FormFactory = /** @class */ (function () {
         Ng2FormFactory.setTemplatePreset(attrMapping, templateObj);
     };
     // Copy setting from OAT to templateConfig object
-    Ng2FormFactory.setTemplatePreset = function (attrMapping, templateObj) {
+    // Copy setting from OAT to templateConfig object
+    Ng2FormFactory.setTemplatePreset = 
+    // Copy setting from OAT to templateConfig object
+    function (attrMapping, templateObj) {
         [
             'label',
             'type',

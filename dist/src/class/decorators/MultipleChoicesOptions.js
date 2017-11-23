@@ -1,5 +1,5 @@
 import { FormControl } from "@angular/forms";
-var OptionWrapper = /** @class */ (function () {
+var OptionWrapper = (function () {
     function OptionWrapper(option) {
         this.label = '';
         this.control = new FormControl();

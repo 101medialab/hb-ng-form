@@ -12,7 +12,7 @@ var directivesAndPipes = [
     HbFormWidget,
     HbMatFormWidget
 ];
-var HbFormModule = /** @class */ (function () {
+var HbFormModule = (function () {
     function HbFormModule() {
     }
     HbFormModule.decorators = [
@@ -21,7 +21,6 @@ var HbFormModule = /** @class */ (function () {
                         CommonModule,
                         FormsModule,
                         ReactiveFormsModule,
-                        // Material Design
                         BrowserAnimationsModule,
                         MatAutocompleteModule,
                         MatButtonModule,
