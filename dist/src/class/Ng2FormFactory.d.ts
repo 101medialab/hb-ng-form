@@ -16,7 +16,7 @@ export declare class Ng2FormFactory {
     }): any;
     private static prepareAndCreateChildTemplateConfig(currentInput, key, formBuilder, isRaw?);
     private static handleArray(current, key, formBuilder);
-    static setValueToTemplate(value: any): void;
+    static factorySetValueFunctionToTemplate(templateObject: any): (rawValue: any) => void;
     static resolveTemplateConfigByType(attrMapping: any, templateObj: any): void;
     static setTemplatePreset(attrMapping: any, templateObj: any): void;
 }

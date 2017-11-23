@@ -61,7 +61,7 @@ let directivesAndPipes = [
     ],
     declarations: directivesAndPipes,
     exports: [
-        ...directivesAndPipes
+        ...directivesAndPipes,
     ]
 })
 export class HbFormModule {

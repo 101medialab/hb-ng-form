@@ -197,9 +197,10 @@ describe('Ng2FormFactory.generateFormGroupByOATMapping', () => {
                 }, {
                     label: 'Type B',
                     structure: B
-                }]
+                }],
+                beforeSetValue: (raw) => 'name' in raw ? 0 : 1
             })
-            attr: Array<A|B> = [];
+            mixedArray: Array<A|B> = [];
         }
 
         let expected = Factory.generateFormGroupByOATMapping(
@@ -211,15 +212,39 @@ describe('Ng2FormFactory.generateFormGroupByOATMapping', () => {
 
         new FormGroup(expected.ngFormControl);
 
-        expected.templateConfig.children.attr.useConfig = 1;
-        expected.templateConfig.children.attr.add();
+        expected.templateConfig.children.setValue({
+            mixedArray: [{
+                name: 'Yo'
+            }, {
+                phoneNo: '99999999'
+            }]
+        });
 
-        expected.templateConfig.children.attr.useConfig = 0;
-        expected.templateConfig.children.attr.add();
+        expected.templateConfig.children.mixedArray.useConfig = 1;
+        expected.templateConfig.children.mixedArray.add();
+
+        expected.templateConfig.children.mixedArray.useConfig = 0;
+        expected.templateConfig.children.mixedArray.add();
 
         expect(
-            expected.templateConfig.children.attr.children
+            expected.templateConfig.children.mixedArray.children
         ).toMatchObject([{
+            children: {
+                "name": {
+                    "label": "Name",
+                    "renderType": "text",
+                    "type": "string"
+                }
+            },
+        }, {
+            children: {
+                "phoneNo": {
+                    "label": "Phone No",
+                    "renderType": "text",
+                    "type": "string"
+                }
+            },
+        }, {
             children: {
                 "phoneNo": {
                     "label": "Phone No",

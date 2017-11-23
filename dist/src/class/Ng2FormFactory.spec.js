@@ -191,7 +191,7 @@ describe('Ng2FormFactory.generateFormGroupByOATMapping', function () {
         }());
         var DecoratorDemo = /** @class */ (function () {
             function DecoratorDemo() {
-                this.attr = [];
+                this.mixedArray = [];
             }
             __decorate([
                 SetupConfig(),
@@ -202,19 +202,43 @@ describe('Ng2FormFactory.generateFormGroupByOATMapping', function () {
                         }, {
                             label: 'Type B',
                             structure: B
-                        }]
+                        }],
+                    beforeSetValue: function (raw) { return 'name' in raw ? 0 : 1; }
                 }),
                 __metadata("design:type", Array)
-            ], DecoratorDemo.prototype, "attr", void 0);
+            ], DecoratorDemo.prototype, "mixedArray", void 0);
             return DecoratorDemo;
         }());
         var expected = Factory.generateFormGroupByOATMapping(new FormBuilder(), Extractor.generateMapping(new DecoratorDemo()));
         new FormGroup(expected.ngFormControl);
-        expected.templateConfig.children.attr.useConfig = 1;
-        expected.templateConfig.children.attr.add();
-        expected.templateConfig.children.attr.useConfig = 0;
-        expected.templateConfig.children.attr.add();
-        expect(expected.templateConfig.children.attr.children).toMatchObject([{
+        expected.templateConfig.children.setValue({
+            mixedArray: [{
+                    name: 'Yo'
+                }, {
+                    phoneNo: '99999999'
+                }]
+        });
+        expected.templateConfig.children.mixedArray.useConfig = 1;
+        expected.templateConfig.children.mixedArray.add();
+        expected.templateConfig.children.mixedArray.useConfig = 0;
+        expected.templateConfig.children.mixedArray.add();
+        expect(expected.templateConfig.children.mixedArray.children).toMatchObject([{
+                children: {
+                    "name": {
+                        "label": "Name",
+                        "renderType": "text",
+                        "type": "string"
+                    }
+                },
+            }, {
+                children: {
+                    "phoneNo": {
+                        "label": "Phone No",
+                        "renderType": "text",
+                        "type": "string"
+                    }
+                },
+            }, {
                 children: {
                     "phoneNo": {
                         "label": "Phone No",

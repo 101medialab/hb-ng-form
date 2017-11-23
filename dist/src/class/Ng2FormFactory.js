@@ -75,12 +75,12 @@ var Ng2FormFactory = /** @class */ (function () {
                 currentTemplateConfig = resolved;
             }
             currentTemplateConfig.label = Ng2FormFactory.generateLabel(key);
-            currentTemplateConfig.setValue = Ng2FormFactory.setValueToTemplate.bind(currentTemplateConfig);
+            currentTemplateConfig.setValue = Ng2FormFactory.factorySetValueFunctionToTemplate(currentTemplateConfig);
             Ng2FormFactory.resolveTemplateConfigByType(current, currentTemplateConfig);
             result.ngFormControl[key] = currentTemplateConfig.control;
             result.templateConfig[key] = currentTemplateConfig;
         }
-        result.templateConfig.setValue = Ng2FormFactory.setValueToTemplate.bind(result.templateConfig);
+        result.templateConfig.setValue = Ng2FormFactory.factorySetValueFunctionToTemplate(result.templateConfig);
         if (isNonPrimitiveType) {
             result.templateConfig = {
                 groupType: attributeMappingObject.type,
@@ -128,7 +128,7 @@ var Ng2FormFactory = /** @class */ (function () {
                 // For reference type array or object
                 schemaTemp = Ng2FormFactory.generateFormGroupByOATMapping(formBuilder, current._mapping);
             }
-            schemaTemp.templateConfig.setValue = Ng2FormFactory.setValueToTemplate.bind(schemaTemp.templateConfig);
+            schemaTemp.templateConfig.setValue = Ng2FormFactory.factorySetValueFunctionToTemplate(schemaTemp.templateConfig);
             if ('formFactory' in current && typeof current.formFactory.onCreate === 'function') {
                 current.formFactory.onCreate(schemaTemp.templateConfig, Ng2FormFactory.diContainer);
             }
@@ -188,42 +188,45 @@ var Ng2FormFactory = /** @class */ (function () {
         // Ng2FormFactory.setTemplatePreset(current, result);
         return result;
     };
-    Ng2FormFactory.setValueToTemplate = function (value) {
-        var _loop_1 = function () {
-            var target = this_1.groupType ? this_1.children : this_1;
-            if (key in target) {
-                if (target[key].type) {
-                    if (typeof value[key] != 'object') {
-                        target[key].control.setValue(String(value[key]));
-                    }
-                }
-                else {
-                    // For Object
-                    if (target[key].groupType === 'object') {
-                        // Let FormGroup to handle value setting
-                        target[key].setValue(value[key]);
+    Ng2FormFactory.factorySetValueFunctionToTemplate = function (templateObject) {
+        return function (rawValue) {
+            var _loop_1 = function () {
+                var targetTemplate = templateObject.groupType ? templateObject.children : templateObject;
+                if (key in targetTemplate) {
+                    if (targetTemplate[key].type) {
+                        if (typeof rawValue[key] != 'object') {
+                            targetTemplate[key].control.setValue(String(rawValue[key]));
+                        }
                     }
                     else {
-                        // Array
-                        while (target[key].control.controls.length > 0) {
-                            target[key].remove(0);
+                        // For Object
+                        if (targetTemplate[key].groupType === 'object') {
+                            // Let FormGroup to handle value setting
+                            targetTemplate[key].setValue(rawValue[key]);
                         }
-                        var i_2 = 0;
-                        value[key].forEach(function (each) {
-                            target[key].add();
-                            var fixForPrimitiveArray = {};
-                            fixForPrimitiveArray[key] = each;
-                            target[key].children[i_2].setValue(target[key].arrayType !== 'object' ? fixForPrimitiveArray : each);
-                            i_2++;
-                        });
+                        else {
+                            // Array
+                            // Remove all elements
+                            while (targetTemplate[key].control.controls.length > 0) {
+                                targetTemplate[key].remove(0);
+                            }
+                            var i_2 = 0;
+                            rawValue[key].forEach(function (each) {
+                                targetTemplate[key].useConfig = targetTemplate[key].beforeSetValue(each);
+                                targetTemplate[key].add();
+                                var fixForPrimitiveArray = {};
+                                fixForPrimitiveArray[key] = each;
+                                targetTemplate[key].children[i_2].setValue(targetTemplate[key].arrayType !== 'object' ? fixForPrimitiveArray : each);
+                                i_2++;
+                            });
+                        }
                     }
                 }
+            };
+            for (var key in rawValue) {
+                _loop_1();
             }
         };
-        var this_1 = this;
-        for (var key in value) {
-            _loop_1();
-        }
     };
     Ng2FormFactory.resolveTemplateConfigByType = function (attrMapping, templateObj) {
         if (attrMapping.type === 'boolean') {
@@ -251,6 +254,7 @@ var Ng2FormFactory = /** @class */ (function () {
             'label',
             'type',
             'useComponent',
+            'beforeSetValue',
             'maxChoices',
             'expandOptions',
             'options',

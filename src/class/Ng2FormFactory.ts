@@ -107,7 +107,7 @@ export class Ng2FormFactory {
             }
 
             currentTemplateConfig.label = Ng2FormFactory.generateLabel(key);
-            currentTemplateConfig.setValue = Ng2FormFactory.setValueToTemplate.bind(currentTemplateConfig);
+            currentTemplateConfig.setValue = Ng2FormFactory.factorySetValueFunctionToTemplate(currentTemplateConfig);
             Ng2FormFactory.resolveTemplateConfigByType(
                 current, currentTemplateConfig
             );
@@ -116,7 +116,7 @@ export class Ng2FormFactory {
             result.templateConfig[key] = currentTemplateConfig;
         }
 
-        result.templateConfig.setValue = Ng2FormFactory.setValueToTemplate.bind(result.templateConfig);
+        result.templateConfig.setValue = Ng2FormFactory.factorySetValueFunctionToTemplate(result.templateConfig);
 
         if (isNonPrimitiveType) {
             result.templateConfig = {
@@ -189,7 +189,7 @@ export class Ng2FormFactory {
                 schemaTemp = Ng2FormFactory.generateFormGroupByOATMapping(formBuilder, current._mapping);
             }
 
-            schemaTemp.templateConfig.setValue = Ng2FormFactory.setValueToTemplate.bind(schemaTemp.templateConfig);
+            schemaTemp.templateConfig.setValue = Ng2FormFactory.factorySetValueFunctionToTemplate(schemaTemp.templateConfig);
 
             if ('formFactory' in current && typeof current.formFactory.onCreate === 'function') {
                 current.formFactory.onCreate(
@@ -269,42 +269,47 @@ export class Ng2FormFactory {
         return result;
     }
 
-    static setValueToTemplate(value) {
-        for (var key in value) {
-            let target = (this as any).groupType ? (this as any).children : this;
+    static factorySetValueFunctionToTemplate(templateObject) {
+        return function (rawValue) {
+            for (var key in rawValue) {
+                let targetTemplate = templateObject.groupType ? templateObject.children : templateObject;
 
-            if (key in target) {
-                if (target[key].type) {
-                    if (typeof value[key] != 'object') {
-                        target[key].control.setValue(
-                            String(value[key])
-                        );
-                    }
-                } else {
-                    // For Object
-                    if (target[key].groupType === 'object') {
-                        // Let FormGroup to handle value setting
-                        target[key].setValue(value[key]);
-                    } else {
-                        // Array
-                        while (target[key].control.controls.length > 0) {
-                            target[key].remove(0);
-                        }
-
-                        let i = 0;
-
-                        value[key].forEach((each) => {
-                            target[key].add();
-
-                            let fixForPrimitiveArray = {};
-                            fixForPrimitiveArray[key] = each;
-
-                            target[key].children[i].setValue(
-                                target[key].arrayType !== 'object' ? fixForPrimitiveArray : each
+                if (key in targetTemplate) {
+                    if (targetTemplate[key].type) {
+                        if (typeof rawValue[key] != 'object') {
+                            targetTemplate[key].control.setValue(
+                                String(rawValue[key])
                             );
+                        }
+                    } else {
+                        // For Object
+                        if (targetTemplate[key].groupType === 'object') {
+                            // Let FormGroup to handle value setting
+                            targetTemplate[key].setValue(rawValue[key]);
+                        } else {
+                            // Array
+                            // Remove all elements
+                            while (targetTemplate[key].control.controls.length > 0) {
+                                targetTemplate[key].remove(0);
+                            }
 
-                            i++;
-                        });
+                            let i = 0;
+
+                            rawValue[key].forEach((each) => {
+                                targetTemplate[key].useConfig = targetTemplate[key].beforeSetValue(each);
+
+                                targetTemplate[key].add();
+
+                                let fixForPrimitiveArray = {};
+                                fixForPrimitiveArray[key] = each;
+
+                                targetTemplate[key].children[i].setValue(
+                                    targetTemplate[key].arrayType !== 'object' ? fixForPrimitiveArray : each
+                                );
+
+                                i++;
+                            });
+                        }
                     }
                 }
             }
@@ -337,6 +342,7 @@ export class Ng2FormFactory {
             'label',
             'type',
             'useComponent',
+            'beforeSetValue',
             'maxChoices',
             'expandOptions',
             'options',

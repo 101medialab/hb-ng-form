@@ -42,7 +42,7 @@ import { Component } from "@angular/core";
                              [innerHtml]="data.matExtra.matPrefix"></div>
 
                         <input matInput
-                               [attr.id]="key ? key : data.label.slugify() + '-input'"
+                               [attr.id]="(key ? key : data.label.slugify()) + '-input'"
                                [type]="data.renderType ? data.renderType : 'text'"
                                [attr.checked]="
                                    parent?.arrayType === 'enum' && 

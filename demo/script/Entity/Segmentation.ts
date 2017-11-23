@@ -146,7 +146,10 @@ export class GroupNode {
             label: 'Group',
             structure: GroupNode
         }],
-        expandOptions: true
+        expandOptions: true,
+        beforeSetValue: (rawValue) => {
+            return rawValue.type === 'LEAF' ? 0 : 1
+        }
     })
     @ArrayOptions({
         onPush: (childrenTemplate) => {
