@@ -26,11 +26,13 @@ import {BaseClass} from 'hb-ng-sdk';
                 <label for="{{ key ? key : data.label.slugify() }}-input">{{ data.renderType !== 'checkbox' || data.label !== undefined ? data.label : data.option.name }}</label>
         
                 <div class="input-control-container">
+                    
+              
                     <input id="{{ key ? key : data.label.slugify() }}-input"
                            *ngIf="!data.renderType || ['select', 'textarea'].indexOf(data.renderType) === -1"
                            [type]="data.renderType ? data.renderType : 'text'"
                            [attr.checked]="
-                               parent?.arrayType === 'enum' && parent.control.value.indexOf(data.option.value) > -1 ? true : null
+                               parent?.arrayType === 'enum' && parent.control.value.indexOf(data.options[0].value) > -1 ? true : null
                            "
                            (change)="
                                parent?.arrayType === 'enum' ?
@@ -75,7 +77,7 @@ import {BaseClass} from 'hb-ng-sdk';
     `,
     inputs: ['data', 'key', 'parent']
 })
-export class HbFormWidget extends BaseClass  implements OnInit {
+export class HbFormWidget extends BaseClass implements OnInit {
     public resolvedOptions;
     public key;
     public data;

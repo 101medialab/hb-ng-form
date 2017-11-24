@@ -1,5 +1,5 @@
 import { HbFormWidget } from "./HbFormWidget";
-import { Component } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 
 @Component({
     selector: 'hb-mat-form-widget',
@@ -41,12 +41,14 @@ import { Component } from "@angular/core";
                              *ngIf="data?.matExtra?.matPrefix"
                              [innerHtml]="data.matExtra.matPrefix"></div>
 
+                        <!-- TODO: parent?.arrayType === 'enum' won't enter this condition -->
+
                         <input matInput
                                [attr.id]="(key ? key : data.label.slugify()) + '-input'"
                                [type]="data.renderType ? data.renderType : 'text'"
                                [attr.checked]="
                                    parent?.arrayType === 'enum' && 
-                                   parent.control.value.indexOf(data.option.value) > -1 ?
+                                   parent.control.value.indexOf(data.options[0].value) > -1 ?
                                        true : null
                                "
                                (change)="
@@ -136,6 +138,7 @@ import { Component } from "@angular/core";
                     </mat-radio-group>
 
                     <ng-template #checkbox>
+                        <!-- TODO: Enum array here -->
                         <mat-checkbox
                             *ngFor="let option of data.options"
                             [value]="option.value"
@@ -166,5 +169,15 @@ import { Component } from "@angular/core";
     `,
     inputs: ['data', 'key', 'parent']
 })
-export class HbMatFormWidget extends HbFormWidget {
+export class HbMatFormWidget extends HbFormWidget implements OnInit {
+    ngOnInit() {
+        if (
+            this.parent.arrayType == 'enum' &&
+            this.parent.control.value.indexOf(this.data.options[0].value) > -1
+        ) {
+            this.data.control.setValue(
+                this.data.options[0].value
+            )
+        }
+    }
 }

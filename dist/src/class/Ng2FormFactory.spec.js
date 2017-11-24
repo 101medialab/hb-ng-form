@@ -174,7 +174,6 @@ describe('Ng2FormFactory.generateFormGroupByOATMapping', function () {
         expected.templateConfig.children.setValue({
             subscriptions: ['2', '5']
         });
-        var a = 1;
         expect(expected.templateConfig.children.subscriptions.children.length).toEqual(2);
         expect(form.value).toMatchObject({
             subscriptions: ['2', '5']

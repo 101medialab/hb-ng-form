@@ -1,3 +1,5 @@
 import { HbFormWidget } from "./HbFormWidget";
-export declare class HbMatFormWidget extends HbFormWidget {
+import { OnInit } from "@angular/core";
+export declare class HbMatFormWidget extends HbFormWidget implements OnInit {
+    ngOnInit(): void;
 }
