@@ -171,6 +171,8 @@ import { Component, OnInit } from "@angular/core";
 })
 export class HbMatFormWidget extends HbFormWidget implements OnInit {
     ngOnInit() {
+        super.ngOnInit();
+
         if (
             this.parent.arrayType == 'enum' &&
             this.parent.control.value.indexOf(this.data.options[0].value) > -1

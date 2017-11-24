@@ -16,6 +16,7 @@ var HbMatFormWidget = (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     HbMatFormWidget.prototype.ngOnInit = function () {
+        _super.prototype.ngOnInit.call(this);
         if (this.parent.arrayType == 'enum' &&
             this.parent.control.value.indexOf(this.data.options[0].value) > -1) {
             this.data.control.setValue(this.data.options[0].value);
