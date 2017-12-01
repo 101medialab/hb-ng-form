@@ -14,6 +14,10 @@ export declare class Ng2FormFactory {
         ngFormControl: any;
         templateConfig: any;
     }): any;
+    static resolveFormValidators(current: any): {
+        validators: any;
+        valueNotEmpty: boolean;
+    };
     private static prepareAndCreateChildTemplateConfig(currentInput, key, formBuilder, isRaw?);
     private static handleArray(current, key, formBuilder);
     static factorySetValueFunctionToTemplate(templateObject: any): (rawValue: any) => void;

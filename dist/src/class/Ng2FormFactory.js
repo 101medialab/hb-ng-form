@@ -40,17 +40,15 @@ var Ng2FormFactory = (function () {
                     var child = Ng2FormFactory.prepareAndCreateChildTemplateConfig(current, key, formBuilder)();
                     resolved = {
                         groupType: 'object',
-                        control: child.ngFormControl instanceof FormGroup ? child.ngFormControl : new FormGroup(child.ngFormControl),
+                        control: child.ngFormControl instanceof FormGroup ?
+                            child.ngFormControl : new FormGroup(child.ngFormControl, Ng2FormFactory.resolveFormValidators(child).validators),
                         children: child.templateConfig
                     };
                 }
             }
             else if (current._type !== 'any') {
                 if (current !== 'undefined' && typeof current._type != 'undefined') {
-                    var validators = current.formFactory && current.formFactory.validators ? current.formFactory.validators : [], valueNotEmpty = current._value !== undefined;
-                    validators = typeof validators === 'function' ? validators(Ng2FormFactory.diContainer) : validators;
-                    if (valueNotEmpty && validators.length === 0)
-                        validators.push(Validators.required);
+                    var _a = Ng2FormFactory.resolveFormValidators(current), validators = _a.validators, valueNotEmpty = _a.valueNotEmpty;
                     currentTemplateConfig = {
                         type: current._type,
                         control: new FormControl(valueNotEmpty ? current._value : '', validators)
@@ -90,6 +88,13 @@ var Ng2FormFactory = (function () {
             Ng2FormFactory.setTemplatePreset(attributeMappingObject, result.templateConfig);
         }
         return result;
+    };
+    Ng2FormFactory.resolveFormValidators = function (current) {
+        var validators = current.formFactory && current.formFactory.validators ? current.formFactory.validators : [], valueNotEmpty = current._value !== undefined;
+        validators = typeof validators === 'function' ? validators(Ng2FormFactory.diContainer) : validators;
+        if (valueNotEmpty && validators.length === 0)
+            validators.push(Validators.required);
+        return { validators: validators, valueNotEmpty: valueNotEmpty };
     };
     Ng2FormFactory.prepareAndCreateChildTemplateConfig = function (currentInput, key, formBuilder, isRaw) {
         if (isRaw === void 0) { isRaw = false; }
@@ -137,13 +142,13 @@ var Ng2FormFactory = (function () {
                 ngFormControl: schemaTemp.ngFormControl instanceof FormControl || current.type === 'object' ?
                     schemaTemp.ngFormControl :
                     // For reference type array
-                    new FormGroup(schemaTemp.ngFormControl),
+                    new FormGroup(schemaTemp.ngFormControl, Ng2FormFactory.resolveFormValidators(schemaTemp).validators),
                 templateConfig: schemaTemp.templateConfig
             };
         };
     };
     Ng2FormFactory.handleArray = function (current, key, formBuilder) {
-        var ngFormArrayControl = new FormArray([]);
+        var ngFormArrayControl = new FormArray([], Ng2FormFactory.resolveFormValidators(current).validators);
         var initChildren = [];
         var arrayType = null;
         var result = {

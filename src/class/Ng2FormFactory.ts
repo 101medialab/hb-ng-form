@@ -64,7 +64,8 @@ export class Ng2FormFactory {
 
                     resolved = {
                         groupType: 'object',
-                        control: child.ngFormControl instanceof FormGroup ? child.ngFormControl : new FormGroup(child.ngFormControl),
+                        control: child.ngFormControl instanceof FormGroup ?
+                            child.ngFormControl : new FormGroup(child.ngFormControl, Ng2FormFactory.resolveFormValidators(child).validators),
                         children: child.templateConfig
                     };
                 }
@@ -72,12 +73,7 @@ export class Ng2FormFactory {
             // Primitive type and date
             else if (current._type !== 'any') {
                 if (current !== 'undefined' && typeof current._type != 'undefined') {
-                    let validators = current.formFactory && current.formFactory.validators ? current.formFactory.validators : [],
-                        valueNotEmpty = current._value !== undefined;
-
-                    validators = typeof validators === 'function' ? validators(Ng2FormFactory.diContainer) : validators;
-
-                    if (valueNotEmpty && validators.length === 0) validators.push(Validators.required);
+                    let { validators, valueNotEmpty } = Ng2FormFactory.resolveFormValidators(current);
 
                     currentTemplateConfig = {
                         type: current._type,
@@ -128,6 +124,17 @@ export class Ng2FormFactory {
         }
 
         return result;
+    }
+
+    static resolveFormValidators(current: any) {
+        let validators = current.formFactory && current.formFactory.validators ? current.formFactory.validators : [],
+            valueNotEmpty = current._value !== undefined;
+
+        validators = typeof validators === 'function' ? validators(Ng2FormFactory.diContainer) : validators;
+
+        if (valueNotEmpty && validators.length === 0) validators.push(Validators.required);
+
+        return { validators, valueNotEmpty };
     }
 
     private static prepareAndCreateChildTemplateConfig(
@@ -202,14 +209,14 @@ export class Ng2FormFactory {
                     schemaTemp.ngFormControl instanceof FormControl || current.type === 'object' ?
                         schemaTemp.ngFormControl :
                         // For reference type array
-                        new FormGroup(schemaTemp.ngFormControl),
+                        new FormGroup(schemaTemp.ngFormControl, Ng2FormFactory.resolveFormValidators(schemaTemp).validators),
                 templateConfig: schemaTemp.templateConfig
             };
         };
     }
 
     private static handleArray(current: any, key: string, formBuilder: FormBuilder) {
-        let ngFormArrayControl = new FormArray([]);
+        let ngFormArrayControl = new FormArray([], Ng2FormFactory.resolveFormValidators(current).validators);
         let initChildren = [];
         let arrayType = null;
 
