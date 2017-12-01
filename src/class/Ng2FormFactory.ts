@@ -77,7 +77,7 @@ export class Ng2FormFactory {
 
                     validators = typeof validators === 'function' ? validators(Ng2FormFactory.diContainer) : validators;
 
-                    if (valueNotEmpty) validators.push(Validators.required);
+                    if (valueNotEmpty && validators.length === 0) validators.push(Validators.required);
 
                     currentTemplateConfig = {
                         type: current._type,

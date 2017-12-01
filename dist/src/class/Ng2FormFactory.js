@@ -49,7 +49,7 @@ var Ng2FormFactory = (function () {
                 if (current !== 'undefined' && typeof current._type != 'undefined') {
                     var validators = current.formFactory && current.formFactory.validators ? current.formFactory.validators : [], valueNotEmpty = current._value !== undefined;
                     validators = typeof validators === 'function' ? validators(Ng2FormFactory.diContainer) : validators;
-                    if (valueNotEmpty)
+                    if (valueNotEmpty && validators.length === 0)
                         validators.push(Validators.required);
                     currentTemplateConfig = {
                         type: current._type,

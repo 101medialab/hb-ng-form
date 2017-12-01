@@ -5,18 +5,18 @@ import { Component, OnInit } from "@angular/core";
     selector: 'hb-mat-form-widget',
     template: `
         <div *ngIf="
-                data.control != undefined && 
+                data.control != undefined &&
                 (
-                    data.groupType == undefined || 
+                    data.groupType == undefined ||
                     parent.arrayType == 'enum'
-                ) && 
-                key != 'setValue' && 
+                ) &&
+                key != 'setValue' &&
                 (
-                    data.hide == undefined ||  
+                    data.hide == undefined ||
                     !data.hide
                 )
             "
-             [ngClass]="{ 
+            [ngClass]="{
                 'error': !data.control.valid,
                 'hb-form-with-hints' : data.hints
             }"
@@ -24,7 +24,7 @@ import { Component, OnInit } from "@angular/core";
             <ng-template #customBlock></ng-template>
 
             <ng-container *ngIf="(
-                !data.useComponent && 
+                !data.useComponent &&
                 data.expandOptions == undefined
             ) || (
                 parent?.arrayType === 'enum'
@@ -32,7 +32,7 @@ import { Component, OnInit } from "@angular/core";
                 <ng-container *ngIf="['select', 'radio', 'checkbox', 'textarea'].indexOf(data.renderType) === -1">
                     <mat-form-field *ngIf="
                         (
-                            parent?.arrayType === 'enum' || 
+                            parent?.arrayType === 'enum' ||
                             data.selectOptionsObservables == undefined
                         ); else autocompleteBlock
                     " class="hb-form-widget-input-field">
@@ -47,7 +47,7 @@ import { Component, OnInit } from "@angular/core";
                                [attr.id]="(key ? key : data.label.slugify()) + '-input'"
                                [type]="data.renderType ? data.renderType : 'text'"
                                [attr.checked]="
-                                   parent?.arrayType === 'enum' && 
+                                   parent?.arrayType === 'enum' &&
                                    parent.control.value.indexOf(data.options[0].value) > -1 ?
                                        true : null
                                "
@@ -68,7 +68,7 @@ import { Component, OnInit } from "@angular/core";
                                 {{ typeof(data.hints) == 'function' ? data.hints(data.diContainer) : data.hints }}
                             </strong>
                         </mat-hint>
-                        
+
                         <div class="form-field-suffix"
                              matSuffix
                              *ngIf="data?.matExtra?.matSuffix"
@@ -107,9 +107,9 @@ import { Component, OnInit } from "@angular/core";
                 </ng-container>
 
                 <mat-form-field *ngIf="data.renderType === 'textarea'">
-                    <textarea matInput rows="5" [formControl]="data.control" placeholder="
-                                  {{ data.label ? data.label : data.option.name }}
-                              " [attr.id]="key ? key : data.label.slugify() + '-input'">
+                    <textarea matInput rows="5" [formControl]="data.control" 
+                              [placeholder]="data.label ? data.label : data.option.name" 
+                              [attr.id]="key ? key : data.label.slugify() + '-input'">
                     </textarea>
 
                     <mat-hint align="start" *ngIf="data?.hints">
@@ -117,7 +117,7 @@ import { Component, OnInit } from "@angular/core";
                             {{ typeof(data.hints) == 'function' ? data.hints(data.diContainer) : data.hints }}
                         </strong>
                     </mat-hint>
-                </mat-form-field>    
+                </mat-form-field>
             </ng-container>
 
             <ng-container *ngIf="!data.useComponent && ['radio', 'checkbox', 'select'].indexOf(data.renderType) > -1">
@@ -150,7 +150,7 @@ import { Component, OnInit } from "@angular/core";
                         </mat-checkbox>
                     </ng-template>
                 </div>
-                
+
                 <ng-template #select>
                     <mat-form-field>
                         <mat-select
@@ -162,6 +162,12 @@ import { Component, OnInit } from "@angular/core";
                                 {{ option.name ? option.name : option.value }}
                             </mat-option>
                         </mat-select>
+
+                        <mat-hint align="start" *ngIf="data?.hints">
+                            <strong>
+                                {{ typeof(data.hints) == 'function' ? data.hints(data.diContainer) : data.hints }}
+                            </strong>
+                        </mat-hint>
                     </mat-form-field>
                 </ng-template>
             </ng-container>
