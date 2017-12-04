@@ -10,7 +10,7 @@ export interface IChoice {
 export interface IChoiceOptionsFormConfig extends IBaseFormConfig {
     renderType?: 'radio' | 'select' | 'checkbox';
     options: {
-        (diContainer: Map<string, any>): Array<IChoice> | Observable<Array<IChoice>>;
+        (diContainer: Map<string, any>, currentTemplateObject, parentTemplateObject): Array<IChoice> | Observable<Array<IChoice>>;
     };
 }
 export declare const ChoiceOptionsSymbol: symbol;

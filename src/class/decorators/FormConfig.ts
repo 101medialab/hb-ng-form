@@ -6,8 +6,8 @@ export type RenderTypeCompatible = 'text' | 'email' | 'number' | 'hidden' | 'rad
 export interface IBaseFormConfig {
     label?: string;
     defaultValue?: any;
-    hints?: string | { (diContainer: Map<string, any>): string };
-    validators?: Array<ValidatorFn> | { (diContainer: Map<string, any>): Array<ValidatorFn> };
+    hints?: string | { (diContainer: Map<string, any>, currentTemplateObject, parentTemplateObject): string };
+    validators?: Array<ValidatorFn> | { (diContainer: Map<string, any>, currentTemplateObject, parentTemplateObject): Array<ValidatorFn> };
     useValidators?: Array<string>;
     renderType?: RenderTypeCompatible;
     hide?: boolean;

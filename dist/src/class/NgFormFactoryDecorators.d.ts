@@ -4,7 +4,6 @@ export * from './decorators/ObjectOptions';
 export * from './decorators/AutocompleteOptions';
 export * from './decorators/ChoiceOptions';
 export * from './decorators/MultipleChoicesOptions';
-export * from './decorators/HTMLSetting';
 export * from './decorators/FlexibleObjectArray';
 export * from './decorators/MatExtraOptions';
 export declare function SetupConfig(): {

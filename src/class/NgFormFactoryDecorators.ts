@@ -4,7 +4,6 @@ export * from './decorators/ObjectOptions';
 export * from './decorators/AutocompleteOptions';
 export * from './decorators/ChoiceOptions';
 export * from './decorators/MultipleChoicesOptions';
-export * from './decorators/HTMLSetting';
 export * from './decorators/FlexibleObjectArray';
 export * from './decorators/MatExtraOptions';
 
@@ -14,7 +13,6 @@ import { ObjectOptionsSymbol } from './decorators/ObjectOptions';
 import { AutocompleteSymbol } from './decorators/AutocompleteOptions';
 import { ChoiceOptionsSymbol } from './decorators/ChoiceOptions';
 import { MultipleChoicesOptionsSymbol } from './decorators/MultipleChoicesOptions';
-import { HTMLSettingSymbol } from "./decorators/HTMLSetting";
 import { FlexibleObjectArraySymbol } from "./decorators/FlexibleObjectArray";
 import { MatExtraOptionsSymbol } from "./decorators/MatExtraOptions";
 import { OnOATResolved } from "hb-ng-sdk";
@@ -29,7 +27,6 @@ export function SetupConfig() {
                 ObjectOptionsSymbol,
                 ChoiceOptionsSymbol,
                 MultipleChoicesOptionsSymbol,
-                HTMLSettingSymbol,
                 FlexibleObjectArraySymbol,
                 AutocompleteSymbol,
                 MatExtraOptionsSymbol

@@ -32,7 +32,7 @@ var HbFormWidget = (function (_super) {
         var resolved = null;
         var options = data.options;
         if (typeof options === 'function') {
-            resolved = options(data.diContainer);
+            resolved = options(data.diContainer, this.data, this.parent);
         }
         else if (!(result instanceof Observable)) {
             resolved = options;

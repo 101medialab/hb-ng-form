@@ -65,7 +65,7 @@ import { Component, OnInit } from "@angular/core";
 
                         <mat-hint align="start" *ngIf="data?.hints">
                             <strong>
-                                {{ typeof(data.hints) == 'function' ? data.hints(data.diContainer) : data.hints }}
+                                {{ typeof(data.hints) == 'function' ? data.hints(data.diContainer, data, parent) : data.hints }}
                             </strong>
                         </mat-hint>
 
@@ -99,7 +99,7 @@ import { Component, OnInit } from "@angular/core";
 
                             <mat-hint align="start" *ngIf="data?.hints">
                                 <strong>
-                                    {{ typeof(data.hints) == 'function' ? data.hints(data.diContainer) : data.hints }}
+                                    {{ typeof(data.hints) == 'function' ? data.hints(data.diContainer, data, parent) : data.hints }}
                                 </strong>
                             </mat-hint>
                         </mat-form-field>
@@ -114,7 +114,7 @@ import { Component, OnInit } from "@angular/core";
 
                     <mat-hint align="start" *ngIf="data?.hints">
                         <strong>
-                            {{ typeof(data.hints) == 'function' ? data.hints(data.diContainer) : data.hints }}
+                            {{ typeof(data.hints) == 'function' ? data.hints(data.diContainer, data, parent) : data.hints }}
                         </strong>
                     </mat-hint>
                 </mat-form-field>
@@ -165,7 +165,7 @@ import { Component, OnInit } from "@angular/core";
 
                         <mat-hint align="start" *ngIf="data?.hints">
                             <strong>
-                                {{ typeof(data.hints) == 'function' ? data.hints(data.diContainer) : data.hints }}
+                                {{ typeof(data.hints) == 'function' ? data.hints(data.diContainer, data, parent) : data.hints }}
                             </strong>
                         </mat-hint>
                     </mat-form-field>

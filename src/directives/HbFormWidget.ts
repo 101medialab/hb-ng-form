@@ -111,7 +111,7 @@ export class HbFormWidget extends BaseClass implements OnInit {
         const options = data.options;
 
         if (typeof options === 'function') {
-            resolved = options(data.diContainer);
+            resolved = options(data.diContainer, this.data, this.parent);
         } else if (!(result instanceof Observable)) {
             resolved = options;
         }
