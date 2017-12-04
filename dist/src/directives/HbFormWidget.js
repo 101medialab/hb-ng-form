@@ -23,6 +23,7 @@ var HbFormWidget = (function (_super) {
             var factory = this.resolver.resolveComponentFactory(this.data.useComponent);
             var ref = this.customBlock.createComponent(factory);
             ref.instance.templateObject = this.data;
+            ref.instance.parentTemplateObject = this.parent;
             ref.changeDetectorRef.detectChanges();
         }
     };

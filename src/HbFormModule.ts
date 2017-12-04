@@ -73,6 +73,7 @@ export type TemplateObjectType = IBaseFormConfig | IChoiceOptionsFormConfig | IA
 export interface ICustomComponent {
     // TemplateObjectType
     templateObject: any;
+    parentTemplateObject: any;
 }
 
 export interface ICustomComponentConstructor {

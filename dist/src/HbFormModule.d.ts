@@ -6,6 +6,7 @@ export declare class HbFormModule {
 export declare type TemplateObjectType = IBaseFormConfig | IChoiceOptionsFormConfig | IArrayOptionsFormConfig;
 export interface ICustomComponent {
     templateObject: any;
+    parentTemplateObject: any;
 }
 export interface ICustomComponentConstructor {
     new (...deps: any[]): ICustomComponent;

@@ -98,6 +98,7 @@ export class HbFormWidget extends BaseClass implements OnInit {
             );
             const ref = this.customBlock.createComponent(factory);
             ref.instance.templateObject = this.data;
+            ref.instance.parentTemplateObject = this.parent;
 
             ref.changeDetectorRef.detectChanges();
         }
