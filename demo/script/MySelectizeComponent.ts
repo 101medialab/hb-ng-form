@@ -13,6 +13,7 @@ export class MySelectizeComponent implements ICustomComponent {
     /** Remember to mark templateObject as public attribute */
     @Input()
     public templateObject: any = null;
+    public parentTemplateObject: any = null;
     $selectize = null;
 
     public isInitialized:boolean = false;

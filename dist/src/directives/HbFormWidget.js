@@ -19,7 +19,7 @@ var HbFormWidget = (function (_super) {
         return _this;
     }
     HbFormWidget.prototype.ngAfterViewInit = function () {
-        if (this.data.useComponent) {
+        if (!this.data.hide && this.data.useComponent) {
             var factory = this.resolver.resolveComponentFactory(this.data.useComponent);
             var ref = this.customBlock.createComponent(factory);
             ref.instance.templateObject = this.data;
@@ -38,14 +38,15 @@ var HbFormWidget = (function (_super) {
         else if (!(result instanceof Observable)) {
             resolved = options;
         }
-        if (!(result instanceof Observable)) {
+        result = resolved;
+        if (!(resolved instanceof Observable)) {
             result = Observable.create(function (o) {
                 o.next(resolved);
             });
         }
         this.resolvedOptions = result;
     };
-    HbFormWidget.prototype.toBoolean = function (val) {
+    HbFormWidget.prototype.stringToBoolean = function (val) {
         return val === 'true';
     };
     HbFormWidget.prototype.updateParentValue = function ($event, option) {

@@ -23,16 +23,13 @@ import { Component, OnInit } from "@angular/core";
              class="expand-to-child hb-form-widget hb-form-widget_{{ key }} {{ data?.html?.classAttr }}">
             <ng-template #customBlock></ng-template>
 
-            <ng-container *ngIf="(
+            <ng-container *ngIf="
                 !data.useComponent &&
-                data.expandOptions == undefined
-            ) || (
-                parent?.arrayType === 'enum'
-            )">
+                parent?.arrayType !== 'enum'
+            ">
                 <ng-container *ngIf="['select', 'radio', 'checkbox', 'textarea'].indexOf(data.renderType) === -1">
                     <mat-form-field *ngIf="
                         (
-                            parent?.arrayType === 'enum' ||
                             data.selectOptionsObservables == undefined
                         ); else autocompleteBlock
                     " class="hb-form-widget-input-field">
@@ -41,26 +38,11 @@ import { Component, OnInit } from "@angular/core";
                              *ngIf="data?.matExtra?.matPrefix"
                              [innerHtml]="data.matExtra.matPrefix"></div>
 
-                        <!-- TODO: parent?.arrayType === 'enum' won't enter this condition -->
-
                         <input matInput
                                [attr.id]="(key ? key : data.label.slugify()) + '-input'"
                                [type]="data.renderType ? data.renderType : 'text'"
-                               [attr.checked]="
-                                   parent?.arrayType === 'enum' &&
-                                   parent.control.value.indexOf(data.options[0].value) > -1 ?
-                                       true : null
-                               "
-                               (change)="
-                                   parent?.arrayType === 'enum' ?
-                                       updateParentValue($event, data.option) :
-                                       data.control.patchValue(
-                                           data.renderType === 'checkbox' ? $event.target.checked : $event.target.value
-                                       );
-                               "
-                               placeholder="
-                                   {{ data.renderType !== 'checkbox' || data.label !== undefined ? data.label : data.option.name }}
-                               "
+                               (change)="data.control.patchValue($event.target.value)"
+                               [placeholder]="data.label !== undefined ? data.label : null"
                                [formControl]="data.control" />
 
                         <mat-hint align="start" *ngIf="data?.hints">
@@ -121,7 +103,7 @@ import { Component, OnInit } from "@angular/core";
             </ng-container>
 
             <ng-container *ngIf="!data.useComponent && ['radio', 'checkbox', 'select'].indexOf(data.renderType) > -1">
-                <div *ngIf="['radio', 'checkbox'].indexOf(data.renderType) > -1; else select">
+                <div *ngIf="data.renderType != 'select'; else select">
                     <mat-radio-group
                         *ngIf="data.renderType == 'radio'; else checkbox"
                         [formControl]="data.control">
@@ -138,16 +120,26 @@ import { Component, OnInit } from "@angular/core";
                     </mat-radio-group>
 
                     <ng-template #checkbox>
-                        <!-- TODO: Enum array here -->
-                        <mat-checkbox
-                            *ngFor="let option of data.options"
-                            [value]="option.value"
-                            [attr.checked]="data.control.value === option.value || option.id === data.control.value ? true : null"
-                            (change)="updateParentValue($event, option)"
-                            [formControl]="data.control"
-                        >
-                            {{ option.name }}
-                        </mat-checkbox>
+                        <ng-container *ngIf="parent?.arrayType == 'enum'; else booleanCheckbox">
+                            <mat-checkbox
+                                *ngFor="let option of data.options"
+                                [value]="option.value"
+                                [attr.checked]="data.control.value === option.value || option.id === data.control.value ? true : null"
+                                (change)="updateParentValue($event, option)"
+                                [formControl]="data.control"
+                            >
+                                {{ option.name }}
+                            </mat-checkbox>
+                        </ng-container>
+                        
+                        <ng-template #booleanCheckbox>
+                            <label>{{ data.label }}</label>
+                            <mat-checkbox class="example-margin" 
+                                          [attr.checked]="data.control.value ? true : null"
+                                          (change)="data.control.patchValue($event.source.checked)">
+                                
+                            </mat-checkbox>
+                        </ng-template>
                     </ng-template>
                 </div>
 
@@ -156,7 +148,7 @@ import { Component, OnInit } from "@angular/core";
                         <mat-select
                             *ngIf="data.renderType == 'select'"
                             [formControl]="data.control"
-                            [placeholder]="data.label != '' ? data.label : null"
+                            [placeholder]="data.label != undefined ? data.label : null"
                         >
                             <mat-option *ngFor="let option of resolvedOptions | async" [value]="option.value">
                                 {{ option.name ? option.name : option.value }}

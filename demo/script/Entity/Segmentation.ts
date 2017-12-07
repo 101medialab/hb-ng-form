@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { HttpClient } from "@angular/common/http";
 
 import {
     FormConfig,
@@ -186,4 +186,6 @@ export default class Segmentation {
         label: 'Only subscribed (if any)'
     })
     subscriptions: string = '';
+
+    isSendNow: boolean = true;
 }

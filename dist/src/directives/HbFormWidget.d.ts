@@ -10,6 +10,6 @@ export declare class HbFormWidget extends BaseClass implements OnInit {
     constructor(resolver: ComponentFactoryResolver);
     ngAfterViewInit(): void;
     ngOnInit(): void;
-    toBoolean(val: any): boolean;
+    stringToBoolean(val: any): boolean;
     updateParentValue($event: any, option: any): void;
 }

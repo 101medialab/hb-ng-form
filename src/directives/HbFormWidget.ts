@@ -92,7 +92,7 @@ export class HbFormWidget extends BaseClass implements OnInit {
     }
 
     ngAfterViewInit() {
-        if (this.data.useComponent) {
+        if (!this.data.hide && this.data.useComponent) {
             const factory = this.resolver.resolveComponentFactory(
                 this.data.useComponent
             );
@@ -117,7 +117,9 @@ export class HbFormWidget extends BaseClass implements OnInit {
             resolved = options;
         }
 
-        if (!(result instanceof Observable)) {
+        result = resolved;
+
+        if (!(resolved instanceof Observable)) {
             result = Observable.create((o)=> {
                 o.next(resolved);
             });
@@ -126,7 +128,7 @@ export class HbFormWidget extends BaseClass implements OnInit {
         this.resolvedOptions = result;
     }
 
-    toBoolean(val) {
+    stringToBoolean(val) {
         return val === 'true'
     }
 
