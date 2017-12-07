@@ -91,10 +91,10 @@ import { HbFormArray } from "./HbFormArray";
                     </button>
                 </div>
 
-                <div class="hints"
+                <strong class="mat-hint"
                      *ngIf="data?.hints">
                     {{ typeof(data.hints) == 'function' ? data.hints(data.diContainer) : data.hints }}
-                </div>
+                </strong>
             </mat-card-content>
         </mat-card>
     `,

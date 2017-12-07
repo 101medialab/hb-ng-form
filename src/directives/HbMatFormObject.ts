@@ -11,7 +11,7 @@ import { HbFormObject } from "./HbFormObject";
                       'hb-form-with-hints' : data.hints
                   }"
                   class="form-object {{ data?.html?.classAttr }} hb-form-obj_{{ key }}">
-            <mat-card-header *ngIf="data.label != '' && !data.hideHeader">
+            <mat-card-header *ngIf="typeof(data.label) == 'string' && data.label != '' && !data.hideHeader">
                 <mat-card-title>
                     {{ data.label }}
                 </mat-card-title>
@@ -40,9 +40,9 @@ import { HbFormObject } from "./HbFormObject";
                         </hb-mat-form-object>
                     </ng-container>
                 </div>
-                <span class="hints" *ngIf="data?.hints">
+                <strong class="mat-hint" *ngIf="data?.hints">
                     {{ typeof(data.hints) == 'function' ? data.hints(data.diContainer) : data.hints }}
-                </span>
+                </strong>
             </mat-card-content>
         </mat-card>
     `,

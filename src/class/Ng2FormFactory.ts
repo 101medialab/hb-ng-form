@@ -285,7 +285,8 @@ export class Ng2FormFactory {
                     if (targetTemplate[key].type) {
                         if (typeof rawValue[key] != 'object') {
                             targetTemplate[key].control.setValue(
-                                String(rawValue[key])
+                                // Do not cast to string or boolean value will be broken
+                                rawValue[key]
                             );
                         }
                     } else {

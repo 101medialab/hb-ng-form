@@ -201,7 +201,9 @@ var Ng2FormFactory = (function () {
                 if (key in targetTemplate) {
                     if (targetTemplate[key].type) {
                         if (typeof rawValue[key] != 'object') {
-                            targetTemplate[key].control.setValue(String(rawValue[key]));
+                            targetTemplate[key].control.setValue(
+                            // Do not cast to string
+                            rawValue[key]);
                         }
                     }
                     else {
