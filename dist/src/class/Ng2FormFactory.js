@@ -91,7 +91,7 @@ var Ng2FormFactory = (function () {
         return result;
     };
     Ng2FormFactory.resolveFormValidators = function (current) {
-        var validators = current.formFactory && current.formFactory.validators ? current.formFactory.validators : [], valueNotEmpty = [undefined, null].indexOf(current._value) > -1;
+        var validators = current.formFactory && current.formFactory.validators ? current.formFactory.validators : [], valueNotEmpty = [undefined, null, '', 0, false].indexOf(current._value) == -1;
         validators = typeof validators === 'function' ? validators(Ng2FormFactory.diContainer) : validators;
         if (valueNotEmpty && validators.length === 0)
             validators.push(Validators.required);
