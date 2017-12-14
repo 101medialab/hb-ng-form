@@ -130,7 +130,7 @@ export class Ng2FormFactory {
 
     static resolveFormValidators(current: any) {
         let validators = current.formFactory && current.formFactory.validators ? current.formFactory.validators : [],
-            valueNotEmpty = [undefined, null, '', 0, false].indexOf(current._value) == -1;
+            valueNotEmpty = [undefined, null].indexOf(current._value) > -1;
 
         validators = typeof validators === 'function' ? validators(Ng2FormFactory.diContainer) : validators;
 
