@@ -90,10 +90,12 @@ export class Ng2FormFactory {
 
             // If resolved is still null, set it to default
             if (!currentTemplateConfig && !resolved) {
+                let { validators } = Ng2FormFactory.resolveFormValidators(current);
+
                 resolved = {
                     type: 'string',
                     renderType: 'text',
-                    control: new FormControl('')
+                    control: new FormControl('', validators)
                 };
             }
 
@@ -128,7 +130,7 @@ export class Ng2FormFactory {
 
     static resolveFormValidators(current: any) {
         let validators = current.formFactory && current.formFactory.validators ? current.formFactory.validators : [],
-            valueNotEmpty = current._value !== undefined;
+            valueNotEmpty = [undefined, null].indexOf(current._value) > -1;
 
         validators = typeof validators === 'function' ? validators(Ng2FormFactory.diContainer) : validators;
 

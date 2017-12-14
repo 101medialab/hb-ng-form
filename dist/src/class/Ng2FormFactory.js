@@ -63,10 +63,11 @@ var Ng2FormFactory = (function () {
             }
             // If resolved is still null, set it to default
             if (!currentTemplateConfig && !resolved) {
+                var validators = Ng2FormFactory.resolveFormValidators(current).validators;
                 resolved = {
                     type: 'string',
                     renderType: 'text',
-                    control: new FormControl('')
+                    control: new FormControl('', validators)
                 };
             }
             // FIXME: this checking might be redundant
@@ -90,7 +91,7 @@ var Ng2FormFactory = (function () {
         return result;
     };
     Ng2FormFactory.resolveFormValidators = function (current) {
-        var validators = current.formFactory && current.formFactory.validators ? current.formFactory.validators : [], valueNotEmpty = current._value !== undefined;
+        var validators = current.formFactory && current.formFactory.validators ? current.formFactory.validators : [], valueNotEmpty = [undefined, null].indexOf(current._value) > -1;
         validators = typeof validators === 'function' ? validators(Ng2FormFactory.diContainer) : validators;
         if (valueNotEmpty && validators.length === 0)
             validators.push(Validators.required);
@@ -202,7 +203,7 @@ var Ng2FormFactory = (function () {
                     if (targetTemplate[key].type) {
                         if (typeof rawValue[key] != 'object') {
                             targetTemplate[key].control.setValue(
-                            // Do not cast to string
+                            // Do not cast to string or boolean value will be broken
                             rawValue[key]);
                         }
                     }
