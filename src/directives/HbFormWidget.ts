@@ -6,7 +6,6 @@ import {
     ViewContainerRef
 } from "@angular/core";
 import { Observable } from "rxjs/Observable";
-import {BaseClass} from 'hb-ng-sdk';
 
 @Component({
     selector: 'hb-form-widget',
@@ -77,7 +76,7 @@ import {BaseClass} from 'hb-ng-sdk';
     `,
     inputs: ['data', 'key', 'parent']
 })
-export class HbFormWidget extends BaseClass implements OnInit {
+export class HbFormWidget implements OnInit {
     public resolvedOptions;
     public key;
     public data;
@@ -88,7 +87,6 @@ export class HbFormWidget extends BaseClass implements OnInit {
     constructor(
         private resolver: ComponentFactoryResolver
     ) {
-        super();
     }
 
     ngAfterViewInit() {
@@ -123,6 +121,10 @@ export class HbFormWidget extends BaseClass implements OnInit {
         }
 
         this.resolvedOptions = result;
+    }
+
+    typeof(obj) {
+        return typeof obj;
     }
 
     toBoolean(val) {

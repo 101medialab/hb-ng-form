@@ -14,7 +14,6 @@ import {
     MatRadioModule,
     MatSelectModule
 } from "@angular/material";
-import { CommonModule } from "hb-ng-sdk";
 
 import {
     HbFormArray,
@@ -40,7 +39,6 @@ let directivesAndPipes = [
 
 @NgModule({
     imports: [
-        CommonModule,
         FormsModule,
         ReactiveFormsModule,
 

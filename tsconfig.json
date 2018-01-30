@@ -25,10 +25,8 @@
     },
     "include": [
         "./src"
-//        "./demo"
     ],
     "files": [
-        "./node_modules/hb-ng-sdk/typings/hb-ng2-sdk.d.ts",
         "./src/HbFormModule"
     ],
     "exclude": [
