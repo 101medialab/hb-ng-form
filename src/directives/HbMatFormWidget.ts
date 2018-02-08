@@ -111,7 +111,7 @@ import { Component, OnInit } from "@angular/core";
                             class="example-radio-button"
                             *ngFor="let option of data.options"
                             [value]="option.value"
-                            [attr.checked]="data.control.value === option.value || option.id === data.control.value ? true : null"
+                            [checked]="data.control.value === option.value || option.id === data.control.value ? true : null"
                             [attr.name]="data.renderType == 'radio' ? (key ? key : data.label.slugify()) + '-input' : null"
                             (change)="updateParentValue($event, option)"
                         >
@@ -124,7 +124,7 @@ import { Component, OnInit } from "@angular/core";
                             <mat-checkbox
                                 *ngFor="let option of data.options"
                                 [value]="option.value"
-                                [attr.checked]="data.control.value === option.value || option.id === data.control.value ? true : null"
+                                [checked]="data.control.value === option.value || option.id === data.control.value ? true : null"
                                 (change)="updateParentValue($event, option)"
                                 [formControl]="data.control"
                             >
@@ -134,8 +134,7 @@ import { Component, OnInit } from "@angular/core";
                         
                         <ng-template #booleanCheckbox>
                             <label>{{ data.label }}</label>
-                            <mat-checkbox class="example-margin" 
-                                          [attr.checked]="data.control.value ? true : null"
+                            <mat-checkbox [checked]="data.control.value ? true : null"
                                           (change)="data.control.patchValue($event.source.checked)">
                                 
                             </mat-checkbox>
