@@ -269,7 +269,7 @@ describe('Ng2FormFactory.generateFormGroupByOATMapping', function () {
                             label: 'Type B',
                             structure: B
                         }],
-                    beforeSetValue: function (raw) { return 'name' in raw ? 0 : 1; }
+                    resolveFlexibleObjectArrayConfig: function (raw) { return 'name' in raw ? 0 : 1; }
                 }),
                 __metadata("design:type", Array)
             ], DecoratorDemo.prototype, "mixedArray", void 0);

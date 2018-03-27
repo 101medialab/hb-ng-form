@@ -277,7 +277,7 @@ describe('Ng2FormFactory.generateFormGroupByOATMapping', () => {
                     label: 'Type B',
                     structure: B
                 }],
-                beforeSetValue: (raw) => 'name' in raw ? 0 : 1
+                resolveFlexibleObjectArrayConfig: (raw) => 'name' in raw ? 0 : 1
             })
             mixedArray: Array<A|B> = [];
         }

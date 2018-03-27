@@ -19,6 +19,12 @@ export interface IBaseFormConfig {
         idAttr?: string;
         classAttr?: string;
     };
+    beforeSetValue?: {
+        (currentTemplateObject, rawValue): void;
+    };
+    afterSetValue?: {
+        (currentTemplateObject, rawValue): void;
+    };
 }
 export declare const FormConfigSymbol: symbol;
 export declare function FormConfig(options: IBaseFormConfig): {

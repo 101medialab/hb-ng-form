@@ -286,10 +286,25 @@ export class Ng2FormFactory {
                 if (key in targetTemplate) {
                     if (targetTemplate[key].type) {
                         if (typeof rawValue[key] != 'object') {
+                            if (
+                                'beforeSetValue' in targetTemplate[key]
+                            ) {
+                                targetTemplate[key].beforeSetValue(targetTemplate[key], rawValue);
+                            }
+
                             targetTemplate[key].control.setValue(
                                 // Do not cast to string or boolean value will be broken
                                 rawValue[key]
                             );
+
+                            if (
+                                'afterSetValue' in targetTemplate[key]
+                            ) {
+                                targetTemplate[key].afterSetValue(targetTemplate[key], rawValue);
+                            }
+                        } else {
+                            // debugger;
+                            // Something goes wrong
                         }
                     } else {
                         // For Object
@@ -307,9 +322,9 @@ export class Ng2FormFactory {
 
                             rawValue[key].forEach((each) => {
                                 if (
-                                    'beforeSetValue' in targetTemplate[key]
+                                    'resolveFlexibleObjectArrayConfig' in targetTemplate[key]
                                 ) {
-                                    targetTemplate[key].useConfig = targetTemplate[key].beforeSetValue(each);
+                                    targetTemplate[key].useConfig = targetTemplate[key].resolveFlexibleObjectArrayConfig(each);
                                 }
 
                                 targetTemplate[key].add();
@@ -357,6 +372,8 @@ export class Ng2FormFactory {
             'type',
             'useComponent',
             'beforeSetValue',
+            'afterSetValue',
+            'resolveFlexibleObjectArrayConfig',
             'maxChoices',
             'expandOptions',
             'options',

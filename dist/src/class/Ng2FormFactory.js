@@ -202,9 +202,19 @@ var Ng2FormFactory = (function () {
                 if (key in targetTemplate) {
                     if (targetTemplate[key].type) {
                         if (typeof rawValue[key] != 'object') {
+                            if ('beforeSetValue' in targetTemplate[key]) {
+                                targetTemplate[key].beforeSetValue(targetTemplate[key], rawValue);
+                            }
                             targetTemplate[key].control.setValue(
                             // Do not cast to string or boolean value will be broken
                             rawValue[key]);
+                            if ('afterSetValue' in targetTemplate[key]) {
+                                targetTemplate[key].afterSetValue(targetTemplate[key], rawValue);
+                            }
+                        }
+                        else {
+                            // debugger;
+                            // Something goes wrong
                         }
                     }
                     else {
@@ -221,8 +231,8 @@ var Ng2FormFactory = (function () {
                             }
                             var i_2 = 0;
                             rawValue[key].forEach(function (each) {
-                                if ('beforeSetValue' in targetTemplate[key]) {
-                                    targetTemplate[key].useConfig = targetTemplate[key].beforeSetValue(each);
+                                if ('resolveFlexibleObjectArrayConfig' in targetTemplate[key]) {
+                                    targetTemplate[key].useConfig = targetTemplate[key].resolveFlexibleObjectArrayConfig(each);
                                 }
                                 targetTemplate[key].add();
                                 var fixForPrimitiveArray = {};
@@ -269,6 +279,8 @@ var Ng2FormFactory = (function () {
             'type',
             'useComponent',
             'beforeSetValue',
+            'afterSetValue',
+            'resolveFlexibleObjectArrayConfig',
             'maxChoices',
             'expandOptions',
             'options',
