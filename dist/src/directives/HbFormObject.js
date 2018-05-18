@@ -22,8 +22,6 @@ var HbFormObject = (function (_super) {
                     inputs: ['id', 'key', 'data', 'parent']
                 },] },
     ];
-    /** @nocollapse */
-    HbFormObject.ctorParameters = function () { return []; };
     return HbFormObject;
 }(HbFormWidget));
 export { HbFormObject };

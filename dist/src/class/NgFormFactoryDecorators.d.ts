@@ -6,6 +6,7 @@ export * from './decorators/ChoiceOptions';
 export * from './decorators/MultipleChoicesOptions';
 export * from './decorators/FlexibleObjectArray';
 export * from './decorators/MatExtraOptions';
+export declare function onOATResolved(target: any, key: any, resolved: any): void;
 export declare function SetupConfig(): {
     (target: Function): void;
     (target: Object, propertyKey: string | symbol): void;

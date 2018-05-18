@@ -38,8 +38,6 @@ var HbFormModule = (function () {
                     exports: directivesAndPipes.slice()
                 },] },
     ];
-    /** @nocollapse */
-    HbFormModule.ctorParameters = function () { return []; };
     return HbFormModule;
 }());
 export { HbFormModule };

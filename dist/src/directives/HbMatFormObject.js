@@ -22,8 +22,6 @@ var HbMatFormObject = (function (_super) {
                     inputs: ['id', 'key', 'data', 'parent']
                 },] },
     ];
-    /** @nocollapse */
-    HbMatFormObject.ctorParameters = function () { return []; };
     return HbMatFormObject;
 }(HbFormObject));
 export { HbMatFormObject };

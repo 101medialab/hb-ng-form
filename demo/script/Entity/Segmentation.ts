@@ -149,6 +149,9 @@ export class GroupNode {
         expandOptions: true,
         beforeSetValue: (rawValue) => {
             return rawValue.type === 'LEAF' ? 0 : 1
+        },
+        resolveFlexibleObjectArrayConfig: (template: any, rawValue) => {
+            console.log(template, rawValue);
         }
     })
     @ArrayOptions({

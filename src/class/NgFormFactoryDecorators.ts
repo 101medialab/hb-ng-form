@@ -17,36 +17,37 @@ import { FlexibleObjectArraySymbol } from "./decorators/FlexibleObjectArray";
 import { MatExtraOptionsSymbol } from "./decorators/MatExtraOptions";
 import { OnOATResolved } from "hb-ng-sdk";
 
+export function onOATResolved(target, key, resolved) {
+    if (!resolved.formFactory) {
+        resolved.formFactory = {};
+        [
+            FormConfigSymbol,
+            ArrayOptionsSymbol,
+            ObjectOptionsSymbol,
+            ChoiceOptionsSymbol,
+            MultipleChoicesOptionsSymbol,
+            FlexibleObjectArraySymbol,
+            AutocompleteSymbol,
+            MatExtraOptionsSymbol
+        ].forEach((eachSymbol) => {
+            let getMetadataArgs = [eachSymbol, target];
+
+            if (key) {
+                getMetadataArgs.push(key);
+            }
+
+            if (
+                Reflect.hasMetadata.apply(Reflect, getMetadataArgs)
+            ) {
+                resolved.formFactory = Object.assign({},
+                    resolved.formFactory,
+                    Reflect.getMetadata.apply(Reflect, getMetadataArgs)
+                );
+            }
+        });
+    }
+}
+
 export function SetupConfig() {
-    return OnOATResolved((target, key, resolved) => {
-        if (!resolved.formFactory) {
-            resolved.formFactory = {};
-            [
-                FormConfigSymbol,
-                ArrayOptionsSymbol,
-                ObjectOptionsSymbol,
-                ChoiceOptionsSymbol,
-                MultipleChoicesOptionsSymbol,
-                FlexibleObjectArraySymbol,
-                AutocompleteSymbol,
-                MatExtraOptionsSymbol
-            ].forEach((eachSymbol) => {
-                let getMetadataArgs = [eachSymbol, target];
-
-                if (key) {
-                    getMetadataArgs.push(key);
-                }
-
-                if (
-                    Reflect.hasMetadata.apply(Reflect, getMetadataArgs)
-                ) {
-                    resolved.formFactory = Object.assign({},
-                        resolved.formFactory,
-                        Reflect.getMetadata.apply(Reflect, getMetadataArgs)
-                    );
-                }
-            });
-
-        }
-    });
+    return OnOATResolved(onOATResolved);
 }

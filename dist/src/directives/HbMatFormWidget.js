@@ -29,8 +29,6 @@ var HbMatFormWidget = (function (_super) {
                     inputs: ['data', 'key', 'parent']
                 },] },
     ];
-    /** @nocollapse */
-    HbMatFormWidget.ctorParameters = function () { return []; };
     return HbMatFormWidget;
 }(HbFormWidget));
 export { HbMatFormWidget };

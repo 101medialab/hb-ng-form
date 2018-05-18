@@ -22,8 +22,6 @@ var HbMatFormArray = (function (_super) {
                     inputs: ['key', 'data', 'parent']
                 },] },
     ];
-    /** @nocollapse */
-    HbMatFormArray.ctorParameters = function () { return []; };
     return HbMatFormArray;
 }(HbFormArray));
 export { HbMatFormArray };
