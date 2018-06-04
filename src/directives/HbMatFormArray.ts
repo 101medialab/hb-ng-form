@@ -6,7 +6,12 @@ import { HbFormArray } from "./HbFormArray";
     template: `
         <mat-card class="hb-form-array hb-array-type_{{ data.arrayType }} hb-form-array_{{ key }} {{ data?.html?.classAttr }}"
                   [attr.id]="data.id"
-                  *ngIf="data.control != undefined && key != 'setValue'"
+                  *ngIf="
+                      data.control != undefined && 
+                      key != 'setValue' && (
+                          data.hide == undefined ||
+                          !data.hide
+                      )"
                   [formGroup]="data.control"
                   [ngClass]="{
                       'hb-form-with-hints' : data.hints

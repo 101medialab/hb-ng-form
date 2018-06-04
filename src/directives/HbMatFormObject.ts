@@ -4,7 +4,12 @@ import { HbFormObject } from "./HbFormObject";
 @Component({
     selector: 'hb-mat-form-object',
     template: `
-        <mat-card *ngIf="data.control != undefined && key != 'setValue'" 
+        <mat-card *ngIf="
+            data.control != undefined && 
+            key != 'setValue' && (
+                data.hide == undefined ||
+                !data.hide
+            )" 
                   [formGroup]="data.control"
                   [ngClass]="{ 
                       'error': !data.control.valid,
