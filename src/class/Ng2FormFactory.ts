@@ -302,7 +302,7 @@ export class Ng2FormFactory {
                             ) {
                                 targetTemplate[key].afterSetValue(targetTemplate[key], rawValue);
                             }
-                        } else {
+                        } else if (typeof rawValue[key] != 'undefined' || rawValue[key] != null) { // skip if rawValue[key] is null or undefined
                             // debugger;
                             // Something goes wrong
                         }
@@ -312,6 +312,9 @@ export class Ng2FormFactory {
                             // Let FormGroup to handle value setting
                             targetTemplate[key].setValue(rawValue[key]);
                         } else {
+                            // Even this field is array, rawValue[key] can be null
+                            if (!rawValue[key]) continue;
+
                             // Array
                             // Remove all elements
                             while (targetTemplate[key].control.controls.length > 0) {
