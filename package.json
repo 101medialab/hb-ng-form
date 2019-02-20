@@ -1,6 +1,6 @@
 {
   "name": "hb-ng-form",
-  "version": "0.0.1-build0016",
+  "version": "0.0.1-build0017",
   "main": "dist/src/index.js",
   "module": "dist/src/index.js",
   "typings": "dist/src/index.d.ts",
@@ -15,6 +15,9 @@
     "dev": "npm run cleanup && NODE_ENV=dev node_modules/.bin/webpack --config webpack.config.js --watch",
     "test": "jest",
     "test:watch": "jest --watch"
+  },
+  "peerDependencies": {
+    "hb-ng-sdk": "git+https://github.com/101medialab/angular-sdk.git"
   },
   "dependencies": {
     "@angular/animations": "^5.2.10",
@@ -31,7 +34,6 @@
     "angular2-template-loader": "^0.6.0",
     "extract-text-webpack-plugin": "^3.0.2",
     "hammerjs": "^2.0.8",
-    "hb-ng-sdk": "git+https://github.com/101medialab/angular-sdk.git",
     "html-loader": "^0.5.1",
     "rxjs": "^5.5.2",
     "typescript": "2.4.2",
