@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { ICustomComponent } from "../../src/HbFormModule";
-import { Observable } from "rxjs/Observable";
-import { Observer } from "rxjs/Observer";
+import { Observable } from "rxjs";
+import { Observer } from "rxjs";
 
 @Component({
     selector: 'mySelectize',

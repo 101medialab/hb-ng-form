@@ -1,6 +1,5 @@
 import { OnInit, ComponentFactoryResolver } from "@angular/core";
-import { BaseClass } from 'hb-ng-sdk';
-export declare class HbFormWidget extends BaseClass implements OnInit {
+export declare class HbFormWidget implements OnInit {
     private resolver;
     resolvedOptions: any;
     key: any;

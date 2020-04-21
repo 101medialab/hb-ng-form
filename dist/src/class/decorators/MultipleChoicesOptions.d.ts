@@ -1,5 +1,5 @@
 import { IBaseFormConfig } from './FormConfig';
-import { Observable } from "rxjs/Observable";
+import { Observable } from "rxjs";
 import { FormControl } from "@angular/forms";
 import { IChoice } from "./ChoiceOptions";
 export declare class OptionWrapper {
@@ -12,11 +12,11 @@ export declare class OptionWrapper {
 export interface IMultipleChoicesOptionsFormConfig extends IBaseFormConfig {
     maxChoices?: number;
     options: {
-        (diContainer: Map<string, any>, currentTemplateObject, parentTemplateObject): Array<OptionWrapper> | Observable<Array<OptionWrapper>>;
+        (diContainer: Map<string, any>, currentTemplateObject: any, parentTemplateObject: any): Array<OptionWrapper> | Observable<Array<OptionWrapper>>;
     };
 }
-export declare const MultipleChoicesOptionsSymbol: symbol;
+export declare const MultipleChoicesOptionsSymbol: unique symbol;
 export declare function MultipleChoicesOptions(options: IMultipleChoicesOptionsFormConfig): {
     (target: Function): void;
-    (target: Object, targetKey: string | symbol): void;
+    (target: Object, propertyKey: string | symbol): void;
 };

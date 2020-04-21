@@ -1,6 +1,6 @@
 import { Directive, Input, Output, EventEmitter, OnChanges, ElementRef } from '@angular/core';
 import 'selectize';
-import { Observable } from "rxjs/Observable";
+import { Observable } from "rxjs";
 
 export interface ISelectizeOption {
     text: string;

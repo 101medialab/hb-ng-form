@@ -6,17 +6,18 @@
 import 'jest';
 
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { expectedMapping } from 'hb-ng-sdk/reusable/ObjectAttributeTypeExtractor.spec';
-import {
-    NonPrimitiveTypeMeta,
-    ObjectAttributeTypeExtractor as Extractor,
-    OnOATResolved,
-} from 'hb-ng-sdk';
 import { Ng2FormFactory as Factory } from './Ng2FormFactory';
 import { FormConfig, SetupConfig } from './NgFormFactoryDecorators';
 import { FlexibleObjectArray } from "./decorators/FlexibleObjectArray";
-import 'hb-ng-sdk/reusable/hb-es-shim';
 import { MultipleChoicesOptions, OptionWrapper } from "./decorators/MultipleChoicesOptions";
+import {
+    NonPrimitiveTypeMeta,
+    ObjectAttributeTypeExtractor as Extractor,
+    OnOATResolved
+} from "../ObjectAttributeTypeExtractor";
+
+import 'reflect-metadata';
+import { expectedMapping } from "../ObjectAttributeTypeExtractor.spec";
 
 describe('ObjectAttributeTypeExtractor.generateMapping - Extract', () => {
     it('should support callback on config resolved. Example usage: Decorator', () => {
@@ -112,7 +113,7 @@ describe('Ng2FormFactory.generateFormGroupByOATMapping', () => {
     // });
 
     it('should handle enum array initial value setting', () => {
-        class EnumnArrayDemo {
+        class EnumArrayDemo {
             @SetupConfig()
             @MultipleChoicesOptions({
                 options: () => {
@@ -123,33 +124,33 @@ describe('Ng2FormFactory.generateFormGroupByOATMapping', () => {
                             "id": 1,
                             "name": "Murthwaite"
                         }, {
-                        "id": 2,
-                        "name": "D'Alessandro"
-                    }, {
-                        "id": 3,
-                        "name": "Fibbings"
-                    }, {
-                        "id": 4,
-                        "name": "Burras"
-                    }, {
-                        "id": 5,
-                        "name": "Mathouse"
-                    }, {
-                        "id": 6,
-                        "name": "Unwins"
-                    }, {
-                        "id": 7,
-                        "name": "McArthur"
-                    }, {
-                        "id": 8,
-                        "name": "Langtree"
-                    }, {
-                        "id": 9,
-                        "name": "Discombe"
-                    }, {
-                        "id": 10,
-                        "name": "Kindleysides"
-                    }
+                            "id": 2,
+                            "name": "D'Alessandro"
+                        }, {
+                            "id": 3,
+                            "name": "Fibbings"
+                        }, {
+                            "id": 4,
+                            "name": "Burras"
+                        }, {
+                            "id": 5,
+                            "name": "Mathouse"
+                        }, {
+                            "id": 6,
+                            "name": "Unwins"
+                        }, {
+                            "id": 7,
+                            "name": "McArthur"
+                        }, {
+                            "id": 8,
+                            "name": "Langtree"
+                        }, {
+                            "id": 9,
+                            "name": "Discombe"
+                        }, {
+                            "id": 10,
+                            "name": "Kindleysides"
+                        }
                     ].forEach((each) => {
                         result.push(
                             new OptionWrapper({
@@ -168,7 +169,7 @@ describe('Ng2FormFactory.generateFormGroupByOATMapping', () => {
         let expected = Factory.generateFormGroupByOATMapping(
             new FormBuilder(),
             Extractor.generateMapping(
-                new EnumnArrayDemo()
+                new EnumArrayDemo()
             )
         );
 

@@ -1,4 +1,4 @@
-import { Observable } from "rxjs/Observable";
+import { Observable } from "rxjs";
 
 export interface IAutocompleteOptions {
     onInit?: (childrenTemplate: any, diContainer: Map<string, any>) => void;

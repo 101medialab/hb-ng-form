@@ -1,3 +1,4 @@
+import { OnOATResolved } from "../ObjectAttributeTypeExtractor";
 export * from './decorators/FormConfig';
 export * from './decorators/ArrayOptions';
 export * from './decorators/ObjectOptions';
@@ -14,7 +15,6 @@ import { ChoiceOptionsSymbol } from './decorators/ChoiceOptions';
 import { MultipleChoicesOptionsSymbol } from './decorators/MultipleChoicesOptions';
 import { FlexibleObjectArraySymbol } from "./decorators/FlexibleObjectArray";
 import { MatExtraOptionsSymbol } from "./decorators/MatExtraOptions";
-import { OnOATResolved } from "hb-ng-sdk/dist/reusable/ObjectAttributeTypeExtractor";
 export function onOATResolved(target, key, resolved) {
     if (!resolved.formFactory) {
         resolved.formFactory = {};

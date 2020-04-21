@@ -1,3 +1,7 @@
+/**
+ *  Reminder: For all decorators' identifiers we use Symbol, so you MUST import annotations from compiled `hb-ng-sdk`
+ *  Symbol is unique and you can get the same one ONLY from where it creates. Importing from src means you imported are wrong one
+ */
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -7,23 +11,19 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-/**
- *  Reminder: For all decorators' identifiers we use Symbol, so you MUST import annotations from compiled `hb-ng-sdk`
- *  Symbol is unique and you can get the same one ONLY from where it creates. Importing from src means you imported are wrong one
- */
 import 'jest';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { expectedMapping } from 'hb-ng-sdk/reusable/ObjectAttributeTypeExtractor.spec';
-import { NonPrimitiveTypeMeta, ObjectAttributeTypeExtractor as Extractor, OnOATResolved, } from 'hb-ng-sdk';
 import { Ng2FormFactory as Factory } from './Ng2FormFactory';
 import { FormConfig, SetupConfig } from './NgFormFactoryDecorators';
 import { FlexibleObjectArray } from "./decorators/FlexibleObjectArray";
-import 'hb-ng-sdk/reusable/hb-es-shim';
 import { MultipleChoicesOptions, OptionWrapper } from "./decorators/MultipleChoicesOptions";
+import { NonPrimitiveTypeMeta, ObjectAttributeTypeExtractor as Extractor, OnOATResolved } from "../ObjectAttributeTypeExtractor";
+import 'reflect-metadata';
+import { expectedMapping } from "../ObjectAttributeTypeExtractor.spec";
 describe('ObjectAttributeTypeExtractor.generateMapping - Extract', function () {
     it('should support callback on config resolved. Example usage: Decorator', function () {
         var decorator = 'DemoDecorator';
-        var DecoratorDemo = (function () {
+        var DecoratorDemo = /** @class */ (function () {
             function DecoratorDemo() {
                 this.attr = null;
                 this.inner = [new InsideObjectArrayDecoratorDemo()];
@@ -47,7 +47,7 @@ describe('ObjectAttributeTypeExtractor.generateMapping - Extract', function () {
             ], DecoratorDemo);
             return DecoratorDemo;
         }());
-        var InsideObjectArrayDecoratorDemo = (function () {
+        var InsideObjectArrayDecoratorDemo = /** @class */ (function () {
             function InsideObjectArrayDecoratorDemo() {
                 this.innerAttr = '';
             }
@@ -115,8 +115,8 @@ describe('Ng2FormFactory.generateFormGroupByOATMapping', function () {
     //     ).toEqual(null);
     // });
     it('should handle enum array initial value setting', function () {
-        var EnumnArrayDemo = (function () {
-            function EnumnArrayDemo() {
+        var EnumArrayDemo = /** @class */ (function () {
+            function EnumArrayDemo() {
                 this.subscriptions = [];
             }
             __decorate([
@@ -166,10 +166,10 @@ describe('Ng2FormFactory.generateFormGroupByOATMapping', function () {
                     },
                 }),
                 __metadata("design:type", Array)
-            ], EnumnArrayDemo.prototype, "subscriptions", void 0);
-            return EnumnArrayDemo;
+            ], EnumArrayDemo.prototype, "subscriptions", void 0);
+            return EnumArrayDemo;
         }());
-        var expected = Factory.generateFormGroupByOATMapping(new FormBuilder(), Extractor.generateMapping(new EnumnArrayDemo()));
+        var expected = Factory.generateFormGroupByOATMapping(new FormBuilder(), Extractor.generateMapping(new EnumArrayDemo()));
         var form = new FormGroup(expected.ngFormControl);
         expected.templateConfig.children.setValue({
             subscriptions: ['2', '5']
@@ -236,13 +236,13 @@ describe('Ng2FormFactory.generateFormGroupByOATMapping', function () {
         });
     });
     it('should generate form for Mixed type Array', function () {
-        var A = (function () {
+        var A = /** @class */ (function () {
             function A() {
                 this.name = '';
             }
             return A;
         }());
-        var B = (function () {
+        var B = /** @class */ (function () {
             function B() {
                 this.phoneNo = null;
             }
@@ -255,7 +255,7 @@ describe('Ng2FormFactory.generateFormGroupByOATMapping', function () {
             ], B.prototype, "phoneNo", void 0);
             return B;
         }());
-        var DecoratorDemo = (function () {
+        var DecoratorDemo = /** @class */ (function () {
             function DecoratorDemo() {
                 this.mixedArray = [];
             }

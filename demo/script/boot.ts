@@ -2,7 +2,6 @@ import 'hammerjs';
 import 'jquery';
 
 import { Component, NgModule, OnInit } from "@angular/core";
-import { RouterModule } from "@angular/router";
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClient, HttpClientModule } from "@angular/common/http";
 import { FormBuilder, FormGroup, ReactiveFormsModule } from "@angular/forms";
@@ -10,19 +9,16 @@ import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import 'core-js';
 import 'zone.js/dist/zone.min.js';
 import 'reflect-metadata';
-import 'rxjs/add/observable/of';
 
-import 'hb-ng-sdk/dist/reusable/hb-es-shim';
-
-import { CommonModule, ObjectAttributeTypeExtractor as Extractor } from "hb-ng-sdk";
 import Segmentation from "./Entity/Segmentation";
 import {
+    ObjectAttributeTypeExtractor as Extractor,
     HbFormModule,
     Ng2FormFactory as Factory
 } from '../../src/index';
 import { MySelectizeComponent } from "./MySelectizeComponent";
 import { HbSelectizeDirective } from "./SelectizeDirective";
-import { Notification } from "./Entity/Notification";
+import { CommonModule } from "@angular/common";
 
 @Component({
     selector: 'hb-form-demo',

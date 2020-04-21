@@ -2,10 +2,11 @@
 const path = require('path');
 const webpack = require('webpack');
 const OptimizeJsPlugin = require('optimize-js-plugin');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const LiveReloadPlugin = require('webpack-livereload-plugin');
 
 let configs = [{
+    mode: "development",
     entry: {
         'main': './src/HbFormModule.ts',
         'demo': './demo/script/boot.ts'
@@ -24,7 +25,7 @@ let configs = [{
             use: 'html-loader?minimize=false'
         }, {
             test: /\.scss$/,
-            loader: 'style-loader!css-loader!sass-loader' 
+            loader: 'style-loader!css-loader!sass-loader'
         }]
     },
     plugins: [
@@ -65,18 +66,13 @@ let configs = [{
         rules: [
             {
                 test: /\.scss$/,
-                use: ExtractTextPlugin.extract({
-                    fallback: 'style-loader',
-                    use: 'css-loader?minimize=true!sass-loader',
-                }),
+                use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
             },
-            { test: /\.css$/, loader: 'style-loader!css-loader?minimize=true' }
+            { test: /\.css$/, loader: 'style-loader!css-loader' }
         ],
     },
     plugins: [
-        new ExtractTextPlugin({
-            filename: '[name].css',
-        }),
+        new MiniCssExtractPlugin(),
         new LiveReloadPlugin()
     ],
 }];

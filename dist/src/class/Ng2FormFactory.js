@@ -1,7 +1,7 @@
 import { FormGroup, FormControl, FormArray, Validators, } from '@angular/forms';
-import { NonPrimitiveTypeMeta, ObjectAttributeTypeExtractor as Extractor } from 'hb-ng-sdk';
+import { NonPrimitiveTypeMeta, ObjectAttributeTypeExtractor as Extractor } from "../ObjectAttributeTypeExtractor";
 export * from './NgFormFactoryDecorators';
-var Ng2FormFactory = (function () {
+var Ng2FormFactory = /** @class */ (function () {
     function Ng2FormFactory() {
     }
     Ng2FormFactory.generateFormGroupByObject = function (formBuilder, object, resolveTypeAny, options) {
@@ -10,11 +10,11 @@ var Ng2FormFactory = (function () {
         return Ng2FormFactory.generateFormGroupByOATMapping(formBuilder, Extractor.generateMapping(object, options), resolveTypeAny);
     };
     Ng2FormFactory.generateLabel = function (key) {
-        return key.replace(/([A-Z]+)/g, " $1").replace(/_/g, ' ').capitalize();
+        var fixedKey = key.replace(/([A-Z]+)/g, " $1").replace(/_/g, ' ');
+        return fixedKey.charAt(0).toUpperCase() + fixedKey.slice(1);
     };
     Ng2FormFactory.generateFormGroupByOATMapping = function (formBuilder, attributeMappingObject, // Yet all attributes inside should be typeof ExtractorResultType
-        // Yet all attributes inside should be typeof ExtractorResultType
-        resolveTypeAny, resolveTypeUndefined) {
+    resolveTypeAny, resolveTypeUndefined) {
         if (resolveTypeAny === void 0) { resolveTypeAny = null; }
         if (resolveTypeUndefined === void 0) { resolveTypeUndefined = null; }
         var result = {
@@ -46,6 +46,7 @@ var Ng2FormFactory = (function () {
                     };
                 }
             }
+            // Primitive type and date
             else if (current._type !== 'any') {
                 if (current !== 'undefined' && typeof current._type != 'undefined') {
                     var _a = Ng2FormFactory.resolveFormValidators(current), validators = _a.validators, valueNotEmpty = _a.valueNotEmpty;
@@ -58,6 +59,7 @@ var Ng2FormFactory = (function () {
                     resolved = resolveTypeUndefined ? resolveTypeUndefined(current, key) : null; // Resolve as null first
                 }
             }
+            // Last case: Null value => any
             else {
                 resolved = resolveTypeAny ? resolveTypeAny(current, key) : null; // Resolve as null first
             }
@@ -212,8 +214,7 @@ var Ng2FormFactory = (function () {
                                 targetTemplate[key].afterSetValue(targetTemplate[key], rawValue);
                             }
                         }
-                        else if (typeof rawValue[key] != 'undefined' || rawValue[key] != null) {
-                            // skip if rawValue[key] is null or undefined
+                        else if (typeof rawValue[key] != 'undefined' || rawValue[key] != null) { // skip if rawValue[key] is null or undefined
                             // debugger;
                             // Something goes wrong
                         }
@@ -274,10 +275,7 @@ var Ng2FormFactory = (function () {
         Ng2FormFactory.setTemplatePreset(attrMapping, templateObj);
     };
     // Copy setting from OAT to templateConfig object
-    // Copy setting from OAT to templateConfig object
-    Ng2FormFactory.setTemplatePreset = 
-    // Copy setting from OAT to templateConfig object
-    function (attrMapping, templateObj) {
+    Ng2FormFactory.setTemplatePreset = function (attrMapping, templateObj) {
         [
             'label',
             'type',

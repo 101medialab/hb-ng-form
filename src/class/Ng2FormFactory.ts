@@ -8,7 +8,7 @@ import {
 import {
     NonPrimitiveTypeMeta,
     ObjectAttributeTypeExtractor as Extractor
-} from 'hb-ng-sdk';
+} from "../ObjectAttributeTypeExtractor";
 
 export * from './NgFormFactoryDecorators';
 
@@ -30,7 +30,9 @@ export class Ng2FormFactory {
     static diContainer = new Map();
 
     static generateLabel(key) {
-        return key.replace(/([A-Z]+)/g, " $1").replace(/_/g, ' ').capitalize();
+        const fixedKey = key.replace(/([A-Z]+)/g, " $1").replace(/_/g, ' ');
+
+        return fixedKey.charAt(0).toUpperCase() + fixedKey.slice(1);
     }
 
     static generateFormGroupByOATMapping(

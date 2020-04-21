@@ -5,10 +5,10 @@ export interface IFlexibleObjectArrayFormConfig extends IBaseFormConfig {
         structure: any;
     }>;
     expandOptions?: boolean;
-    resolveFlexibleObjectArrayConfig: (template: any, rawValue) => void;
+    resolveFlexibleObjectArrayConfig: (template: any, rawValue: any) => void;
 }
-export declare const FlexibleObjectArraySymbol: symbol;
+export declare const FlexibleObjectArraySymbol: unique symbol;
 export declare function FlexibleObjectArray(options: IFlexibleObjectArrayFormConfig): {
     (target: Function): void;
-    (target: Object, targetKey: string | symbol): void;
+    (target: Object, propertyKey: string | symbol): void;
 };

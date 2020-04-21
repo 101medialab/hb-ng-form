@@ -7,10 +7,11 @@ export declare class Ng2FormFactory {
     }, options?: any): any;
     static diContainer: Map<any, any>;
     static generateLabel(key: any): any;
-    static generateFormGroupByOATMapping(formBuilder: FormBuilder, attributeMappingObject: any, resolveTypeAny?: (attrMapping, key: string) => {
+    static generateFormGroupByOATMapping(formBuilder: FormBuilder, attributeMappingObject: any, // Yet all attributes inside should be typeof ExtractorResultType
+    resolveTypeAny?: (attrMapping: any, key: string) => {
         ngFormControl: any;
         templateConfig: any;
-    }, resolveTypeUndefined?: (attrMapping, key: string) => {
+    }, resolveTypeUndefined?: (attrMapping: any, key: string) => {
         ngFormControl: any;
         templateConfig: any;
     }): any;
@@ -18,8 +19,8 @@ export declare class Ng2FormFactory {
         validators: any;
         valueNotEmpty: boolean;
     };
-    private static prepareAndCreateChildTemplateConfig(currentInput, key, formBuilder, isRaw?);
-    private static handleArray(current, key, formBuilder);
+    private static prepareAndCreateChildTemplateConfig;
+    private static handleArray;
     static factorySetValueFunctionToTemplate(templateObject: any): (rawValue: any) => void;
     static resolveTemplateConfigByType(attrMapping: any, templateObj: any): void;
     static setTemplatePreset(attrMapping: any, templateObj: any): void;

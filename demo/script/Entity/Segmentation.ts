@@ -8,7 +8,7 @@ import {
     ObjectOptions
 } from '../../../src/index';
 import { Observable } from 'rxjs';
-import { Observer } from "rxjs/Observer";
+import { Observer } from "rxjs";
 import { FormControl } from "@angular/forms";
 import { MySelectizeComponent } from "../MySelectizeComponent";
 import { ArrayOptions } from "../../../src/class/decorators/ArrayOptions";

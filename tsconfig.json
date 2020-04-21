@@ -28,7 +28,6 @@
 //        "./demo"
     ],
     "files": [
-        "./node_modules/hb-ng-sdk/typings/hb-ng2-sdk.d.ts",
         "./src/HbFormModule"
     ],
     "exclude": [
@@ -39,6 +38,7 @@
     ],
     "angularCompilerOptions": {
         "genDir": "./dist",
+        "enableIvy": false,
         "skipMetadataEmit" : false,
         "entryModule": "./src/HbFormModule#HbFormModule"
     },

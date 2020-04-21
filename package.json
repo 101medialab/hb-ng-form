@@ -16,69 +16,73 @@
     "test": "jest",
     "test:watch": "jest --watch"
   },
-  "peerDependencies": {
-    "hb-ng-sdk": "git+https://github.com/101medialab/angular-sdk.git"
-  },
   "dependencies": {
-    "@angular/animations": "^5.2.10",
-    "@angular/cdk": "^5.2.5",
-    "@angular/common": "^5.2.10",
-    "@angular/compiler": "^5.2.10",
-    "@angular/compiler-cli": "^5.2.10",
-    "@angular/core": "^5.2.10",
-    "@angular/forms": "^5.2.10",
-    "@angular/material": "^5.2.5",
-    "@angular/platform-browser": "^5.2.10",
-    "@angular/platform-browser-dynamic": "^5.2.10",
-    "@angular/router": "^5.2.10",
-    "angular2-template-loader": "^0.6.0",
+    "@angular/animations": "^9.1.2",
+    "@angular/cdk": "^9.2.1",
+    "@angular/common": "^9.1.2",
+    "@angular/compiler": "^9.1.2",
+    "@angular/compiler-cli": "^9.1.2",
+    "@angular/core": "^9.1.2",
+    "@angular/forms": "^9.1.2",
+    "@angular/material": "^9.2.1",
+    "@angular/platform-browser": "^9.1.2",
+    "@angular/platform-browser-dynamic": "^9.1.2",
+    "@angular/router": "^9.1.2",
+    "angular2-template-loader": "^0.6.2",
     "extract-text-webpack-plugin": "^3.0.2",
     "hammerjs": "^2.0.8",
-    "hb-ng-sdk": "git+https://github.com/101medialab/angular-sdk.git",
-    "html-loader": "^0.5.1",
-    "rxjs": "^5.5.2",
-    "typescript": "2.4.2",
-    "webpack": "^3.8.1",
-    "zone.js": "^0.8.18"
+    "html-loader": "^1.1.0",
+    "rxjs": "^6.5.5",
+    "typescript": "3.8.3",
+    "webpack": "^4.42.1",
+    "zone.js": "^0.10.3"
   },
   "devDependencies": {
-    "@types/jest": "^21.1.8",
-    "@types/jquery": "^3.2.16",
-    "@types/node": "^8.0.53",
-    "awesome-typescript-loader": "^3.4.0",
-    "babel-preset-env": "^1.6.1",
-    "css-loader": "^0.28.7",
-    "jest": "^21.2.1",
-    "jest-preset-angular": "^4.0.1",
-    "jquery": "^3.2.1",
-    "node-sass": "^4.7.2",
+    "@types/jest": "^25.2.1",
+    "@types/jquery": "^3.3.35",
+    "@types/node": "^13.13.1",
+    "awesome-typescript-loader": "^5.2.1",
+    "babel-core": "^6.26.3",
+    "babel-preset-env": "^1.7.0",
+    "css-loader": "^3.5.2",
+    "jest": "^25.4.0",
+    "jest-preset-angular": "^8.1.3",
+    "jquery": "^3.5.0",
+    "mini-css-extract-plugin": "^0.9.0",
+    "node-sass": "^4.13.1",
     "optimize-js-plugin": "0.0.4",
-    "rimraf": "2.6.2",
-    "sass-loader": "^6.0.6",
-    "selectize": "^0.12.4",
-    "style-loader": "^0.19.0",
-    "ts-jest": "^21.2.3",
-    "webpack-livereload-plugin": "^1.0.0"
+    "reflect-metadata": "0.1.10",
+    "rimraf": "3.0.2",
+    "sass-loader": "^8.0.2",
+    "selectize": "^0.12.6",
+    "style-loader": "^1.1.4",
+    "ts-jest": "^25.4.0",
+    "tslib": "^1.10.0",
+    "webpack-cli": "^3.3.11",
+    "webpack-livereload-plugin": "^2.3.0"
   },
   "repository": {
     "type": "git",
     "url": "git://github.com/101medialab/hb-ng-form.git"
   },
   "jest": {
+    "preset": "jest-preset-angular",
+    "setupFilesAfterEnv": [
+      "<rootDir>/setupJest.ts"
+    ],
+    "testPathIgnorePatterns": [
+      "<rootDir>/node_modules/",
+      "<rootDir>/dist/",
+      "<rootDir>/src/test.ts"
+    ],
     "globals": {
       "ts-jest": {
-        "useBabelrc": true,
-        "tsConfigFile": "src/tsconfig.spec.json"
+        "tsConfig": "<rootDir>/tsconfig.json",
+        "stringifyContentPathRegex": "\\.html$",
+        "astTransformers": [
+          "<rootDir>/node_modules/jest-preset-angular/build/InlineFilesTransformer"
+        ]
       }
-    },
-    "preset": "jest-preset-angular",
-    "setupTestFrameworkScriptFile": "<rootDir>/setupJest.js",
-    "transformIgnorePatterns": [
-      "<rootDir>/node_modules/(?!hb-ng-sdk)"
-    ],
-    "transform": {
-      "^.+\\.(ts|html)$": "<rootDir>/node_modules/jest-preset-angular/preprocessor.js",
-      "^.+\\.js$": "babel-jest"
     }
   }
 }

@@ -5,8 +5,8 @@ export interface IMatExtraOptionsFormConfig extends IBaseFormConfig {
         matSuffix?: string;
     };
 }
-export declare const MatExtraOptionsSymbol: symbol;
+export declare const MatExtraOptionsSymbol: unique symbol;
 export declare function MatExtraOptions(options: IMatExtraOptionsFormConfig): {
     (target: Function): void;
-    (target: Object, targetKey: string | symbol): void;
+    (target: Object, propertyKey: string | symbol): void;
 };

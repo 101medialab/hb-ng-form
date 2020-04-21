@@ -1,5 +1,5 @@
 import { IBaseFormConfig } from './FormConfig';
-import { Observable } from "rxjs/Observable";
+import { Observable } from "rxjs";
 
 export interface IChoice {
     name: string;

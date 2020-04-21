@@ -3,4 +3,4 @@
  *  Symbol is unique and you can get the same one ONLY from where it creates. Importing from src means you imported are wrong one
  */
 import 'jest';
-import 'hb-ng-sdk/reusable/hb-es-shim';
+import 'reflect-metadata';
