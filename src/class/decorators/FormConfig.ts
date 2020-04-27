@@ -28,9 +28,19 @@ export interface IBaseFormConfig {
 export const FormConfigSymbol = Symbol('FormConfig');
 
 export function FormConfig(options: IBaseFormConfig) {
+    let slug = null;
+
+    if (options.label) {
+        slug = options.label.toLowerCase()
+            .replace(/[^\w\s-]/g, '')
+            .replace(/[\s_-]+/g, '-')
+            .replace(/^-+|-+$/g, '');
+    }
+
     return Reflect.metadata(FormConfigSymbol,
         Object.assign({
-            hiderHeader: false
+            hiderHeader: false,
+            slug,
         }, options)
     );
 }

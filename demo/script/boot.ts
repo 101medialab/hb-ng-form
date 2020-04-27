@@ -1,14 +1,13 @@
 import 'hammerjs';
 import 'jquery';
+import 'reflect-metadata';
+import 'core-js/es7/reflect';
+import 'zone.js/dist/zone';
 
 import { Component, NgModule, OnInit } from "@angular/core";
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClient, HttpClientModule } from "@angular/common/http";
 import { FormBuilder, FormGroup, ReactiveFormsModule } from "@angular/forms";
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
-import 'core-js';
-import 'zone.js/dist/zone.min.js';
-import 'reflect-metadata';
 
 import Segmentation from "./Entity/Segmentation";
 import {
@@ -29,9 +28,7 @@ class DemoBootComponent implements OnInit {
     public template;
 
     constructor(
-        private httpClient: HttpClient
     ) {
-        Factory.diContainer.set('httpClient', httpClient);
         Factory.diContainer.set('domainStatus', {
             getCurrentRegion: () => {
                 return {
@@ -78,6 +75,10 @@ class DemoBootComponent implements OnInit {
 
         console.log(this);
     }
+
+    onSubmit(value) {
+        console.log(value);
+    }
 }
 
 @NgModule({
@@ -86,7 +87,6 @@ class DemoBootComponent implements OnInit {
         CommonModule,
         ReactiveFormsModule,
         HbFormModule,
-        HttpClientModule,
 
         // RouterModule.forRoot([{
         //     path: 'demo/basic',
@@ -121,4 +121,5 @@ class DemoBootComponent implements OnInit {
 class HbFormDemoModule {
 }
 
-platformBrowserDynamic().bootstrapModule(HbFormDemoModule);
+platformBrowserDynamic().bootstrapModule(HbFormDemoModule)
+    .catch(err => console.error(err));

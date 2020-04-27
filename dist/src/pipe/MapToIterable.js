@@ -10,7 +10,8 @@ var MapToIterable = /** @class */ (function () {
     }
     MapToIterable.prototype.transform = function (object) {
         var result = [];
-        for (var key in object) {
+        for (var _i = 0, _a = Object.keys(object); _i < _a.length; _i++) {
+            var key = _a[_i];
             if (object.hasOwnProperty(key)) {
                 result.push({ key: key, val: object[key] });
             }

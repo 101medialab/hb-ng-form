@@ -1,13 +1,11 @@
 import { Component, Input } from '@angular/core';
-import { ICustomComponent } from "../../src/HbFormModule";
+import { ICustomComponent } from "../../src";
 import { Observable } from "rxjs";
 import { Observer } from "rxjs";
 
 @Component({
     selector: 'mySelectize',
-    template: `
-        <select *ngIf="isInitialized" [hbSelectize]="$selectize"></select>
-    `
+    template:  `<select *ngIf="isInitialized" [hbSelectize]="$selectize"></select>`
 })
 export class MySelectizeComponent implements ICustomComponent {
     /** Remember to mark templateObject as public attribute */
@@ -20,7 +18,7 @@ export class MySelectizeComponent implements ICustomComponent {
 
     ngAfterViewInit() {
         setTimeout(() => {
-            this.$selectize = Observable.create((o: Observer<any>) => {
+            this.$selectize = new Observable((o: Observer<any>) => {
                 this.templateObject.selectOptionsObservables
                     .map((optionsArray) =>{
                         optionsArray.forEach((each) => {

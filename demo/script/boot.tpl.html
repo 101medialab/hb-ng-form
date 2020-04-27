@@ -11,9 +11,14 @@
 
 <!--<hr />-->
 
-<h1>
-    Angular Material Design </h1>
+<h1>Angular Material Design </h1>
+
+<!--<form [formGroup]="form" class="ui form" (ngSubmit)="onSubmit(form.value)">-->
+<!--    <hb-mat-form-object [data]="template" [key]="''"></hb-mat-form-object>-->
+<!--</form>-->
+
+<hr/>
 
 <form [formGroup]="form" class="ui form" (ngSubmit)="onSubmit(form.value)">
-    <hb-mat-form-object [data]="template" [key]="''"></hb-mat-form-object>
+    <hb-form-object [data]="template" [key]="''"></hb-form-object>
 </form>

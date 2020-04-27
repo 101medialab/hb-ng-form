@@ -7,7 +7,7 @@ export class MapToIterable {
     transform(object: Object): Array<any> {
         let result = [];
 
-        for (let key in object) {
+        for (let key of Object.keys(object)) {
             if (object.hasOwnProperty(key)) {
                 result.push({key, val: object[key]});
             }

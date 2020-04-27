@@ -25,15 +25,15 @@ import { MatInputModule } from "@angular/material/input";
 import { MatNativeDateModule } from "@angular/material/core";
 import { MatRadioModule } from "@angular/material/radio";
 import { MatSelectModule } from "@angular/material/select";
-import { HbFormArray, HbMatFormArray, HbFormObject, HbMatFormObject, HbFormWidget, HbMatFormWidget } from './index';
+import { HbFormArrayComponent, HbFormMatArrayComponent, HbFormObjectComponent, HbFormMatObjectComponent, HbFormWidgetComponent, HbFormMatWidgetComponent } from './index';
 import { MapToIterable } from "./pipe/MapToIterable";
 var directivesAndPipes = [
-    HbFormArray,
-    HbMatFormArray,
-    HbFormObject,
-    HbMatFormObject,
-    HbFormWidget,
-    HbMatFormWidget,
+    HbFormArrayComponent,
+    HbFormMatArrayComponent,
+    HbFormObjectComponent,
+    HbFormMatObjectComponent,
+    HbFormWidgetComponent,
+    HbFormMatWidgetComponent,
     MapToIterable,
 ];
 var HbFormModule = /** @class */ (function () {

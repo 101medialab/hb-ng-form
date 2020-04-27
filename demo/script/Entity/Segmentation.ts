@@ -1,17 +1,15 @@
-import { HttpClient } from "@angular/common/http";
-
 import {
     FormConfig,
     ChoiceOptions,
     SetupConfig,
     FlexibleObjectArray,
     ObjectOptions
-} from '../../../src/index';
+} from '../../../src';
 import { Observable } from 'rxjs';
 import { Observer } from "rxjs";
 import { FormControl } from "@angular/forms";
 import { MySelectizeComponent } from "../MySelectizeComponent";
-import { ArrayOptions } from "../../../src/class/decorators/ArrayOptions";
+import { ArrayOptions } from "../../../src";
 
 export class LeafNodeCondition {
     @SetupConfig()
@@ -78,24 +76,24 @@ export class LeafNode {
                             break;
                     }
 
-                    const httpClient = <HttpClient>diContainer.get('httpClient');
-
-                    httpClient
-                        .get(
-                            ''
-                        )
-                        .subscribe((value: any) => {
-                            let result = [];
-
-                            value.data.forEach((each) => {
-                                result.push({
-                                    label: each.name,
-                                    value: each.id
-                                });
-                            });
-
-                            observer.next(result);
-                        });
+                    // const httpClient = <HttpClient>diContainer.get('httpClient');
+                    //
+                    // httpClient
+                    //     .get(
+                    //         ''
+                    //     )
+                    //     .subscribe((value: any) => {
+                    //         let result = [];
+                    //
+                    //         value.data.forEach((each) => {
+                    //             result.push({
+                    //                 label: each.name,
+                    //                 value: each.id
+                    //             });
+                    //         });
+                    //
+                    //         observer.next(result);
+                    //     });
                 });
 
                 setTimeout(() => {
