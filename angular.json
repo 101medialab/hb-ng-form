@@ -1,0 +1,47 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "projects",
+  "projects": {
+    "hb-ng-form": {
+      "projectType": "library",
+      "root": "projects/hb-ng-form",
+      "sourceRoot": "projects/hb-ng-form/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/hb-ng-form/tsconfig.lib.json",
+            "project": "projects/hb-ng-form/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/hb-ng-form/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/hb-ng-form/src/test.ts",
+            "tsConfig": "projects/hb-ng-form/tsconfig.spec.json",
+            "karmaConfig": "projects/hb-ng-form/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/hb-ng-form/tsconfig.lib.json",
+              "projects/hb-ng-form/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    }},
+  "defaultProject": "hb-ng-form"
+}

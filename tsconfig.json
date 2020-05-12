@@ -1,49 +1,30 @@
 {
     "compileOnSave": false,
-    "buildOnSave": false,
     "compilerOptions": {
         "baseUrl": "./",
-        "target": "ES5",
-        "module": "ES2015",
-        "moduleResolution": "node",
-        "declaration": true,
-        "noImplicitAny": false,
+        "outDir": "./dist/out-tsc",
         "sourceMap": true,
-        "emitDecoratorMetadata": true,
+        "declaration": false,
+        "downlevelIteration": true,
         "experimentalDecorators": true,
-        "outDir": "./dist",
-        "rootDir": "./",
-        "skipLibCheck": true,
-        "typeRoots": [
-            "./node_modules/@types",
-            "./typings"
-        ],
+        "emitDecoratorMetadata": true,
+        "module": "esnext",
+        "moduleResolution": "node",
+        "importHelpers": true,
+        "target": "es2015",
         "lib": [
-            "dom",
-            "es2017"
-        ]
+            "es2018",
+            "dom"
+        ],
+        "paths": {
+            "hb-ng-form": [
+                "dist/hb-ng-form/hb-ng-form",
+                "dist/hb-ng-form"
+            ]
+        }
     },
-    "include": [
-        "./src"
-//        "./demo"
-    ],
-    "files": [
-        "./src/HbFormModule"
-    ],
-    "exclude": [
-        "node_modules",
-        "dist",
-        "**/*.ngfactory.ts",
-        "**/*.shim.ts"
-    ],
     "angularCompilerOptions": {
-        "genDir": "./dist",
-        "enableIvy": false,
-        "skipMetadataEmit" : false,
-        "entryModule": "./src/HbFormModule#HbFormModule"
-    },
-    "awesomeTypescriptLoaderOptions": {
-        "useBabel": true,
-        "useCache": true
+        "fullTemplateTypeCheck": true,
+        "strictInjectionParameters": true
     }
 }
