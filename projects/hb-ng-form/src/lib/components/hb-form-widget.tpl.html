@@ -19,7 +19,7 @@
     <ng-container *ngIf="!data.useComponent; else customBlock">
         <label *ngIf="data.label" for="hb-form-widget_{{ key ? key : data.slug }}-input">{{ data.label }}</label>
 
-        <ng-container *ngIf="parent?.arrayType === 'enum'">
+        <ng-container *ngIf="parent?.arrayType !== 'enum'">
             <ng-container *ngIf="['select', 'radio', 'checkbox', 'textarea'].indexOf(data.renderType) === -1">
                 <ng-container *ngIf="data.selectOptionsObservables == undefined; else autocompleteBlock"
                      class="hb-form-widget-input-field">
@@ -68,7 +68,7 @@
 
                     <ng-container *ngIf="data.renderType == 'radio'; else checkBoxBlock">
                         <input type="radio"
-                               id="hb-form-widget_{{ key ? key : data.slug }}-input__option.name"
+                               id="hb-form-widget_{{ key ? key : data.slug }}-input__{{ slugifyString(option.name) }}"
                                class="example-radio-button"
                                [value]="option.value"
                                [checked]="data.control.value === option.value || option.id === data.control.value ? true : null"
@@ -90,7 +90,7 @@
                         <ng-template #booleanCheckBoxBlock>
                             <input type="checkbox"
                                    [checked]="data.control.value ? true : null"
-                                   (change)="data.control.patchValue($event.source.checked)"/>
+                                   (change)="data.control.patchValue($event.target.checked)"/>
                         </ng-template>
                     </ng-template>
                 </ng-container>

@@ -105,7 +105,7 @@
             </mat-radio-group>
 
             <ng-template #checkBoxBlock>
-                <ng-container *ngIf="parent?.arrayType == 'enum'; else booleanCheckbox">
+                <ng-container *ngIf="parent?.arrayType == 'enum'; else booleanCheckboxBlock">
                     <mat-checkbox
                         *ngFor="let option of data.options"
                         [value]="option.value"
@@ -117,7 +117,7 @@
                     </mat-checkbox>
                 </ng-container>
 
-                <ng-template #booleanCheckbox>
+                <ng-template #booleanCheckboxBlock>
                     <label>{{ data.label }}</label>
                     <mat-checkbox [checked]="data.control.value ? true : null"
                                   (change)="data.control.patchValue($event.source.checked)">

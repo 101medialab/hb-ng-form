@@ -10,7 +10,7 @@ ng generate library hb-ng-form
 npm run jest-test
 
 # To build
-ng build hb-ng-form --prod
+cd projects/hb-ng-form && ng build hb-ng-form --prod
 ```
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.1.5.
