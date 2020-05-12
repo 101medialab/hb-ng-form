@@ -1,0 +1,19 @@
+import { __decorate, __extends } from "tslib";
+import { Component } from "@angular/core";
+import { HbFormObjectComponent } from "./hb-form-object.component";
+var HbFormMatObjectComponent = /** @class */ (function (_super) {
+    __extends(HbFormMatObjectComponent, _super);
+    function HbFormMatObjectComponent() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    HbFormMatObjectComponent = __decorate([
+        Component({
+            selector: 'hb-mat-form-object',
+            template: "<mat-card *ngIf=\"\n    data.control != undefined &&\n    key != 'setValue' && (\n        data.hide == undefined ||\n        !data.hide\n    )\"\n          [formGroup]=\"data.control\"\n          [ngClass]=\"{\n        'error': !data.control.valid,\n        'hb-form-with-hints' : data.hints\n    }\"\n          class=\"form-object {{ data?.html?.classAttr }} hb-form-obj_{{ key }}\">\n    <mat-card-header *ngIf=\"typeof(data.label) == 'string' && data.label != '' && !data.hideHeader\">\n        <mat-card-title>\n            {{ data.label }}\n        </mat-card-title>\n    </mat-card-header>\n    <mat-card-content class=\"hb-form-object-content\">\n        <div *ngFor=\"let each of data.children | mapToIterable\" class=\"hb-form-obj-attr_{{ each.key }}\">\n            <ng-container *ngIf=\"!each.hide && each.key != 'setValue'\">\n                <hb-mat-form-widget\n                        *ngIf=\"each.val.groupType == undefined && each.key != 'setValue'\"\n                        [data]=\"each.val\"\n                        [key]=\"each.key\"\n                        [parent]=\"data\">\n                </hb-mat-form-widget>\n                <hb-mat-form-array\n                        *ngIf=\"each.val?.groupType == 'array'\"\n                        [data]=\"each.val\"\n                        [key]=\"each.key\"\n                        [formArrayName]=\"each.key\"\n                        [parent]=\"data\">\n                </hb-mat-form-array>\n                <hb-mat-form-object\n                        *ngIf=\"each.val?.groupType == 'object' && each.key != 'setValue'\"\n                        [data]=\"each.val\"\n                        [key]=\"each.key\"\n                        [parent]=\"data\">\n                </hb-mat-form-object>\n            </ng-container>\n        </div>\n        <strong class=\"mat-hint\" *ngIf=\"data?.hints\">\n            {{ typeof(data.hints) == 'function' ? data.hints(data.diContainer) : data.hints }}\n        </strong>\n    </mat-card-content>\n</mat-card>\n",
+            inputs: ['id', 'key', 'data', 'parent']
+        })
+    ], HbFormMatObjectComponent);
+    return HbFormMatObjectComponent;
+}(HbFormObjectComponent));
+export { HbFormMatObjectComponent };
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiaGItZm9ybS1tYXQtb2JqZWN0LmNvbXBvbmVudC5qcyIsInNvdXJjZVJvb3QiOiJuZzovL2hiLW5nLWZvcm0vIiwic291cmNlcyI6WyJsaWIvY29tcG9uZW50cy9oYi1mb3JtLW1hdC1vYmplY3QuY29tcG9uZW50LnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxPQUFPLEVBQUUsU0FBUyxFQUFFLE1BQU0sZUFBZSxDQUFDO0FBQzFDLE9BQU8sRUFBRSxxQkFBcUIsRUFBRSxNQUFNLDRCQUE0QixDQUFDO0FBT25FO0lBQThDLDRDQUFxQjtJQUFuRTs7SUFDQSxDQUFDO0lBRFksd0JBQXdCO1FBTHBDLFNBQVMsQ0FBQztZQUNQLFFBQVEsRUFBRSxvQkFBb0I7WUFDOUIsdS9EQUE2QztZQUM3QyxNQUFNLEVBQUUsQ0FBQyxJQUFJLEVBQUUsS0FBSyxFQUFFLE1BQU0sRUFBRSxRQUFRLENBQUM7U0FDMUMsQ0FBQztPQUNXLHdCQUF3QixDQUNwQztJQUFELCtCQUFDO0NBQUEsQUFERCxDQUE4QyxxQkFBcUIsR0FDbEU7U0FEWSx3QkFBd0IiLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgeyBDb21wb25lbnQgfSBmcm9tIFwiQGFuZ3VsYXIvY29yZVwiO1xuaW1wb3J0IHsgSGJGb3JtT2JqZWN0Q29tcG9uZW50IH0gZnJvbSBcIi4vaGItZm9ybS1vYmplY3QuY29tcG9uZW50XCI7XG5cbkBDb21wb25lbnQoe1xuICAgIHNlbGVjdG9yOiAnaGItbWF0LWZvcm0tb2JqZWN0JyxcbiAgICB0ZW1wbGF0ZVVybDogICcuL2hiLWZvcm0tbWF0LW9iamVjdC50cGwuaHRtbCcsXG4gICAgaW5wdXRzOiBbJ2lkJywgJ2tleScsICdkYXRhJywgJ3BhcmVudCddXG59KVxuZXhwb3J0IGNsYXNzIEhiRm9ybU1hdE9iamVjdENvbXBvbmVudCBleHRlbmRzIEhiRm9ybU9iamVjdENvbXBvbmVudCB7XG59XG4iXX0=

@@ -1,0 +1,20 @@
+{
+  "name": "hb-ng-form",
+  "version": "0.0.1",
+  "peerDependencies": {
+    "@angular/common": "^9.1.6",
+    "@angular/core": "^9.1.6",
+    "@angular/material": "^9.2.3",
+    "tslib": "^1.10.0"
+  },
+  "main": "bundles/hb-ng-form.umd.js",
+  "module": "fesm5/hb-ng-form.js",
+  "es2015": "fesm2015/hb-ng-form.js",
+  "esm5": "esm5/hb-ng-form.js",
+  "esm2015": "esm2015/hb-ng-form.js",
+  "fesm5": "fesm5/hb-ng-form.js",
+  "fesm2015": "fesm2015/hb-ng-form.js",
+  "typings": "hb-ng-form.d.ts",
+  "metadata": "hb-ng-form.metadata.json",
+  "sideEffects": false
+}

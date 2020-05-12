@@ -1,0 +1,19 @@
+import { __decorate, __extends } from "tslib";
+import { Component } from "@angular/core";
+import { HbFormWidgetComponent } from './hb-form-widget.component';
+var HbFormObjectComponent = /** @class */ (function (_super) {
+    __extends(HbFormObjectComponent, _super);
+    function HbFormObjectComponent() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    HbFormObjectComponent = __decorate([
+        Component({
+            selector: 'hb-form-object',
+            template: "<div *ngIf=\"\n        data.control != undefined &&\n        key != 'setValue' && (\n            data.hide == undefined ||\n            !data.hide\n        )\n    \"\n     [formGroup]=\"data.control\"\n     [ngClass]=\"{\n         'error': !data.control.valid,\n         'hb-form-with-hints' : data.hints\n     }\"\n     class=\"form-object {{ data?.html?.classAttr }} hb-form-obj_{{ key }}\"\n>\n    <h2 *ngIf=\"typeof(data.label) == 'string' && data.label != '' && !data.hideHeader\">\n        {{ data.label }}\n    </h2>\n\n    <div class=\"hb-form-object-content\">\n        <div *ngFor=\"let each of data.children | mapToIterable\" class=\"hb-form-obj-attr_{{ each.key }}\">\n            <ng-container *ngIf=\"!each.hide && each.key != 'setValue'\">\n                <hb-form-widget\n                    *ngIf=\"each.val.groupType == undefined && each.key != 'setValue'\"\n                    [data]=\"each.val\"\n                    [key]=\"each.key\"\n                    [parent]=\"data\"\n                ></hb-form-widget>\n                <hb-form-array\n                    *ngIf=\"each.val?.groupType == 'array'\"\n                    [data]=\"each.val\"\n                    [key]=\"each.key\"\n                    [formArrayName]=\"each.key\"\n                    [parent]=\"data\"\n                ></hb-form-array>\n                <hb-form-object\n                    *ngIf=\"each.val?.groupType == 'object' && each.key != 'setValue'\"\n                    [data]=\"each.val\"\n                    [key]=\"each.key\"\n                    [parent]=\"data\"\n                ></hb-form-object>\n            </ng-container>\n        </div>\n\n        <span class=\"hints\" *ngIf=\"data?.hints\">\n            {{ typeof(data.hints) == 'function' ? data.hints(data.diContainer) : data.hints }}\n        </span>\n    </div>\n</div>\n",
+            inputs: ['id', 'key', 'data', 'parent']
+        })
+    ], HbFormObjectComponent);
+    return HbFormObjectComponent;
+}(HbFormWidgetComponent));
+export { HbFormObjectComponent };
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiaGItZm9ybS1vYmplY3QuY29tcG9uZW50LmpzIiwic291cmNlUm9vdCI6Im5nOi8vaGItbmctZm9ybS8iLCJzb3VyY2VzIjpbImxpYi9jb21wb25lbnRzL2hiLWZvcm0tb2JqZWN0LmNvbXBvbmVudC50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiO0FBQUEsT0FBTyxFQUFFLFNBQVMsRUFBRSxNQUFNLGVBQWUsQ0FBQztBQUMxQyxPQUFPLEVBQUUscUJBQXFCLEVBQUUsTUFBTSw0QkFBNEIsQ0FBQztBQU9uRTtJQUEyQyx5Q0FBcUI7SUFBaEU7O0lBQ0EsQ0FBQztJQURZLHFCQUFxQjtRQUxqQyxTQUFTLENBQUM7WUFDUCxRQUFRLEVBQUUsZ0JBQWdCO1lBQzFCLGkwREFBeUM7WUFDekMsTUFBTSxFQUFFLENBQUMsSUFBSSxFQUFFLEtBQUssRUFBRSxNQUFNLEVBQUUsUUFBUSxDQUFDO1NBQzFDLENBQUM7T0FDVyxxQkFBcUIsQ0FDakM7SUFBRCw0QkFBQztDQUFBLEFBREQsQ0FBMkMscUJBQXFCLEdBQy9EO1NBRFkscUJBQXFCIiwic291cmNlc0NvbnRlbnQiOlsiaW1wb3J0IHsgQ29tcG9uZW50IH0gZnJvbSBcIkBhbmd1bGFyL2NvcmVcIjtcbmltcG9ydCB7IEhiRm9ybVdpZGdldENvbXBvbmVudCB9IGZyb20gJy4vaGItZm9ybS13aWRnZXQuY29tcG9uZW50JztcblxuQENvbXBvbmVudCh7XG4gICAgc2VsZWN0b3I6ICdoYi1mb3JtLW9iamVjdCcsXG4gICAgdGVtcGxhdGVVcmw6ICAnLi9oYi1mb3JtLW9iamVjdC50cGwuaHRtbCcsXG4gICAgaW5wdXRzOiBbJ2lkJywgJ2tleScsICdkYXRhJywgJ3BhcmVudCddXG59KVxuZXhwb3J0IGNsYXNzIEhiRm9ybU9iamVjdENvbXBvbmVudCBleHRlbmRzIEhiRm9ybVdpZGdldENvbXBvbmVudCB7XG59XG4iXX0=
