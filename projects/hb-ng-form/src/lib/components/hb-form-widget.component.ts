@@ -6,6 +6,11 @@ import {
     ViewContainerRef
 } from "@angular/core";
 import { Observable } from "rxjs";
+import { IMultipleChoicesOptionsFormConfig } from "../class/decorators/MultipleChoicesOptions";
+import { IBaseFormConfig } from "../class/decorators/FormConfig";
+import { IArrayOptionsFormConfig } from "../class/decorators/ArrayOptions";
+import { IObjectOptionsFormConfig } from "../class/decorators/ObjectOptions";
+import { IChoiceOptionsFormConfig } from "../class/decorators/ChoiceOptions";
 
 @Component({
     selector: 'hb-form-widget',
@@ -15,7 +20,7 @@ import { Observable } from "rxjs";
 export class HbFormWidgetComponent implements OnInit {
     public resolvedOptions;
     public key;
-    public data;
+    public data: any & IBaseFormConfig & IMultipleChoicesOptionsFormConfig & IArrayOptionsFormConfig & IObjectOptionsFormConfig & IChoiceOptionsFormConfig;
     public parent;
     static slugMap = [];
 
@@ -24,6 +29,10 @@ export class HbFormWidgetComponent implements OnInit {
     constructor(
         private resolver: ComponentFactoryResolver
     ) {
+    }
+
+    log(...args) {
+        console.log(...args);
     }
 
     ngAfterViewInit() {
@@ -39,29 +48,56 @@ export class HbFormWidgetComponent implements OnInit {
         }
     }
 
+    isOptionSelectingComponent() {
+        return ['radio', 'checkbox', 'select'].indexOf(this.data.renderType) > -1;
+    }
+
     ngOnInit() {
-        let data = this.data;
+        if (this.isOptionSelectingComponent()) {
+            let data = this.data;
 
-        let result = null;
-        let resolved = null;
-        const options = data.options;
+            let result = null;
+            let resolved = null;
 
-        if (typeof options === 'function') {
-            resolved = options(data.diContainer, this.data, this.parent);
-        } else if (!(result instanceof Observable)) {
-            resolved = options;
+            let options: any = [];
+            if (
+                data.options && (
+                    data.options.length ||
+                    typeof data.options === 'function'
+                )
+            ) {
+                options = data.options
+            } else if (
+                data.type === 'boolean' &&
+                data.renderType === 'checkbox'
+            ) {
+                options = [{
+                    name: data.label,
+                    value: true,
+                }];
+            }
+
+            if (options.length === 0) {
+                throw new Error('No options set for ' + data.key + ' in ' + this.parent.key);
+            }
+
+            if (typeof options === 'function') {
+                resolved = options(data.diContainer, this.data, this.parent);
+            } else if (!(result instanceof Observable)) {
+                resolved = options;
+            }
+
+            result = resolved;
+
+            if (!(resolved instanceof Observable)) {
+                result = new Observable((o) => {
+                    o.next(resolved);
+                    o.complete();
+                });
+            }
+
+            this.resolvedOptions = result;
         }
-
-        result = resolved;
-
-        if (!(resolved instanceof Observable)) {
-            result = new Observable((o) => {
-                o.next(resolved);
-                o.complete();
-            });
-        }
-
-        this.resolvedOptions = result;
     }
 
     stringToBoolean(val) {
@@ -108,10 +144,14 @@ export class HbFormWidgetComponent implements OnInit {
             return HbFormWidgetComponent.slugMap[input];
         }
 
-        return HbFormWidgetComponent.slugMap[input] = input
-            .toLowerCase()
-            .replace(/[^\w\s-]/g, '')
-            .replace(/[\s_-]+/g, '-')
-            .replace(/^-+|-+$/g, '');
+        if (input) {
+            return HbFormWidgetComponent.slugMap[input] = input
+                .toLowerCase()
+                .replace(/[^\w\s-]/g, '')
+                .replace(/[\s_-]+/g, '-')
+                .replace(/^-+|-+$/g, '');
+        } else {
+            throw new Error('Cannot slugify input, input is undefined.')
+        }
     }
 }

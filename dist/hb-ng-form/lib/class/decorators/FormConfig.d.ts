@@ -1,6 +1,7 @@
 import { ICustomComponentConstructor } from "../../HbFormModule";
 import { ValidatorFn } from "@angular/forms";
-export declare type RenderTypeCompatible = 'text' | 'email' | 'number' | 'hidden' | 'radio' | 'checkbox' | 'textarea' | 'select';
+export declare type RenderType = 'text' | 'email' | 'number' | 'hidden' | 'radio' | 'checkbox' | 'textarea' | 'select';
+export declare type HtmlElementAttribute = 'label' | 'input' | 'inputContainer' | 'widgetContainer';
 export interface IBaseFormConfig {
     label?: string;
     defaultValue?: any;
@@ -11,13 +12,20 @@ export interface IBaseFormConfig {
         (diContainer: Map<string, any>, currentTemplateObject: any, parentTemplateObject: any): Array<ValidatorFn>;
     };
     useValidators?: Array<string>;
-    renderType?: RenderTypeCompatible;
+    renderType?: RenderType;
     hide?: boolean;
     hideHeader?: boolean;
     useComponent?: ICustomComponentConstructor;
     html?: {
-        idAttr?: string;
-        classAttr?: string;
+        id?: {
+            [key in HtmlElementAttribute]: string;
+        };
+        class?: {
+            [key in HtmlElementAttribute]: string;
+        };
+        textarea?: {
+            row?: number;
+        };
     };
     beforeSetValue?: {
         (currentTemplateObject: any, rawValue: any): void;

@@ -1,7 +1,8 @@
 import { Component, Input } from '@angular/core';
-import { ICustomComponent } from "../../src";
 import { Observable } from "rxjs";
 import { Observer } from "rxjs";
+import { ICustomComponent } from "hb-ng-form";
+import { map } from "rxjs/operators";
 
 @Component({
     selector: 'mySelectize',
@@ -20,15 +21,17 @@ export class MySelectizeComponent implements ICustomComponent {
         setTimeout(() => {
             this.$selectize = new Observable((o: Observer<any>) => {
                 this.templateObject.selectOptionsObservables
-                    .map((optionsArray) =>{
-                        optionsArray.forEach((each) => {
-                            each.text = each.label;
+                    .pipe(
+                        map((optionsArray: any[]) =>{
+                            optionsArray.forEach((each) => {
+                                each.text = each.label;
 
-                            delete each.label;
-                        });
+                                delete each.label;
+                            });
 
-                        return optionsArray;
-                    })
+                            return optionsArray;
+                        })
+                    )
                     .subscribe((optionsResolved) => {
                         o.next({
                             sortField: 'name',

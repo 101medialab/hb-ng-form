@@ -11,7 +11,7 @@ export interface IChoiceOptionsFormConfig extends IBaseFormConfig {
     renderType?: 'radio' | 'select' | 'checkbox';
     options: {
         (diContainer: Map<string, any>, currentTemplateObject: any, parentTemplateObject: any): Array<IChoice> | Observable<Array<IChoice>>;
-    };
+    } | Array<IChoice> | Observable<Array<IChoice>>;
 }
 export declare const ChoiceOptionsSymbol: unique symbol;
 export declare function ChoiceOptions(options: IChoiceOptionsFormConfig): {

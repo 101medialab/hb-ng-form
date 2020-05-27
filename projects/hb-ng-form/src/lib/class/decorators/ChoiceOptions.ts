@@ -12,7 +12,13 @@ export interface IChoice {
 export interface IChoiceOptionsFormConfig extends IBaseFormConfig {
     // checkbox is for boolean only
     renderType?: 'radio' | 'select' | 'checkbox';
-    options: { (diContainer: Map<string, any>, currentTemplateObject, parentTemplateObject): Array<IChoice> | Observable<Array<IChoice>> };
+    options: {
+        (
+            diContainer: Map<string, any>,
+            currentTemplateObject,
+            parentTemplateObject
+        ): Array<IChoice> | Observable<Array<IChoice>>
+    } | Array<IChoice> | Observable<Array<IChoice>>;
 }
 
 export const ChoiceOptionsSymbol = Symbol('IChoiceOptionsFormConfig');

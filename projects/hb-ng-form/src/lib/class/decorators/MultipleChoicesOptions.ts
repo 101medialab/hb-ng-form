@@ -17,11 +17,12 @@ export class OptionWrapper {
 export interface IMultipleChoicesOptionsFormConfig extends IBaseFormConfig {
     maxChoices?: number;
     options: {
-        (diContainer: Map<string, any>, currentTemplateObject, parentTemplateObject): Array<OptionWrapper> |
-        Observable<
-            Array<OptionWrapper>
-        >
-    };
+        (
+            diContainer: Map<string, any>,
+            currentTemplateObject,
+            parentTemplateObject
+        ): Array<OptionWrapper> | Observable<Array<OptionWrapper>>
+    } | Array<OptionWrapper> | Observable<Array<OptionWrapper>>;
 }
 
 export const MultipleChoicesOptionsSymbol = Symbol('IMultipleChoicesOptionsFormConfig');

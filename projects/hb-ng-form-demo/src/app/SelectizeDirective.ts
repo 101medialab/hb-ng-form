@@ -1,6 +1,7 @@
 import { Directive, Input, Output, EventEmitter, OnChanges, ElementRef } from '@angular/core';
 import 'selectize';
 import { Observable } from "rxjs";
+import { debounceTime, distinctUntilChanged } from "rxjs/operators";
 
 export interface ISelectizeOption {
     text: string;
@@ -46,7 +47,7 @@ export class HbSelectizeDirective implements OnChanges {
             });
         } else {
             if (options.onChange) {
-                var onChangeCB = options.onChange;
+                let onChangeCB = options.onChange;
 
                 options.onChange = (value) => {
                     onChangeCB(value, this.selectizeInstance);
@@ -63,8 +64,10 @@ export class HbSelectizeDirective implements OnChanges {
 
             if (options.updateOn) {
                 options.updateOn
-                    .debounceTime(200)
-                    .distinctUntilChanged()
+                    .pipe(
+                        debounceTime(200),
+                        distinctUntilChanged()
+                    )
                     .subscribe((value) => {
                         this.selectizeInstance.setValue(value);
                     });

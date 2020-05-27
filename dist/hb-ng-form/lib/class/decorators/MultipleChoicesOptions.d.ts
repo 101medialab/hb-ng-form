@@ -13,7 +13,7 @@ export interface IMultipleChoicesOptionsFormConfig extends IBaseFormConfig {
     maxChoices?: number;
     options: {
         (diContainer: Map<string, any>, currentTemplateObject: any, parentTemplateObject: any): Array<OptionWrapper> | Observable<Array<OptionWrapper>>;
-    };
+    } | Array<OptionWrapper> | Observable<Array<OptionWrapper>>;
 }
 export declare const MultipleChoicesOptionsSymbol: unique symbol;
 export declare function MultipleChoicesOptions(options: IMultipleChoicesOptionsFormConfig): {

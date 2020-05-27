@@ -1,14 +1,14 @@
 <div *ngIf="
-        data.control != undefined &&
-        (
-            data.groupType == undefined ||
-            parent.arrayType == 'enum'
-        ) &&
-        key != 'setValue' &&
-        (
-            data.hide == undefined ||
-            !data.hide
-        )
+         data.control != undefined &&
+         (
+             data.groupType == undefined ||
+             parent.arrayType == 'enum'
+         ) &&
+         key != 'setValue' &&
+         (
+             data.hide == undefined ||
+             !data.hide
+         )
     "
     [ngClass]="{
         'error': !data.control.valid,
@@ -17,18 +17,20 @@
     class="expand-to-child hb-form-widget hb-form-widget_{{ key }} {{ data?.html?.classAttr }}"
 >
     <ng-container *ngIf="!data.useComponent; else customBlock">
-        <label *ngIf="data.label" for="hb-form-widget_{{ key ? key : data.slug }}-input">{{ data.label }}</label>
+        <label *ngIf="data.label"
+               [attr.for]="'hb-form-widget_' + (key ? key : data.slug) +'-input'"
+               [attr.class]="data?.html?.class?.label">{{ data.label }}</label>
 
         <ng-container *ngIf="parent?.arrayType !== 'enum'">
             <ng-container *ngIf="['select', 'radio', 'checkbox', 'textarea'].indexOf(data.renderType) === -1">
-                <ng-container *ngIf="data.selectOptionsObservables == undefined; else autocompleteBlock"
+                <div *ngIf="data.selectOptionsObservables == undefined; else autocompleteBlock"
                      class="hb-form-widget-input-field">
-                    <input [attr.id]="(key ? key : data.slug) + '-input'"
+                    <input [attr.id]="'hb-form-widget_' + (key ? key : data.slug) +'-input'"
                            [type]="data.renderType ? data.renderType : 'text'"
                            (change)="data.control.patchValue($event.target.value)"
-                           [placeholder]="data.label !== undefined ? data.label : null"
+                           [placeholder]="data.placeholder !== undefined ? data.placeholder : ''"
                            [formControl]="data.control" />
-                </ng-container>
+                </div>
 
                 <ng-template #autocompleteBlock [ngIf]="data.autocomplete != undefined">
 <!--                        Autocomplete is not well supported in hb-form-widget-->
@@ -55,16 +57,18 @@
             </ng-container>
 
             <ng-container *ngIf="data.renderType == 'textarea'">
-                <textarea rows="5" [formControl]="data.control"
-                          [attr.id]="key ? key : data.slug + '-input'">
+                <textarea [rows]="data?.html?.textarea?.row || 5" [formControl]="data.control"
+                          [attr.id]="'hb-form-widget_' + (key ? key : data.slug) +'-input'">
                 </textarea>
             </ng-container>
         </ng-container>
 
-        <ng-container *ngIf="['radio', 'checkbox', 'select'].indexOf(data.renderType) > -1">
+        <ng-container *ngIf="isOptionSelectingComponent()">
+
             <ng-container *ngIf="data.renderType != 'select'; else selectBlock">
                 <ng-container *ngFor="let option of resolvedOptions | async">
-                    <label for="hb-form-widget_{{ key ? key : data.slug }}-input__{{ slugifyString(option.name) }}">{{ option.name }}</label>
+                    <label *ngIf="parent?.arrayType == 'enum' || data.renderType != 'checkbox'"
+                           for="hb-form-widget_{{ key ? key : data.slug }}-input__{{ slugifyString(option.name) }}">{{ option.name }}</label>
 
                     <ng-container *ngIf="data.renderType == 'radio'; else checkBoxBlock">
                         <input type="radio"
@@ -73,7 +77,7 @@
                                [value]="option.value"
                                [checked]="data.control.value === option.value || option.id === data.control.value ? true : null"
                                [attr.name]="data.renderType == 'radio' ? (key ? key : data.slug) + '-input' : null"
-                               (change)="updateParentValue($event, option)"
+                               (select)="parent?.arrayType == 'enum' ? updateParentValue($event, option) : data.control.patchValue($event.target.value)"
                                [formControl]="data.control"
                         />
                     </ng-container>
@@ -83,7 +87,7 @@
                             <input type="checkbox"
                                    [value]="option.value"
                                    [checked]="data.control.value === option.value || option.id === data.control.value ? true : null"
-                                   (change)="updateParentValue($event, option)"
+                                   (change)="parent?.arrayType == 'enum' ? updateParentValue($event, option) : data.control.patchValue($event.target.value)"
                                    [formControl]="data.control"/>
                         </ng-container>
 
@@ -99,7 +103,7 @@
             <ng-template #selectBlock>
                 <select *ngIf="data.renderType == 'select'"
                         [formControl]="data.control"
-                        [attr.placeholder]="data.label != undefined ? data.label : null"
+                        [attr.placeholder]="data.label != undefined ? data.label : ''"
                 >
                     <option *ngFor="let option of resolvedOptions | async" [value]="option.value">
                         {{ option.name ? option.name : option.value }}
