@@ -1,1 +1,0 @@
-{"version":3,"file":"ObjectOptions.js","sourceRoot":"","sources":["../../../../src/class/decorators/ObjectOptions.ts"],"names":[],"mappings":"AAMA,MAAM,CAAC,IAAM,mBAAmB,GAAG,MAAM,CAAC,0BAA0B,CAAC,CAAC;AAEtE,MAAM,UAAU,aAAa,CAAC,OAAiC;IAC3D,OAAO,OAAO,CAAC,QAAQ,CACnB,mBAAmB,EACnB,MAAM,CAAC,MAAM,CACiB,EACzB,EAAE,OAAO,CACb,CACJ,CAAC;AACN,CAAC"}

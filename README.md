@@ -11,6 +11,12 @@ npm run jest-test
 
 # To build
 cd projects/hb-ng-form && ng build hb-ng-form --prod
+
+# To develop
+cd projects/hb-ng-form && ng build --watch
+
+# To build demo site with live reload, can use for checking developement result
+cd projects/hb-ng-form-demo && ng serve
 ```
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.1.5.
