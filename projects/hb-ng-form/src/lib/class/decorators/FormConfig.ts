@@ -2,12 +2,8 @@ import { ICustomComponentConstructor } from "../../HbFormModule";
 import { ValidatorFn } from "@angular/forms";
 
 export type RenderType = 'text' | 'email' | 'number' | 'hidden' | 'radio' | 'checkbox' | 'textarea' | 'select';
-export type HtmlElementAttribute = 'label' | 'input' | 'inputContainer' | 'widgetContainer';
 
-type ObjectHtmlElementAttribute = 'objectHeaderContainer' | 'objectHeader' | HtmlElementAttribute;
-type ArrayHtmlElementAttribute = 'arrayHeaderContainer' | 'arrayHeader' | HtmlElementAttribute;
-
-export interface IBaseFormConfig {
+export interface IBaseFormConfig<T> {
     label?: string;
     defaultValue?: any;
     hints?: string | { (diContainer: Map<string, any>, currentTemplateObject, parentTemplateObject): string };
@@ -18,12 +14,8 @@ export interface IBaseFormConfig {
     hideHeader?: boolean;
     useComponent?: ICustomComponentConstructor;
     html?: {
-        id?: {
-            [key in HtmlElementAttribute]: string
-        },
-        class?: {
-            [key in HtmlElementAttribute]: string
-        },
+        id?: T,
+        class?: T,
         textarea?: {
             row?: number
         }
@@ -38,7 +30,7 @@ export interface IBaseFormConfig {
 
 export const FormConfigSymbol = Symbol('FormConfig');
 
-export function FormConfig(options: IBaseFormConfig) {
+export function FormConfig<T>(options: IBaseFormConfig<T>) {
     let slug = null;
 
     if (options.label) {

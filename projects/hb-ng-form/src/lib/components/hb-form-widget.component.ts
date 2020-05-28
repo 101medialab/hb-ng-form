@@ -6,21 +6,35 @@ import {
     ViewContainerRef
 } from "@angular/core";
 import { Observable } from "rxjs";
-import { IMultipleChoicesOptionsFormConfig } from "../class/decorators/MultipleChoicesOptions";
-import { IBaseFormConfig } from "../class/decorators/FormConfig";
-import { IArrayOptionsFormConfig } from "../class/decorators/ArrayOptions";
-import { IObjectOptionsFormConfig } from "../class/decorators/ObjectOptions";
-import { IChoiceOptionsFormConfig } from "../class/decorators/ChoiceOptions";
+// import { IMultipleChoicesOptionsFormConfig } from "../class/decorators/MultipleChoicesOptions";
+// import { IBaseFormConfig } from "../class/decorators/FormConfig";
+// import { IArrayOptionsFormConfig } from "../class/decorators/ArrayOptions";
+// import { IObjectOptionsFormConfig } from "../class/decorators/ObjectOptions";
+// import { IChoiceOptionsFormConfig } from "../class/decorators/ChoiceOptions";
+// import { BaseTheme } from "../class/themes/BaseTheme";
+// import { FormControl } from "@angular/forms";
+//
+//
+// public data: {
+//     control: FormControl,
+//         config: {
+//         base: IBaseFormConfig,
+//             multipleChoices: IMultipleChoicesOptionsFormConfig,
+//             arrayOptions: IArrayOptionsFormConfig,
+//             objectOptions: IObjectOptionsFormConfig,
+//             choiceOptions: IChoiceOptionsFormConfig,
+//     }
+// };
 
 @Component({
     selector: 'hb-form-widget',
     templateUrl: './hb-form-widget.tpl.html',
-    inputs: ['data', 'key', 'parent']
+    inputs: ['data', 'key', 'parent', 'theme']
 })
 export class HbFormWidgetComponent implements OnInit {
     public resolvedOptions;
     public key;
-    public data: any & IBaseFormConfig & IMultipleChoicesOptionsFormConfig & IArrayOptionsFormConfig & IObjectOptionsFormConfig & IChoiceOptionsFormConfig;
+    public data: any;
     public parent;
     static slugMap = [];
 

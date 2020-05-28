@@ -1,6 +1,4 @@
-<div [attr.id]="data.id"
-     class="hb-form-array {{ data.arrayType }} hb-form-array_{{ key }} {{ data?.html?.classAttr }}"
-     *ngIf="
+<div *ngIf="
          data.control != undefined &&
          key != 'setValue' && (
              data.hide == undefined ||
@@ -11,16 +9,18 @@
      [ngClass]="{
          'hb-form-with-hints' : data.hints
      }"
+     [attr.id]="data.id"
+     class="hb-form-array hb-form-array-type_{{ data.arrayType }} hb-form-array-key_{{ key }} {{ data?.html?.classAttr }}"
 >
-    <header>
-        <h2 *ngIf="!data.hideHeader">{{ data.label }}</h2>
+    <header class="hb-form-array-header-container {{ theme.array.class.headerContainer }}">
+        <div class="hb-form-array-header {{ theme.array.class.header }}" *ngIf="!data.hideHeader">{{ data.label }}</div>
 
         <ng-container *ngIf="data.childrenConfigName.length > 0">
             <ng-container *ngIf="!data.expandOptions; else expandedArrayPushOptions">
                 <select class="hb-form-array-config-switch"
                         [(ngModel)]="data.useConfig" [ngModelOptions]="{standalone: true}">
                     <option *ngFor="let configName of data.childrenConfigName; let i = index" [value]="i">
-                        {{ configName }}
+                        {{ configName }}”
                     </option>
                 </select>
 

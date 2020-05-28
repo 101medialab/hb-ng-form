@@ -10,7 +10,8 @@
          'error': !data.control.valid,
          'hb-form-with-hints' : data.hints
      }"
-     class="form-object {{ data?.html?.classAttr }} hb-form-obj_{{ key }}"
+     [attr.id]="data.id"
+     class="hb-form-object {{ data?.html?.classAttr }} hb-form-object-key_{{ key }}"
 >
     <h2 *ngIf="typeof(data.label) == 'string' && data.label != '' && !data.hideHeader">
         {{ data.label }}
